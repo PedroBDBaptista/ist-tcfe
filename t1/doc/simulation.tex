@@ -3,13 +3,13 @@
 
 \subsection{Operating Point Analysis}
 
-In order to input the given circuit into the simulation software \emph{ngspice} we proceeded to number the existing nodes. It is fundamental to specify to which nodes each component is connected to, carefully distinguishing the positive from the negative terminal, once that this is going to affect the current value returned.
+In order to input the given circuit into the simulation software, \emph{ngspice}, we proceeded to number the existing nodes. It is fundamental to specify to which nodes each component is connected to, carefully distinguishing the positive from the negative terminal, once that this is going to affect the current value returned.
 
-\emph{Ngspice} measures the voltages in each node and the current through any voltage source. In order to define $V_c$ one needs to have access to the current going through $R_6$. We have achieved this by adding a voltage source $V_{aux}$, with voltage $0V$, in series with $R_6$ and taking its current, once that this is the same for components in series. Voltage source, $V_{aux}$, is, therefore connected to terminals 0 and 8, where 8 is a terminal located between $R_6$ and node 0.
+\emph{Ngspice} measures the voltages in each node and the current through any voltage source. In order to define $V_c$ one needs to have access to the current going through $R_6$. We have achieved this by adding a voltage source $V_{aux}$, with voltage $0V$, in series with $R_6$ and taking its current, since this is the same for components in series. Voltage source, $V_{aux}$, is, therefore connected to terminals 0 and 8, where 8 is a terminal located between $R_6$ and node 0.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm]{../doc/NodeAnalysis}
+  \includegraphics[width=10cm]{../doc/NGSpice}
   \caption{Considered circuit to input in \emph{ngspice}}
   \label{fig:fignodos}
 \end{figure}
