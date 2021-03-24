@@ -1,12 +1,16 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this laboratory assignment the objective of analysing an RC circuit has been
-achieved. Static, time and frequency analyses have been performed both
-theoretically using the Octave maths tool and by circuit simulation using the
-Ngspice tool. The simulation results matched the theoretical results
-precisely. The reason for this perfect match is the fact that this is a
-straightforward circuit containing only linear components, so the theoretical
-and simulation models cannot differ. For more complex components, the
-theoretical and simulation models could differ but this is not the case in this
-work.
+Comparing the results obtained through our theoretical analysis (with the help of Octave
+software) with the values given to us by \emph{ngspice}'s simulation, and, furthermore, by checking the
+error tables \ref{tab:error_tensoes} and \ref{tab:error_current}, we can claim that both sets match. The percentual
+errors are very low (far less than 1\%) and so we conclude the Mesh and Node Analyses were both done
+correctly and can be used separately to find currents or voltages to describe the circuit.
+
+\par
+
+This consistency follows because \emph{ngspice} works by solving a set of simultaneous equations
+based on the Kirchhof's Laws. Thus, the simulator operates by solving a matrix of linear equations much
+like the one which the theoretical analysis was based on. The errors do exist because \emph{Ngspice}'s output
+precision is set by default to 6 digits (one can increase the precision of the calculations up to, approximately,
+16 digits) and \emph{Octave}'s output gives us more precise results.
