@@ -136,7 +136,7 @@ fid_2=fopen(filename_2,"w");
 
 
 for t=1:11
-	fprintf(fid_2,"$\\epsilon$ ($I_%s%s$) &  %.6f  \\\\ \\hline \n",s(t,1),s(t,2),error_current(t));
+	fprintf(fid_2,"$\\epsilon$ ($I_{%s%s}$) &  %.6f  \\\\ \\hline \n",s(t,1),s(t,2),error_current(t));
 endfor;
 
 fclose(fid_2);
