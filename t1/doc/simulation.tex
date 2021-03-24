@@ -3,9 +3,9 @@
 
 \subsection{Operating Point Analysis}
 
-In order the input the given circuit into the simulation software \emph{ngspice} we procedeed to number the existing nodes. It is fundamental to specify to which nodes each component is connected to, carefully distinguishing the positive from the negative terminal, once that this is going to affect the current value returned.
+In order to input the given circuit into the simulation software \emph{ngspice} we proceeded to number the existing nodes. It is fundamental to specify to which nodes each component is connected to, carefully distinguishing the positive from the negative terminal, once that this is going to affect the current value returned.
 
-\emph{Ngspice} measures the voltages in each node and the current through any voltage source. In order to define $V_c$ one needs to have access to the current going through $R_6$. We have achieved this by adding a voltage source $V_{aux}$ in series with $R_6$ and taking its current, once that this is the same for components in series.
+\emph{Ngspice} measures the voltages in each node and the current through any voltage source. In order to define $V_c$ one needs to have access to the current going through $R_6$. We have achieved this by adding a voltage source $V_{aux}$, with voltage $0V$, in series with $R_6$ and taking its current, once that this is the same for components in series. Voltage source, $V_{aux}$, is, therefore connected to terminals 0 and 8, where 8 is a terminal located between $R_6$ and node 0.
 
 \begin{figure}[H]
   \centering
@@ -14,10 +14,11 @@ In order the input the given circuit into the simulation software \emph{ngspice}
   \label{fig:fignodos}
 \end{figure}
 
+After inputing all components into \emph{ngspice}, we then ran the simulation program printing the current going through every component and the voltages in every node.
 
-Table \ref{tab:ngspice} shows the simulated operating point results for the circuit
-under analysis. Compared to the theoretical analysis results, one notices the
-following differences: describe and explain the differences.
+
+Table \ref{tab:ngspice} shows the simulated results for the circuit
+under analysis.
 
 \begin{table}[H]
   \centering
@@ -32,8 +33,7 @@ following differences: describe and explain the differences.
   \label{tab:ngspice}
 \end{table}
 
-One can immediately notice that current values for the voltage sources are approximately  symmetrical to the ones presented in the theoretical analysis. This is because we have considered the current in the voltage sources going from the negative terminal to the positive one. On the other hand, \emph{ngspice} considers the current the other way around, i.e., entering the positive terminal.
-
+One can immediately notice that current values for the voltage sources are approximately symmetrical to the ones presented in the theoretical analysis. This is because we have considered the current in the voltage sources going from the negative terminal to the positive one. On the other hand, \emph{ngspice} considers the current the other way around, i.e., entering the positive terminal.
 
 
 %formula do erro
@@ -43,7 +43,7 @@ One can immediately notice that current values for the voltage sources are appro
   \label{eq:error}
 \end{equation}
 
-We have considered the value obtained by the mashes/nodes methods as the "real" one ($x_r$) and the value obtained through \emph{ngspice} as the experimental one ($x_e$). It is important to notice, once more, that the values from \emph{ngspice} for the current going through the voltages souces are the simetric of the ones we have considered. The percentual error computation had this in mind.
+We have considered the value obtained by the mashes/nodes methods as the "real" one ($x_r$) and the value obtained through \emph{ngspice} as the experimental one ($x_e$). It is important to notice, once more, that the values from \emph{ngspice} for the current going through the voltages sources are simetric to the ones we have considered. The percentual error computation had this in mind.
 
 Here, we present the obtained values for the errors.
 
@@ -55,7 +55,7 @@ Here, we present the obtained values for the errors.
     \input{../mat/error_tensoes}
   \end{tabular}
   \caption{Voltages' percentual errors}
-  \label{tab:op}
+  \label{tab:error_tensoes}
 \end{table}
 
 
@@ -68,13 +68,10 @@ Here, we present the obtained values for the errors.
     \input{../mat/error_current}
   \end{tabular}
   \caption{Currents' percentual errors }
-  \label{tab:op}
+  \label{tab:error_current}
 \end{table}
 
-We have not considered the error in the $8^{th}$ node, once that it is defined to be exactly 0. Therefore, the use of equation \ref{eq:error} would give us an infinite answer. However, we have presented the error for $V_a$. Although this voltage was given to us by the \emph{python} code available, \emph{ngspice} in unable do consider the same number of significant figures as the ones presented, resulting in a non-zero value.
+We have not considered the error in the $8^{th}$ node, once that it is defined to be exactly 0. Therefore, the use of equation \ref{eq:error} would give us an infinite answer. However, we have presented the error for $V_a$. Although this voltage was given to us by the \emph{python} code available, \emph{ngspice} is unable to consider the same number of significant figures as the ones presented, resulting in a non-zero value.
 
 
-\emph{Ngsipe} works by solving a set of simultaneous equations based on the Kirchhof's Laws. Thus, the simulator operates my solving a matrix of equations much like the one on wich the theoretical analysis was based on.
-
-The results obtained by the siulation software corroborate the ones one expected. All the error values obtained are far less that 1\%. \emph{Ngspice}'s precision in set by default to 6 digits, one can increase the precision of the calculations up to, approximatly, 16 digits. This would, probably, result in an even lower error than the one obtained. We chose not to do so in order to diminish the computaional weight on the system.
 
