@@ -22,3 +22,42 @@ following differences: describe and explain the differences.
 
 [EXPLICAR SINAIS TROCADOS NAS CORRENTES DE VA E VC DEVIDO A CONVENÇÃO DO NGSPICE (CONTRÁRIA À ASSUMIDA POR NÓS)]
 [EXPLICAR V8 COMO FONTE FICTICIA PARA CALCULO DO NGSPICE]
+
+ERROS PERCENTUAIS DAS CORRENTES E TENSOES. CONSIDERANDO VALOR REAL O OBTIDO PELO OCTAVE.
+FORMULA = ABS(X(NGSIPE)-X(OCTAVE) ) / X(OCTAVE) *100
+
+
+%formula do erro
+\begin{equation}
+  \centering
+  \epsilon (x_e)=\frac{|x_e-x_r|}{x_r} \times 100\,\%
+  \label{eq:error}
+\end{equation}
+
+We have considered the value obtained by the mashes/nodes methods as the "real" one ($x_r$) and the value obtained through \emph{ngspice} as the experimental one ($x_e$). It is important to notice, once more, that the values from \emph{ngspice} for the current going through the voltages souces are the simetric of the ones we have considered. The percentual error computation had this in mind.
+
+ERROS CORRENTES
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline
+    {\bf Name} & {\bf Value in \%} \\ \hline
+    \input{../mat/error_tensoes}
+  \end{tabular}
+  \caption{Currents' percentual errors}
+  \label{tab:op}
+\end{table}
+
+ERROS TENSOES
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline
+    {\bf Name} & {\bf Value in \%} \\ \hline
+    \input{../mat/error_current}
+  \end{tabular}
+  \caption{Voltages' percentual errors }
+  \label{tab:op}
+\end{table}
