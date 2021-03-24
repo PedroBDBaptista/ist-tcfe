@@ -2,8 +2,39 @@
 \label{sec:analysis}
 
 \subsection{Mesh Analysis}
-[Falar sobre análise teórica do circuito usando método das malhas. Meter equações e matrizes usadas no NGSPICE]
-[Tabela do Octave]
+
+\par The mesh method applies Kirschoff Voltage Law, eq.\ref{eq:KVL}, to all circuit meshes, except ones containing current sources, after stipulating mesh current directions. A equation can be derived for each mesh, making use of Ohm's Law when needed, eq. \ref{eq:Ohm}, forming a equation system. For meshes containing current sources, an equation can be obtained by inspection.
+
+\begin{multicols}{2}
+\begin{equation}
+    \sum_{i=1}^{n} V_i = 0
+    \label{eq:KVL}
+\end{equation}
+
+\begin{equation}
+    V = I \times R
+    \label{eq:Ohm}
+\end{equation}
+\end{multicols}
+
+Bellow, we ilustrate the stipulated current directions for all meshes and components, in figure \ref{}, and present the derived equation system in matrix form.
+
+\begin{equation*}
+\begin{bmatrix} R_1+R_3+R_4 & -R_3 & -R_4 & 0 \\
+ -R_4 & 0 & R_4+R_6+R_7-K_c & 0 \\
+ -K_bR_3 & 0 & K_bR_3-1 & 0 \\
+ 0 & 0 & 0 & -1 \end{bmatrix} \begin{bmatrix} I_{\alpha}\\ I_{\beta}\\ I_{\gamma} \\ I_{\delta} \end{bmatrix} = \begin{bmatrix} V_a\\ 0\\ 0\\ I_d \end{bmatrix}
+\end{equation*}
+%R_1+R_2+R_3 -R_3 -R_4 0
+%-R_4 0 R_4+R_6+R_7-K_c 0
+%-1 0 1-1/(K_bR_3) 0
+%0 0 0 1
+
+\par The first two equations were derived by KVL applied to meshes $\alpha$ and $\gamma$, respectively. The third equation regards the inspection of dependent source $I_b$, and the forth equation is trivially obtained.
+
+\par The matrix system was solved using Octave software. The results for mesh currents were used to calculate all branch currents, the latter being presented in the table bellow. This way results can be more easily compared between sections.
+
+
 
 \begin{table}[H]
   \centering
