@@ -48,7 +48,7 @@ i=[-I(2);-I(3);I(1);-I(2);I(1)-I(2);I(1)-I(4);I(2)-I(3);-I(4);-I(4);I(1);I(3)-I(
 
 
 for k = 1:11
- fprintf(fid, "$I_{%s%s}$ &  %.5e \\\\ \\hline \n",s(k,1),s(k,2),i(k));
+ fprintf(fid, "$I_{%s%s}$ &  %.7e \\\\ \\hline \n",s(k,1),s(k,2),i(k));
 endfor
 fclose(fid);
 
@@ -78,7 +78,7 @@ fid=fopen(filename,"w");
 fprintf(fid,"$V_0$ & 0.  \\\\ \\hline \n");
 
 for k=1:7
-	fprintf(fid,"$V_%d$ & %.5f \\\\ \\hline\n",k,v(k));
+	fprintf(fid,"$V_%d$ & %.7f \\\\ \\hline\n",k,v(k));
 endfor;
 
 fclose(fid);
@@ -118,6 +118,7 @@ spice_voltages(7) = 4.829982e+00;
 error_current=[];
 for j=1:9
 	error_current(j)=abs(spice_currents(j)-i(j))/abs(i(j)) * 100;
+	%printf("%f \n", error_current(j));
 endfor;
 	error_current(10)=abs(spice_currents(10)+i(10))/abs(i(10)) * 100;
 	error_current(11)=abs(spice_currents(11)+i(11))/abs(i(11)) * 100;
@@ -136,7 +137,7 @@ fid_2=fopen(filename_2,"w");
 
 
 for t=1:11
-	fprintf(fid_2,"$\\epsilon$ ($I_{%s%s}$) &  %.6f  \\\\ \\hline \n",s(t,1),s(t,2),error_current(t));
+	fprintf(fid_2,"$\\epsilon$ ($I_{%s%s}$) &  %.7f  \\\\ \\hline \n",s(t,1),s(t,2),error_current(t));
 endfor;
 
 fclose(fid_2);
@@ -149,7 +150,7 @@ fid_3=fopen(filename_3,"w");
 
 
 for t=1:7
-	fprintf(fid_3,"$\\epsilon$ (%d) &  %.6f  \\\\ \\hline \n",t,error_voltages(t));
+	fprintf(fid_3,"$\\epsilon$ (%d) &  %.7f  \\\\ \\hline \n",t,error_voltages(t));
 endfor;
 
 fclose(fid_3);
