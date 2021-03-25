@@ -3,7 +3,7 @@
 
 \subsection{Mesh Analysis}
 
-\par The mesh method applies Kirschoff Voltage Law, eq.\ref{eq:KVL}, to all circuit meshes, except ones containing current sources, after stipulating mesh current directions. A equation can be derived for each mesh, making use of Ohm's Law when needed, eq. \ref{eq:Ohm}, forming a equation system. For meshes containing current sources, an equation can be obtained by inspection.
+\par The mesh method applies Kirschoff's Voltage Law, eq.\ref{eq:KVL}, to all circuit meshes, except ones containing current sources, after stipulating mesh current directions. A equation can be derived for each mesh, making use of Ohm's Law when needed, eq. \ref{eq:Ohm}, forming a equation system. For meshes containing current sources, an equation can be obtained by inspection.
 
 \begin{multicols}{2}
 \begin{equation}
@@ -56,7 +56,7 @@ Below, we ilustrate the stipulated current directions for all meshes and compone
 \end{table}
 
 \subsection{Node Analysis}
-\par The nodal method applies Kirschoff Current Law, eq.\ref{eq:KCL}, to all circuit nodes, except ones next to voltage sources. A equation can be derived for each node, using Ohm's Law when needed, eq. \ref{eq:Ohm}, forming a equation system. Usually, the ground node is stipulated next to a voltage source, so that two nodal voltages can be directly infered. If there is more than one voltage source, which is our case, one can write aditional equations considering the so called "supernode", which is the analysis of two consecutive nodes as one, and apllying KCL only to external branches. In the presence of dependent voltage sources, one can also derive a equation from inspection. 
+\par The nodal method applies Kirschoff Current Law, eq.\ref{eq:KCL}, to all circuit nodes, except ones next to voltage sources. A equation can be derived for each node, using Ohm's Law when needed, eq. \ref{eq:Ohm}, forming a equation system. Usually, the ground node is stipulated next to a voltage source, so that two nodal voltages can be directly infered. If there is more than one voltage source, which is our case, one can write aditional equations considering the so called "supernode", which is the analysis of two consecutive nodes as one, and apllying KCL only to external branches. In the presence of dependent voltage sources, one can also derive a equation from inspection.
 \begin{multicols}{2}
 \begin{equation}
     \sum_{i=1}^{n} I_i = 0
@@ -81,18 +81,18 @@ Below, we ilustrate the stipulated voltage directions for all branches, in figur
 
 
 \begin{equation*}
-\begin{bmatrix} 
+\begin{bmatrix}
  1 & 0 & 0 & 0 & 0 & 0 & 0 \\
  G_1 & -G_1 & 0 & 0 & 0 & -G_6 & -G_4 \\
  -G_1 & G_1+G_2+G_3 & -G_2 & 0 & 0 & 0 & -G_3\\
  0 & G_2+K_b & -G_2 & 0 & 0 & 0 & -K_b\\
  0 & -K_b & 0 & -G_5 & 0 & 0 & K_b+G_5\\
  0 & 0 & 0 & 0 & -1 & K_cG_6 & 1\\
- 0 & 0 & 0 & 0 & -G_7 & G_6+G_7 & 0\end{bmatrix} 
-\begin{bmatrix} 
- V_1\\ V_2\\ V_3\\ V_4\\ V_5\\ V_6\\ V_7\end{bmatrix} 
-= 
-\begin{bmatrix} 
+ 0 & 0 & 0 & 0 & -G_7 & G_6+G_7 & 0\end{bmatrix}
+\begin{bmatrix}
+ V_1\\ V_2\\ V_3\\ V_4\\ V_5\\ V_6\\ V_7\end{bmatrix}
+=
+\begin{bmatrix}
  V_a\\ 0\\ 0\\ 0\\ -I_d\\ 0\\ 0 \end{bmatrix}
 \end{equation*}
 
@@ -111,4 +111,3 @@ Below, we ilustrate the stipulated voltage directions for all branches, in figur
   \caption{Theoretical values for node voltages using Octave}
   \label{tab:TVoltages}
 \end{table}
-
