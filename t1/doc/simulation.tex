@@ -1,11 +1,10 @@
 \section{Simulation Analysis}
 \label{sec:simulation}
 
-\subsection{Operating Point Analysis}
 
 In order to input the given circuit into the simulation software, \emph{ngspice}, we proceeded to number the existing nodes. It is fundamental to specify to which nodes each component is connected to, carefully distinguishing the positive from the negative terminal, once that this is going to affect the current value returned.
 
-\emph{Ngspice} measures the voltages in each node and the current through any voltage source. In order to define $V_c$ one needs to have access to the current going through $R_6$. We have achieved this by adding a voltage source $V_{aux}$, with voltage $0V$, in series with $R_6$ and taking its current, since this is the same for components in series. Voltage source, $V_{aux}$, is, therefore connected to terminals 0 and 8, where 8 is a terminal located between $R_6$ and node 0.
+\emph{Ngspice} measures the voltages in each node and the current through any voltage source. In order to define $V_c$ one needs to have access to the current going through $R_6$. We have achieved this by adding a voltage source $V_{aux}$, with voltage $0V$, in series with $R_6$ and taking its current, since this is the same for components in series. Voltage source, $V_{aux}$, is therefore connected to nodes 0 and 8, where node 8 is located between $R_6$ and the negative terminal of $V_{aux}$.
 
 \begin{figure}[H]
   \centering
@@ -34,8 +33,8 @@ under analysis.
 \end{table}
 
 One can immediately notice that current values for the voltage sources are approximately symmetrical to the ones presented in the theoretical analysis. This is because we have considered the current in the voltage sources going from the negative terminal to the positive one. On the other hand, \emph{ngspice} considers the current the other way around, i.e., entering the positive terminal.
-
-
+\par
+We now proceed to calculate the discrepancies between the theoretical analysis and the simulation results:
 %formula do erro
 \begin{equation}
   \centering
@@ -71,7 +70,4 @@ Here, we present the obtained values for the errors.
   \label{tab:error_current}
 \end{table}
 
-We have not considered the error in the $8^{th}$ node, once that it is defined to be exactly 0. Therefore, the use of equation \ref{eq:error} would give us an infinite answer. However, we have presented the error for $V_a$. Although this voltage was given to us by the \emph{python} code available, \emph{ngspice} is unable to consider the same number of significant figures as the ones presented, resulting in a non-zero value.
-
-
-
+We have not considered the error in the $8^{th}$ node, since it is defined to be exactly 0. Therefore, the use of equation \ref{eq:error} would give us an infinite answer. However, we have presented the error for $V_a$. Although this voltage was given to us by the \emph{python} code available, \emph{ngspice} is unable to consider the same number of significant figures as the ones presented, resulting in a non-zero value.
