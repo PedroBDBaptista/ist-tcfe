@@ -3,7 +3,7 @@
 
 \subsection{Mesh Analysis}
 
-\par The mesh method applies Kirschoff's Voltage Law, Eq.\ref{eq:KVL}, to all circuit meshes, except ones containing current sources, after stipulating mesh current directions. A equation can be derived for each mesh, making use of Ohm's Law when needed, Eq. \ref{eq:Ohm}, forming an equation system. For meshes containing current sources, an equation can be obtained by inspection.
+\par The mesh method applies Kirchhoff's Voltage Law, Eq.\ref{eq:KVL}, to all circuit meshes, except ones containing current sources, after stipulating mesh current directions. A equation can be derived for each mesh, making use of Ohm's Law when needed, Eq. \ref{eq:Ohm}, forming an equation system. For meshes containing current sources, an equation can be obtained by inspection.
 
 \begin{multicols}{2}
 \begin{equation}
@@ -57,7 +57,7 @@ Analysing the matrix, one can quickly notice that $\alpha$, $\beta$ and $\gamma$
 \end{table}
 
 \subsection{Node Analysis}
-\par The nodal method applies Kirschoff's Current Law, Eq.\ref{eq:KCL}, to all circuit nodes, except ones next to voltage sources. A equation can be derived for each node, using Ohm's Law when needed, Eq. \ref{eq:Ohm}, forming a equation system. Usually, the ground node is stipulated next to a voltage source, so that two nodal voltages can be directly infered. If there is more than one voltage source, which is our case, one can write additional equations considering the so called "supernode", which is the analysis of two consecutive nodes as one, and applying KCL only to external branches. In the presence of dependent voltage sources, one can also derive a equation from inspection.
+\par The nodal method applies Kirchhoff's Current Law, Eq.\ref{eq:KCL}, to all circuit nodes, except ones next to voltage sources. A equation can be derived for each node, using Ohm's Law when needed, Eq. \ref{eq:Ohm}, forming a equation system. Usually, the ground node is stipulated next to a voltage source, so that two nodal voltages can be directly infered. If there is more than one voltage source, which is our case, one can write additional equations considering the so called "supernode", which is the analysis of two consecutive nodes as one, and applying KCL only to external branches. In the presence of dependent voltage sources, one can also derive a equation from inspection.
 \begin{multicols}{2}
 \begin{equation}
     \sum_{i=1}^{n} I_i = 0
