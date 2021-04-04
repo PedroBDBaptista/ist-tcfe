@@ -1,74 +1,141 @@
 close all
 clear all
 
-%%EXAMPLE SYMBOLIC COMPUTATIONS
+%===================================================
 
-pkg load symbolic
+%LEITURA DO FICHEIRO DATA
 
-syms t
-syms R
-syms C
-syms vi(t)
-syms vo(t)
-syms i(t)
+%===================================================
+%open=fopen("/home/vaz/ist-tcfe/t2/data.txt","r")
 
-i(t)=C*diff(vo,t)
+data=fileread('../data.txt');
 
-printf("\n\nKVL equation:\n");
+data=strsplit(data,{"\n","="});
 
-vi(t) = R*i(t)+vo(t)
+for i=1:7
+  R(i)=str2double(cell2mat(data(i*2-1+4)))*1000;
+  G(i)=1/R(i);
+endfor
 
-syms vo_n(t) %natural solution
-syms vo_f(t) %forced solution
-
-printf("\n\nSolution is of the form");
-
-v(t) = vo_n(t) + vo_f(t)
-
-printf("\n\nNatural solution:\n");
-syms A
-syms wn
-
-vi(t) = 0 %no excitation
-i_n(t) = C*diff(vo_n, t)
+Vs= str2double(cell2mat(data(19)))
+C = str2double(cell2mat(data(21))) / 1000000
+Kb= str2double(cell2mat(data(23))) /1000
+Kd= str2double(cell2mat(data(25)))*1000
 
 
-printf("\n\n Natural solution is of the form");
-vo_n(t) = A*exp(wn*t)
 
-R*i_n(t)+vo_n(t) == 0
+%===================================================
 
-R*C*wn*vo_n(t)+vo_n(t) == 0
+%ALINEA A
 
-R*C*wn+1==0
+%===================================================
 
-solve(ans, wn)
+A=[
+0,     0,0,1,0,0,0,0;
+1,     0,0,0,0,0,0,0;
+G(1),  -(G(1)+G(2)+G(3)),    G(2),   0,   G(3),          0,   0,   0;
+0,     -(G(2)+Kb),           G(2),    0,    Kb,          0,   0,   0;
+-G(1),   G(1),                0,      0,    G(4)         ,0   ,G(6)    ,0;
+0,       0,                   0,      0,     1,          0,   Kd*G(6),-  1;
+0,      -Kb,                  0,      0,    G(1)+Kb,    -G(3),       0,       0;
+0,       0,                   0,       0,    0,           0,   -(G(6)+G(7)),    G(7);
+];
+
+B=[0;Vs;0;0;0;0;0;0;];
+
+Vol=A\B;
 
 
-%%EXAMPLE NUMERIC COMPUTATIONS
+%IMPRESSAO DOS VALORES DAS TENSOES PARA FICHEIRO PARA O LATEX
 
-R=1e3 %Ohm
-C=100e-9 %F
+filename = "data_alinea_a.tex";
+fid=fopen(filename,"w");
 
-f = 1000 %Hz
-w = 2*pi*f; %rad/s
+for k=1:8
+	fprintf(fid,"$V_%d$ & %.7f \\\\ \\hline\n",k,Vol(k));
+endfor;
 
-%time axis: 0 to 10ms with 1us steps
-t=0:1e-6:10e-3; %s
+%IMPRESSAO DA CORRENTES
 
-Zc = 1/(j*w*C)
-Cgain = Zc/(R+Zc)
-Gain = abs(Cgain)
-Phase = angle(Cgain)
 
-vi = 1*cos(w*t);
-vo = Gain*cos(w*t+Phase);
+fclose(fid);
 
-hf = figure ();
-plot (t*1000, vi, "g");
-hold on;
-plot (t*1000, vo, "b");
 
-xlabel ("t[ms]");
-ylabel ("vi(t), vo(t) [V]");
-print (hf, "forced.eps", "-depsc");
+
+%IMPRESSAO DOS VALORES PARA NGSPICE
+
+
+
+
+
+%============================================
+
+%alinea 2 
+
+%============================================
+
+%DETERMINAÇAO DE IX
+
+SVS=[        -(G(1)+G(2)+G(3)),  G(2) ,  G(3),                0,            0,              0,             0;
+	        -(G(2)+Kb),          G(2),    Kb,                 0,            0,              0,             0;
+	       G(1),                  0,     G(4),                0,           G(6),              0,           0;
+	        -Kb,                 0,     G(5)+Kb,           -G(5),          0,               0,           -1;
+	         0,                   0,             1,           0,              Kd*G(6),      -1               0;
+	         0,                0,         0,                  1,             0,             -1,             0;
+	         0,                   0,     0,                      0,       -(G(6)+G(7)),       G(7),      0;];
+
+col=[0;0;0;0;0;Vol(6)-Vol(8);0];
+
+
+sol=SVS\col;
+
+
+Ix=sol(7);
+
+
+%printf("\n\n Ix=   %f", Ix);
+
+
+%IMPRESSAO DA TABELA
+
+filename = "data_alinea_2.tex";
+fid=fopen(filename,"w");
+
+fprintf(fid,"$I_x$ & %.7f \\\\ \\hline\n",Ix);
+fprintf(fid,"$V_x$ & %.7f \\\\ \\hline\n",Vol(6)-Vol(8));
+fprintf(fid,"$R_{eq}$ & %.7f \\\\ \\hline\n",(Vol(6)-Vol(8))/Ix);
+
+
+fclose(fid);
+
+%FALTA O GRAFICO%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%============================================
+
+%alinea 3 
+
+%============================================
+
+f=1000;
+w=2*pi*f;
+
+vs=exp(-pi/2 * j)
+
+y=(j*w*C)
+
+A3=[
+0,     0,0,1,0,0,0,0;
+1,     0,0,0,0,0,0,0;
+G(1),  -(G(1)+G(2)+G(3)),    G(2),   0,   G(3),          0,   0,   0;
+0,     -(G(2)+Kb),           G(2),    0,    Kb,          0,   0,   0;
+-G(1),   G(1),                0,      0,    G(4)         ,0   ,G(6)    ,0;  
+0,       0,                   0,      0,     1,          0,   Kd*G(6), -1;
+0,       0,                   0,       0,    0,           0,   -(G(6)+G(7)),    G(7);
+0,       -Kb,                 0,        0,     G(5)+Kb,    -G(5)-y,     0,        y;
+];
+
+B3=[0;vs;0;0;0;0;0;0;];
+
+sol3=A3\B3
