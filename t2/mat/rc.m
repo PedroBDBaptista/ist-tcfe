@@ -23,10 +23,56 @@ Kb= str2double(cell2mat(data(23))) /1000
 Kd= str2double(cell2mat(data(25)))*1000
 
 
+%===================================================
+
+%FICHEIRO DATA NGSPICE
 
 %===================================================
 
-%ALINEA A
+filename = "data_ngspice.mod";
+fid=fopen(filename,"w");
+
+fprintf(fid, "ANALISE ESTATICA T<0\n");
+
+fprintf(fid, "*fontes de tensao\n" );
+fprintf(fid, "Vs 1 0 %f \n",Vs);
+
+fprintf(fid, "Vaux 0 9 0 \n");
+
+fprintf(fid, "Hvd 5 8 Vaux %f \n",Kd);
+
+
+fprintf(fid, "*fontes de corrente\n" );
+
+fprintf(fid, "Gib 6 3 2 5 %f \n",Kb);
+
+
+fprintf(fid, "*resistencias\n" );
+
+fprintf(fid, "R1 1 2 %f \n", R(1));
+fprintf(fid, "R2 3 2 %f \n", R(2));
+fprintf(fid, "R3 2 5 %f \n", R(3));
+fprintf(fid, "R4 5 0 %f \n", R(4));
+fprintf(fid, "R5 5 6 %f \n", R(5));
+fprintf(fid, "R6 9 7 %f \n", R(6));
+fprintf(fid, "R7 7 8 %f \n", R(7));
+
+fprintf(fid, "*condensador\n" );
+
+fprintf(fid, "C1 6 8 %f \n",C );
+
+fprintf(fid, ".end \n");
+
+fclose(fid);
+
+
+
+
+
+
+%===================================================
+
+%ALINEA 1
 
 %===================================================
 
