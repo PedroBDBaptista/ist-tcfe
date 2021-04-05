@@ -62,4 +62,7 @@ echo  "op_END"
 *hardcopy zim.ps abs(v(coll)/((v(1)-v(2))/1k))
 *echo zim_FIG
 
+quit
 .endc
+
+.end

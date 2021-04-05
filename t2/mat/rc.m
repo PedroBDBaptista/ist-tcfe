@@ -25,7 +25,7 @@ Kd= str2double(cell2mat(data(25)))*1000
 
 %===================================================
 
-%FICHEIRO DATA NGSPICE
+%FICHEIRO DATA NGSPICE 1)
 
 %===================================================
 
@@ -107,9 +107,41 @@ endfor;
 fclose(fid);
 
 
+%=======================================
 
-%IMPRESSAO DOS VALORES PARA NGSPICE
+%IMPRESSAO DOS VALORES PARA NGSPICE 2)
 
+%=======================================
+filename = "data_ngspice3.txt";
+fid=fopen(filename,"w");
+
+fprintf(fid, "*ANALISE t>0 Natural solution\n");
+
+fprintf(fid, "*fontes de tensao\n" );
+fprintf(fid, "Vs 1 0 0 \n");
+
+fprintf(fid, "Vaux 0 9 0 \n");
+
+fprintf(fid, "Hvd 5 8 Vaux %f \n",Kd);
+
+fprintf(fid, "*fontes de corrente\n" );
+
+fprintf(fid, "Gib 6 3 2 5 %f \n",Kb);
+
+
+fprintf(fid, "*resistencias\n" );
+
+fprintf(fid, "R1 1 2 %f \n", R(1));
+fprintf(fid, "R2 3 2 %f \n", R(2));
+fprintf(fid, "R3 2 5 %f \n", R(3));
+fprintf(fid, "R4 5 0 %f \n", R(4));
+fprintf(fid, "R5 5 6 %f \n", R(5));
+fprintf(fid, "R6 9 7 %f \n", R(6));
+fprintf(fid, "R7 7 8 %f \n", R(7));
+
+fprintf(fid, ".end \n");
+
+fclose(fid);
 
 
 
@@ -142,21 +174,74 @@ Ix=sol(7);
 %printf("\n\n Ix=   %f", Ix);
 
 
-%IMPRESSAO DA TABELA
+%IMPRESSAO DA TABELA%%%%%%%%%%%%%%%%%%
 
 filename = "data_alinea_2.tex";
 fid=fopen(filename,"w");
 
+fprintf(fid,"$V_1$ & %.7f \\\\ \\hline\n",0);
+fprintf(fid,"$V_2$ & %.7f \\\\ \\hline\n",sol(1));
+fprintf(fid,"$V_3$ & %.7f \\\\ \\hline\n",sol(2));
+fprintf(fid,"$V_4$ & %.7f \\\\ \\hline\n",0);
+fprintf(fid,"$V_5$ & %.7f \\\\ \\hline\n",sol(3));
+fprintf(fid,"$V_6$ & %.7f \\\\ \\hline\n",sol(4));
+fprintf(fid,"$V_7$ & %.7f \\\\ \\hline\n",sol(5));
+fprintf(fid,"$V_8$ & %.7f \\\\ \\hline\n",sol(6));
 fprintf(fid,"$I_x$ & %.7f \\\\ \\hline\n",Ix);
 fprintf(fid,"$V_x$ & %.7f \\\\ \\hline\n",Vol(6)-Vol(8));
 fprintf(fid,"$R_{eq}$ & %.7f \\\\ \\hline\n",(Vol(6)-Vol(8))/Ix);
 
 
 fclose(fid);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %FALTA O GRAFICO%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%=======================================================
+
+%Dados 3) para NGSPICE
+
+%=======================================================
+
+filename = "data_ngspice3.txt";
+fid=fopen(filename,"w");
+
+fprintf(fid, "*ANALISE ESTATICA\n");
+
+fprintf(fid, "*fontes de tensao\n" );
+fprintf(fid, "Vs 1 0 0 \n");
+
+fprintf(fid, "Vaux 0 9 0 \n");
+
+fprintf(fid, "Hvd 5 8 Vaux %f \n",Kd);
 
 
+fprintf(fid, "*fontes de corrente\n" );
+
+fprintf(fid, "Gib 6 3 2 5 %f \n",Kb);
+
+
+fprintf(fid, "*resistencias\n" );
+
+fprintf(fid, "R1 1 2 %f \n", R(1));
+fprintf(fid, "R2 3 2 %f \n", R(2));
+fprintf(fid, "R3 2 5 %f \n", R(3));
+fprintf(fid, "R4 5 0 %f \n", R(4));
+fprintf(fid, "R5 5 6 %f \n", R(5));
+fprintf(fid, "R6 9 7 %f \n", R(6));
+fprintf(fid, "R7 7 8 %f \n", R(7));
+
+fprintf(fid, "*condensador\n" );
+
+fprintf(fid, "C1 6 8 %f \n",C );
+
+fprintf(fid, ".end \n");
+
+fclose(fid);
+
+%filename = "data_ngspice3_2.txt";
+%fid=fopen(filename,"w");
+
+%fprintf(fid, "")
 
 %============================================
 

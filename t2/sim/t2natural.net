@@ -1,0 +1,17 @@
+*
+*NGSPICE simulation script
+*Transient Analysis Natural Solution t>0
+
+.options savecurrents
+
+.include ../mat/data_ngspice3.txt
+
+*************************************************
+**************SIMULATION CONTROL*****************
+*************************************************
+
+.control
+
+echo "*******************************************"
+echo "Transient Analysis"
+echo "*******************************************"
