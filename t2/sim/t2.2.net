@@ -1,0 +1,27 @@
+*
+*NGSPICE simulation script
+*Static analysis at t=0
+
+.options savecurrents
+
+.include ../mat/data_ngspicet0.txt
+
+*******************************************************
+***************SIMULATION CONTROL**********************
+*******************************************************
+.control
+
+op
+
+echo "*************************************************"
+echo "Operating Point "
+echo "*************************************************"
+
+echo "op_TAB"
+print all
+echo "op_END"
+
+quit
+.endc
+
+.end

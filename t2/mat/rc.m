@@ -29,7 +29,7 @@ Kd= str2double(cell2mat(data(25)))*1000
 
 %===================================================
 
-filename = "data_ngspice.mod";
+filename = "data_ngspice1.txt";
 fid=fopen(filename,"w");
 
 fprintf(fid, "*ANALISE ESTATICA\n");
@@ -112,10 +112,10 @@ fclose(fid);
 %IMPRESSAO DOS VALORES PARA NGSPICE 2)
 
 %=======================================
-filename = "data_ngspice3.txt";
+filename = "data_ngspice2.txt";
 fid=fopen(filename,"w");
 
-fprintf(fid, "*ANALISE t>0 Natural solution\n");
+fprintf(fid, "*ANALISE ESTATICA T=0 \n");
 
 fprintf(fid, "*fontes de tensao\n" );
 fprintf(fid, "Vs 1 0 0 \n");
@@ -124,6 +124,7 @@ fprintf(fid, "Vaux 0 9 0 \n");
 
 fprintf(fid, "Hvd 5 8 Vaux %f \n",Kd);
 
+fprintf(fid, "Vx 6 8 %f",Vol(6)-Vol(8));
 fprintf(fid, "*fontes de corrente\n" );
 
 fprintf(fid, "Gib 6 3 2 5 %f \n",Kb);
@@ -205,9 +206,9 @@ fclose(fid);
 filename = "data_ngspice3.txt";
 fid=fopen(filename,"w");
 
-fprintf(fid, "*ANALISE ESTATICA\n");
+fprintf(fid, "*ANALISE T>0 NATURAL SOLUTION\n");
 
-fprintf(fid, "*fontes de tensao\n" );
+fprintf(fid, "*Fontes de tensao\n" );
 fprintf(fid, "Vs 1 0 0 \n");
 
 fprintf(fid, "Vaux 0 9 0 \n");
@@ -215,12 +216,12 @@ fprintf(fid, "Vaux 0 9 0 \n");
 fprintf(fid, "Hvd 5 8 Vaux %f \n",Kd);
 
 
-fprintf(fid, "*fontes de corrente\n" );
+fprintf(fid, "*Fontes de corrente\n" );
 
 fprintf(fid, "Gib 6 3 2 5 %f \n",Kb);
 
 
-fprintf(fid, "*resistencias\n" );
+fprintf(fid, "*Resistencias\n" );
 
 fprintf(fid, "R1 1 2 %f \n", R(1));
 fprintf(fid, "R2 3 2 %f \n", R(2));
@@ -234,18 +235,17 @@ fprintf(fid, "*condensador\n" );
 
 fprintf(fid, "C1 6 8 %f \n",C );
 
+fprintf(fid, "*INITIAL CONDITIONS FOR TRANSIENT ANALYSIS\n")
+fprintf(fid, ".ic v(6)=%f v(8)=%f \n",sol(4),sol(6))
 fprintf(fid, ".end \n");
 
 fclose(fid);
 
-%filename = "data_ngspice3_2.txt";
-%fid=fopen(filename,"w");
 
-%fprintf(fid, "")
 
 %============================================
 
-%alinea 3
+%alinea 4
 
 %============================================
 
@@ -270,3 +270,47 @@ G(1),  -(G(1)+G(2)+G(3)),    G(2),   0,   G(3),          0,   0,   0;
 B3=[0;vs;0;0;0;0;0;0;];
 
 sol3=A3\B3
+
+%============================================
+
+%Dados 4) para NGSPICE
+
+%============================================
+
+filename = "data_ngspice4.txt";
+fid=fopen(filename,"w");
+
+fprintf(fid, "*ANALISE T>0 TRANSIENT ANALYSIS AND FREQUENCY ANALYSIS\n");
+
+fprintf(fid, "*Fontes de tensao\n" );
+fprintf(fid, "Vs 1 0 0.0 ac 1.0 sin (0 1 1k) \n");
+
+fprintf(fid, "Vaux 0 9 0 \n");
+
+fprintf(fid, "Hvd 5 8 Vaux %f \n",Kd);
+
+
+fprintf(fid, "*Fontes de corrente\n" );
+
+fprintf(fid, "Gib 6 3 2 5 %f \n",Kb);
+
+
+fprintf(fid, "*Resistencias\n" );
+
+fprintf(fid, "R1 1 2 %f \n", R(1));
+fprintf(fid, "R2 3 2 %f \n", R(2));
+fprintf(fid, "R3 2 5 %f \n", R(3));
+fprintf(fid, "R4 5 0 %f \n", R(4));
+fprintf(fid, "R5 5 6 %f \n", R(5));
+fprintf(fid, "R6 9 7 %f \n", R(6));
+fprintf(fid, "R7 7 8 %f \n", R(7));
+
+fprintf(fid, "*condensador\n" );
+
+fprintf(fid, "C1 6 8 %f \n",C );
+
+fprintf(fid, "*INITIAL CONDITIONS FOR TRANSIENT ANALYSIS\n")
+fprintf(fid, ".ic v(6)=%f v(8)=%f \n",sol(4),sol(6))
+fprintf(fid, ".end \n");
+
+fclose(fid);

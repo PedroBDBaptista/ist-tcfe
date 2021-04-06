@@ -1,0 +1,47 @@
+*
+*NGSPICE simulation script
+*Transient Analysis Natural Solution t>0
+
+.options savecurrents
+
+.include ../mat/data_ngspice4.txt
+
+*************************************************
+**************SIMULATION CONTROL*****************
+*************************************************
+
+.control
+
+*make plots in color
+set hcopypscolor=0
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=violet
+set color5=rgb:3/8/0
+set color6=rgb:4/0/0
+
+echo "********************************************"
+echo  "Transient analysis"
+echo "********************************************"
+tran 2e-5 20e-3 uic
+
+hardcopy trans.ps v(6) v(1)
+echo trans_FIG
+
+echo "********************************************"
+echo  "Frequency analysis"
+echo "********************************************"
+
+ac dec 10 0.1 1MEG uic
+
+hardcopy acm.ps db(v(6)) db(v(1))
+echo acm_FIG
+hardcopy acp.ps ph(v(6))*180/pi ph(v(1))*180/pi
+echo acp_FIG
+
+quit
+.endc
+
+.end
