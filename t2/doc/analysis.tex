@@ -139,7 +139,7 @@ With this in mind, we are now going to study how the voltages in the capacitors 
 %alínea 3
 %==============================================================
 
-\subsection{ Transient Analysis - Natural Solution for t>0}
+\subsection{ Transient Analysis - Natural Solution for t$>$0}
 We want to compute node 6's voltage with respect to time. First we need to compute its natural solution. Since we know the form of the explicit solution  (an exponential), we just the need to know the node 6's voltage at $t=0$ and at $t \to \infty $.
 The latter is $0$ (the natural solution is the solution for a circuit that doesn't impose a voltage, i.e, doesn't have an independent voltage source, so naturally $V_{6}$ decays to $0$), and the former was calculated in the last section. However, we can say that
 the initial condition for this case is, in reality, the capacitor's voltage ,$V_x$, at $t<0$, because it's this condition that dictates $V_6$ at $t=0$. The plot of the form
@@ -226,21 +226,51 @@ with different amplitude and phase.
 %===================================
 %alínea 6
 %===================================
+
 \subsection{Frequency Analysis}
-ALINEA 6
-AMPLITUDE (FREQUENCIA)
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=10cm]{alinea_6_amp}
-  \caption{o q po aqui}
-  \label{fig:fignodos}
-\end{figure}
 
+\section{alinea 6}
+We want, now, to study how the frequency of the voltage independent source, $V_s$, may affect the voltages and phases in every other node.
+We start by considering that the phase in $V_s$ is 0. We can always do that since the phase are always relative to each other. One can imagine a time translation so that this holds true every time.
+Once obtained the imaginary amplitudes for the voltages in each node, it becomes trivial to find the real amplitude and phase shift.
+Let $\mathcal{A}$ be the complex amplitude, $A$ the real amplitude, and $\phi$ the phase shift. We can write the following expressions
 
-FASE FREQUENCIA
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=10cm]{alinea_6_amp_2}
-  \caption{o q po aqui}
-  \label{fig:fignodos}
-\end{figure}
+\begin{center}
+    \begin{equation}
+        A=\sqrt{Re^2(\mathcal{A})+Im^2(\mathcal{A})}=||\mathcal{A}||
+    \end{equation}
+\end{center}
+
+\begin{center}
+    \begin{equation}
+        \phi=acrtan\left(\frac{Im(\mathcal{A})}{Re(\mathcal{A})}\right)=arg(\mathcal{A})
+    \end{equation}
+\end{center}
+
+If we focus on the matrix \ref{eq:} we can see that if we remove the $6^{th}$ column and the last line, we can remove the $6^{th}$ unknown variable. Notice that if this is done we are left with a matrix that is frequency independent. This means that all of the other variables must by frequency independent.
+
+We have computed the complex amplitudes for a very large finite set frequencies, ranging from 0.1 Hz to 1 MHz. We now present the obtained values for the phase shift of $V_6$, $V_8$, $V_c$ and $V_s$. Notice that $V_s$ is imposed to have null phase and amplitude of 1.
+
+\begin{center}
+    \includegraphics[scale=0.5]{alinea_6_amp}
+    \captionof{figure}{Amplitude as a function of frequency}
+     \label{fig:amp(f)1}
+\end{center}
+
+\begin{center}
+    \includegraphics[scale=0.5]{alinea_6_amp_2}
+    \captionof{figure}{Amplitude as a function of frequency}
+     \label{fig:amp(f)2}
+\end{center}
+
+We chose to create two different plots, only one of which contains the difference in amplitudes. We did so since, as the frequency goes to infinity $V_C\longrightarrow0$, this makes it more difficult to understand what it happening on a bigger scale.
+As expected, we can see that $V_8$ is frequency independent. Also as theoretically predicted, the voltage difference between the capacitors terminals goes to 0 too, once that the impedance is inversely proportional to the frequency. The voltage difference is itself proportional to the impedance.
+
+Plotting the same results for the phase shifts we get
+\begin{center}
+    \includegraphics[scale=0.5]{alinea_6_fases}
+    \captionof{figure}{Amplitude as a function of frequency}
+     \label{fig:amp(f)1}
+\end{center}
+
+As predicted, $V_s$'s phase remains, by construction, 0, and $V_8$'s remains constant, as expected.
