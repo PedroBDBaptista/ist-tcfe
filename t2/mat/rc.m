@@ -17,10 +17,10 @@ for i=1:7
   G(i)=1/R(i);
 endfor
 
-Vs= str2double(cell2mat(data(19)))
-C = str2double(cell2mat(data(21))) / 1000000
-Kb= str2double(cell2mat(data(23))) /1000
-Kd= str2double(cell2mat(data(25)))*1000
+Vs= str2double(cell2mat(data(19)));
+C = str2double(cell2mat(data(21))) / 1000000;
+Kb= str2double(cell2mat(data(23))) /1000;
+Kd= str2double(cell2mat(data(25)))*1000;
 
 
 %===================================================
@@ -206,7 +206,7 @@ Tc=1/(Req*C); %timeconstant
 v6n=sol(4)*exp(-Tc*t);
 
 hf = figure ();
-plot (t*1000, v6n, "r");
+plot (t*1000, v6n, "r;V6n(t)");
 
 xlabel("t[ms]");
 ylabel("V6n(t) [V]");
@@ -307,7 +307,7 @@ Phase=-arg(sol3(6));
 v6f=Ampl*cos(w*t-Phase);
 
 clf(hf);
-plot (t*1000, v6f, "r");
+plot (t*1000, v6f, "r;V6f(t)");
 
 xlabel("t[ms]");
 ylabel("V6f(t) [V]");
@@ -372,9 +372,9 @@ PhaseSource=-arg(vs);
 Vsource=AmpSource*cos(w*t-PhaseSource);
 
 clf(hf);
-plot(t*1000,v6n+v6f,"r");
+plot(t*1000,v6n+v6f,"r;V6(t);");
 hold on;
-plot(t*1000,Vsource,"b");
+plot(t*1000,Vsource,"b;Vsource(t);");
 
 
 xlabel("t[ms]");
@@ -410,39 +410,47 @@ for i=1:100
 
 	C6=A6\B6;
 
-	amp_f(i)=C6(6);
-	paris(i)=C6(8) %guarda num vetor a tensao em 8 para diferentes freq tal como paris
+	amp_f_6(i)=C6(6);
+	amp_f_8(i)=C6(8) %guarda num vetor a tensao em 8 para diferentes freq tal como amp_f_8
 	fonte_s(i)=1.; %Vs
+	fase_vs(i)=arg(vs)+pi/2;
 
 endfor;
 
 %PLOTTING 
 
 
-oslo=abs(amp_f);
-dakar=-arg(amp_f)+pi/2;
-
+amp_6=abs(amp_f_6);
+for(i=1:100)
+	if(arg(amp_f_6(i))>pi/2)
+		fase_6(i)=arg(amp_f_6(i))-2*pi;
+	else
+	fase_6(i)=arg(amp_f_6(i));
+	endif;
+endfor;
 
 clf(hf);
-semilogx (freq, 20*log10(oslo),"r");
+semilogx (freq, 20*log10(amp_6),"r;Amplitude V6(f);");
 hold on;
-semilogx(freq,20*log10(fonte_s),"-b");
+semilogx(freq,20*log10(fonte_s),"-b;Amplitude Vs(f);");
 hold on;
-semilogx(freq,20*log10(abs(amp_f-paris)),"g");
+semilogx(freq,20*log10(abs(amp_f_6-amp_f_8)),"g;Amplitude Vc(f);");
 hold on;
-semilogx(freq,20*log10(abs(paris)),"--y");
+semilogx(freq,20*log10(abs(amp_f_8)),"--y;Amplitude V8(f);");
 
 xlabel("f [Hz]");
-ylabel("V(f) [V]");
+ylabel("V(f) [dB]");
 print (hf, "alinea_6_amp.eps","-depsc");
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clf(hf)
-semilogx(freq,dakar,"r");
+semilogx(freq,fase_vs,"--y;Phase Vs(f);"); %fase de vs como
 hold on;
-semilogx(freq,-arg(paris)+pi/2,"b"); %fase de 8
+semilogx(freq,fase_6+pi/2,"r;Phase V6(f);");
 hold on;
-semilogx(freq,-arg(amp_f-paris)+pi/2,"b"); %fase de Vc
+semilogx(freq,arg(amp_f_8)+pi/2-2*pi,"b;Phase V8(f);"); %fase de 8
+hold on;
+semilogx(freq,arg(amp_f_6-amp_f_8)+pi/2,"g;Phase Vc(f);"); %fase de Vc
 xlabel("f [Hz]");
-ylabel("Fase []");
+ylabel("Fase [rad]");
 print (hf, "alinea_6_fases.eps","-depsc");
