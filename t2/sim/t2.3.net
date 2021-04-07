@@ -1,0 +1,48 @@
+*
+*NGSPICE simulation script
+*Transient Analysis Natural Solution t>0
+
+.options savecurrents
+
+.include ../mat/data_ngspice3.txt
+
+*************************************************
+**************SIMULATION CONTROL*****************
+*************************************************
+
+.control
+
+*make plots in color
+set hcopypscolor=0
+set color0=white
+set color1=black
+set color2=red
+set color3=blue
+set color4=violet
+set color5=rgb:3/8/0
+set color6=rgb:4/0/0
+
+*op
+
+*echo "********************************************"
+*echo "Operating Point Analysis"
+*echo "********************************************"
+
+*echo  "op_TAB"
+*print all
+*print @Vs[i]
+*print @Hvd[i]
+*echo  "op_END"
+
+echo "*******************************************"
+echo "Transient Analysis"
+echo "*******************************************"
+tran 2e-5 20e-3 uic
+
+hardcopy natural.ps v(6)
+echo natural_FIG
+
+quit
+.endc
+
+.end
