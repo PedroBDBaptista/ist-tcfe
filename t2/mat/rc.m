@@ -206,7 +206,7 @@ Tc=1/(Req*C); %timeconstant
 v6n=sol(4)*exp(-Tc*t);
 
 hf = figure ();
-plot (t*1000, v6n, "r;V6n(t)");
+plot (t*1000, v6n, "r;V6n(t);");
 
 xlabel("t[ms]");
 ylabel("V6n(t) [V]");
@@ -307,7 +307,7 @@ Phase=-arg(sol3(6));
 v6f=Ampl*cos(w*t-Phase);
 
 clf(hf);
-plot (t*1000, v6f, "r;V6f(t)");
+plot (t*1000, v6f, "r;V6f(t);");
 
 xlabel("t[ms]");
 ylabel("V6f(t) [V]");
@@ -417,7 +417,7 @@ for i=1:100
 
 endfor;
 
-%PLOTTING 
+%PLOTTING
 
 
 amp_6=abs(amp_f_6);
