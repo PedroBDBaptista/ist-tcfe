@@ -200,6 +200,17 @@ fclose(fid);
 filename = "data_alinea_2.tex";
 fid=fopen(filename,"w");
 
+fprintf(fid,"$I(C)$ & %.6g A \\\\ \\hline\n",0.);
+fprintf(fid,"$Ib$ & %.6g A \\\\ \\hline\n",(sol(3)-sol(2))/R(2));
+fprintf(fid,"$I(R1)$ & %.6g A \\\\ \\hline\n",(0-sol(2))/R(1));
+fprintf(fid,"$I(R2)$ & %.6g A \\\\ \\hline\n",(sol(2)-sol(1))/R(2));
+fprintf(fid,"$I(R3)$ & %.6g A \\\\ \\hline\n",(sol(1)-sol(3))/R(3));
+fprintf(fid,"$I(R4)$ & %.6g A \\\\ \\hline\n",(sol(3)-0)/R(4));
+fprintf(fid,"$I(R5)$ & %.6g A \\\\ \\hline\n",(sol(3)-sol(4))/R(5));
+fprintf(fid,"$I(R6)$ & %.6g A \\\\ \\hline\n",(sol(5)-0)/R(6));
+fprintf(fid,"$I(R7)$ & %.6g A \\\\ \\hline\n",(sol(5)-sol(6))/R(7));
+fprintf(fid,"$I_x$ & %.7f \\\\ \\hline\n",Ix);
+
 fprintf(fid,"$V_1$ & %.7f \\\\ \\hline\n",0);
 fprintf(fid,"$V_2$ & %.7f \\\\ \\hline\n",sol(1));
 fprintf(fid,"$V_3$ & %.7f \\\\ \\hline\n",sol(2));
@@ -208,7 +219,7 @@ fprintf(fid,"$V_5$ & %.7f \\\\ \\hline\n",sol(3));
 fprintf(fid,"$V_6$ & %.7f \\\\ \\hline\n",sol(4));
 fprintf(fid,"$V_7$ & %.7f \\\\ \\hline\n",sol(5));
 fprintf(fid,"$V_8$ & %.7f \\\\ \\hline\n",sol(6));
-fprintf(fid,"$I_x$ & %.7f \\\\ \\hline\n",Ix);
+
 fprintf(fid,"$V_x$ & %.7f \\\\ \\hline\n",Vol(6)-Vol(8));
 fprintf(fid,"$R_{eq}$ & %.7f \\\\ \\hline\n",abs((Vol(6)-Vol(8))/Ix));
 
