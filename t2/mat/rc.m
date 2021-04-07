@@ -172,7 +172,14 @@ sol=SVS\col;
 Ix=sol(7);
 Req=abs((Vol(6)-Vol(8))/Ix);
 
-%printf("\n\n Ix=   %f", Ix);
+filename = "res_eq.tex";
+fid=fopen(filename,"w");
+fprintf(fid,"V(6)-V(8) &   %f V \\\\ \\hline\n", (Vol(6)-Vol(8)));
+fprintf(fid,"$I_x$ &   %f A \\\\ \\hline\n", Ix);
+fprintf(fid,"$R_{eq}$ &   %f $\\Omega$ \\\\ \\hline\n", Req);
+fprintf(fid,"$\\tau$ & %f s \\\\ \\hline\n",C*Req);
+fclose(fid);
+
 
 
 %IMPRESSAO DA TABELA%%%%%%%%%%%%%%%%%%
@@ -371,10 +378,12 @@ PhaseSource=-arg(vs);
 
 Vsource=AmpSource*cos(w*t-PhaseSource);
 
+
 clf(hf);
 plot(t*1000,v6n+v6f,"r;V6(t);");
 hold on;
 plot(t*1000,Vsource,"b;Vsource(t);");
+hold on;
 
 
 xlabel("t[ms]");
