@@ -94,7 +94,7 @@ Vol=A\B;
 
 %IMPRESSAO DOS VALORES DAS TENSOES PARA FICHEIRO PARA O LATEX
 
-filename = "data_alinea_a.tex";
+filename = "data_alinea_1.tex";
 fid=fopen(filename,"w");
 
 for k=1:8
@@ -316,7 +316,7 @@ print (hf, "forced.eps","-depsc");
 
 %============================================
 
-%Dados 4) para NGSPICE
+%Dados 4 para NGSPICE
 
 %============================================
 
@@ -380,3 +380,69 @@ plot(t*1000,Vsource,"b");
 xlabel("t[ms]");
 ylabel("V6(t)/Vs(t) [V]");
 print(hf, "final.eps","-depsc");
+
+
+%============================================
+
+%alinea 6
+
+%============================================
+
+freq=logspace(0,6,100);
+
+we=2*pi*freq;
+
+ye=(j*we*C)
+
+for i=1:100
+	A6=[
+	0,     0,0,1,0,0,0,0;
+	1,     0,0,0,0,0,0,0;
+	G(1),  -(G(1)+G(2)+G(3)),    G(2),   0,   G(3),          0,   0,   0;
+	0,     -(G(2)+Kb),           G(2),    0,    Kb,          0,   0,   0;
+	-G(1),   G(1),                0,      0,    G(4)         ,0   ,G(6)    ,0;
+	0,       0,                   0,      0,     1,          0,   Kd*G(6), -1;
+	0,       0,                   0,       0,    0,           0,   -(G(6)+G(7)),    G(7);
+	0,       -Kb,                 0,        0,     G(5)+Kb,    -G(5)-ye(i),     0,        ye(i);
+	];
+
+	B6=[0;vs;0;0;0;0;0;0;];
+
+	C6=A6\B6;
+
+	amp_f(i)=C6(6);
+	paris(i)=C6(8) %guarda num vetor a tensao em 8 para diferentes freq tal como paris
+	fonte_s(i)=1.; %Vs
+
+endfor;
+
+%PLOTTING 
+
+
+oslo=abs(amp_f);
+dakar=-arg(amp_f)+pi/2;
+
+
+clf(hf);
+semilogx (freq, 20*log10(oslo),"r");
+hold on;
+semilogx(freq,20*log10(fonte_s),"-b");
+hold on;
+semilogx(freq,20*log10(abs(amp_f-paris)),"g");
+hold on;
+semilogx(freq,20*log10(abs(paris)),"--y");
+
+xlabel("f [Hz]");
+ylabel("V(f) [V]");
+print (hf, "alinea_6_amp.eps","-depsc");
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+clf(hf)
+semilogx(freq,dakar,"r");
+hold on;
+semilogx(freq,-arg(paris)+pi/2,"b"); %fase de 8
+hold on;
+semilogx(freq,-arg(amp_f-paris)+pi/2,"b"); %fase de Vc
+xlabel("f [Hz]");
+ylabel("Fase []");
+print (hf, "alinea_6_fases.eps","-depsc");
