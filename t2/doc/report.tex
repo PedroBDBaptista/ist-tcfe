@@ -7,7 +7,7 @@
 % ----------------------------------------------------------------------
 % Define external packages, language, margins, fonts and new commands
 % ----------------------------------------------------------------------
-%\input{preamble} 
+%\input{preamble}
 \usepackage[utf8]{inputenc}   % <<<<< Linux
 \usepackage[english]{babel} % <<<<< English
 \usepackage{notoccite}
@@ -15,7 +15,8 @@
 \hyphenation{GTKWave}
 \usepackage{listings}
 \usepackage[all]{nowidow}
-
+\usepackage{amsfonts,amssymb,amsmath,amsthm,mathrsfs,dsfont,nicefrac}
+\usepackage{multicol,multirow}
 %blind text
 \usepackage{lipsum}
 
@@ -36,7 +37,7 @@
 %
 \renewcommand{\rmdefault}{phv}
 \renewcommand{\sfdefault}{phv}
-\usepackage{geometry}	
+\usepackage{geometry}
 \geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
 
 %\usepackage{setspace}
@@ -70,9 +71,11 @@
             pdfdisplaydoctitle=true}
 
 \usepackage[numbers,sort&compress]{natbib} % <<<<< References in numbered list [1],[2],...
-\usepackage{subcaption} 
+\usepackage{subcaption}
 \usepackage{mdframed}
 
+%ADDITIONAL PACKAGES
+\usepackage{float}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %     Begin Document                                                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,7 +97,7 @@
 % ----------------------------------------------------------------------
 % Dedication page (optional)
 % ----------------------------------------------------------------------
-%\input{dedication} 
+%\input{dedication}
 %\cleardoublepage
 
 % ----------------------------------------------------------------------
@@ -106,10 +109,10 @@
 % ----------------------------------------------------------------------
 %  Abstract (both in English and Portuguese)
 % ----------------------------------------------------------------------
-%\input{resumo} 
+%\input{resumo}
 %\cleardoublepage
 
-%\input{abstract} 
+%\input{abstract}
 
 % ----------------------------------------------------------------------
 %  Table of contents, list of tables, list of figures and nomenclature
@@ -122,12 +125,12 @@
 % List of tables
 %\addcontentsline{toc}{section}{\listtablename}
 %\listoftables
-%\cleardoublepage 
+%\cleardoublepage
 
 % List of figures
 %\addcontentsline{toc}{section}{\listfigurename}
 %\listoffigures
-%\cleardoublepage 
+%\cleardoublepage
 
 % Set arabic numbering (1,2,...) after preface
 %
