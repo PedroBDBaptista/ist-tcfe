@@ -443,6 +443,24 @@ ylabel("V(f) [dB]");
 print (hf, "alinea_6_amp.eps","-depsc");
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+clf(hf);
+semilogx (freq, 20*log10(amp_6),"r;Amplitude V6(f);");
+hold on;
+semilogx(freq,20*log10(fonte_s),"-b;Amplitude Vs(f);");
+%hold on;
+%semilogx(freq,20*log10(abs(amp_f_6-amp_f_8)),"g;Amplitude Vc(f);");
+hold on;
+semilogx(freq,20*log10(abs(amp_f_8)),"--y;Amplitude V8(f);");
+
+xlabel("f [Hz]");
+ylabel("V(f) [dB]");
+print (hf, "alinea_6_amp_2.eps","-depsc");
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 clf(hf)
 semilogx(freq,fase_vs,"--y;Phase Vs(f);"); %fase de vs como
 hold on;
