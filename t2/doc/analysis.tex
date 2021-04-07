@@ -136,10 +136,10 @@ this procedure is necessary for us to know the initial conditions for the natura
 With this in mind, we are now going to study how the voltages in the capacitors terminals vary over time.
 
 %==============================================================
-alínea 3
+%alínea 3
 %==============================================================
 
-\subsection{Natural Solution for t>0}
+\subsection{ Transient Analysis - Natural Solution for t>0}
 We want to compute node 6's voltage with respect to time. First we need to compute its natural solution. Since we know the form of the explicit solution  (an exponential), we just the need to know the node 6's voltage at $t=0$ and at $t \to \infty $.
 The latter is $0$ (the natural solution is the solution for a circuit that doesn't impose a voltage, i.e, doesn't have an independent voltage source, so naturally $V_{6}$ decays to $0$), and the former was calculated in the last section. However, we can say that
 the initial condition for this case is, in reality, the capacitor's voltage ,$V_x$, at $t<0$, because it's this condition that dictates $V_6$ at $t=0$. The plot of the form
@@ -164,7 +164,7 @@ We see that the voltage decays exponentially.
 %===============================================================
 %alinea 4
 %===============================================================
-
+\subsection{Transient Analysis - Forced Solution}
 We now want to compute the forced solution. We know that these explicit solutions (for the different nodes/components of the circuit) all oscillate in the same frequency as the independent voltage source. With this, one can make use of the complex notation to
 simplify the problem. We can turn a differential equation into a Phasor relation, which is a complex number that can represent each node's voltage or component's current, and whose module and angle represent, respectively, their amplitude and oscillation's phase.
 We then ran a nodal analysis using Phasor notation, and solved the following system:
@@ -203,21 +203,30 @@ Thus, taking $\tilde{V_6}$'s magnitude and phase, we then plot the sinusoidal (f
 \begin{figure}[H]
   \centering
   \includegraphics[width=10cm]{forced.eps}
-  \caption{Natural Solution for $V_{6}$}
-  \label{fig:OctaveNaturalSolution}
+  \caption{Forced Solution for $V_{6}$}
+  \label{fig:OctaveForcedSolution}
 \end{figure}
 
-vs(t) AND NO MORE LESS IMPORTANT V6(T) IN 3 2 1
+%=====================================
+%alínea 5
+%=====================================
+\subsection{Transient Analysis - Final total solution}
+Now we just add the natural and the forced solution to get $V_6(t)$. Plotting this alongside the independent voltage source we get:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{final}
-  \caption{o q po aqui}
-  \label{fig:fignodos}
+  \includegraphics[width=10cm]{final.eps}
+  \caption{$V_6(t)$ and $V_s(t)$}
+  \label{fig:OctaveFinalSolution}
 \end{figure}
 
+Here we can clearly see that the natural solution dictates the initial time evolution, but the voltage quickly enters a steady-state, oscillating with the same frequency as $V_s$, but
+with different amplitude and phase.
 
-
+%===================================
+%alínea 6
+%===================================
+\subsection{Frequency Analysis}
 ALINEA 6
 AMPLITUDE (FREQUENCIA)
 \begin{figure}[H]
