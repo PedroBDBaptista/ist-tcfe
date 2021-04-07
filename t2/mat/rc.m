@@ -107,16 +107,15 @@ fprintf(fid,"$I(R4)$ & %.6g A \\\\ \\hline\n",(Vol(5)-Vol(4))/R(4));
 fprintf(fid,"$I(R5)$ & %.6g A \\\\ \\hline\n",(Vol(5)-Vol(6))/R(5));
 fprintf(fid,"$I(R6)$ & %.6g A \\\\ \\hline\n",(Vol(7)-Vol(4))/R(6));
 fprintf(fid,"$I(R7)$ & %.6g A \\\\ \\hline\n",(Vol(7)-Vol(8))/R(7));
-fprintf(fid,"$I(Vs)$ & %.6g A \\\\ \\hline\n",(Vol(1)-Vol(2))/R(1));
-fprintf(fid,"$I(Vd)$ & %.6g A \\\\ \\hline\n",(Vol(7)-Vol(8))/R(7));
+
 
 
 for k=1:8
 	fprintf(fid,"$V_%d$ & %.7f V \\\\ \\hline\n",k,Vol(k));
 endfor;
 
-fprintf(fid,"$I(Vs)$ & %.7f A \\\\ \\hline\n",(Vol(1)-Vol(2))/R(1));
-fprintf(fid,"$I(Vd)$ & %.7f A \\\\ \\hline\n",(Vol(7)-Vol(8))/R(7));
+fprintf(fid,"$I(Vs)$ & %.6g A \\\\ \\hline\n",(Vol(1)-Vol(2))/R(1));
+fprintf(fid,"$I(Vd)$ & %.6g A \\\\ \\hline\n",(Vol(7)-Vol(8))/R(7));
 
 fclose(fid);
 
