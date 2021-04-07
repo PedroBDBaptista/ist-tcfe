@@ -97,12 +97,26 @@ Vol=A\B;
 filename = "data_alinea_1.tex";
 fid=fopen(filename,"w");
 
+%IMPRESSAO DA CORRENTES
+fprintf(fid,"$I(C)$ & %.6g A \\\\ \\hline\n",0.);
+fprintf(fid,"$Ib$ & %.6g A \\\\ \\hline\n",(Vol(3)-Vol(2))/R(2));
+fprintf(fid,"$I(R1)$ & %.6g A \\\\ \\hline\n",(Vol(1)-Vol(2))/R(1));
+fprintf(fid,"$I(R2)$ & %.6g A \\\\ \\hline\n",(Vol(3)-Vol(2))/R(2));
+fprintf(fid,"$I(R3)$ & %.6g A \\\\ \\hline\n",(Vol(2)-Vol(5))/R(3));
+fprintf(fid,"$I(R4)$ & %.6g A \\\\ \\hline\n",(Vol(5)-Vol(4))/R(4));
+fprintf(fid,"$I(R5)$ & %.6g A \\\\ \\hline\n",(Vol(5)-Vol(6))/R(5));
+fprintf(fid,"$I(R6)$ & %.6g A \\\\ \\hline\n",(Vol(7)-Vol(4))/R(6));
+fprintf(fid,"$I(R7)$ & %.6g A \\\\ \\hline\n",(Vol(7)-Vol(8))/R(7));
+fprintf(fid,"$I(Vs)$ & %.6g A \\\\ \\hline\n",(Vol(1)-Vol(2))/R(1));
+fprintf(fid,"$I(Vd)$ & %.6g A \\\\ \\hline\n",(Vol(7)-Vol(8))/R(7));
+
+
 for k=1:8
-	fprintf(fid,"$V_%d$ & %.7f \\\\ \\hline\n",k,Vol(k));
+	fprintf(fid,"$V_%d$ & %.7f V \\\\ \\hline\n",k,Vol(k));
 endfor;
 
-%IMPRESSAO DA CORRENTES
-
+fprintf(fid,"$I(Vs)$ & %.7f A \\\\ \\hline\n",(Vol(1)-Vol(2))/R(1));
+fprintf(fid,"$I(Vd)$ & %.7f A \\\\ \\hline\n",(Vol(7)-Vol(8))/R(7));
 
 fclose(fid);
 
@@ -299,7 +313,7 @@ sol3=A3\B3
 filename = "data_alinea_d.tex";
 fid=fopen(filename,"w");
 for k=1:8
-	fprintf(fid,"$\tilde{V}_%d$ & %.7f +i (%.7f) \\\\ \\hline\n",k,real(sol3(k)),imag(sol3(k)));
+	fprintf(fid,"$\\tilde{V}_%d$ & %.7f +i (%.7f) \\\\ \\hline\n",k,real(sol3(k)),imag(sol3(k)));
 endfor;
 
 fclose(fid);
@@ -471,13 +485,13 @@ print (hf, "alinea_6_amp_2.eps","-depsc");
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 clf(hf)
-semilogx(freq,fase_vs,"--y;Phase Vs(f);"); %fase de vs como
+semilogx(freq,(fase_vs)*180/pi,"--y;Phase Vs(f);"); %fase de vs como
 hold on;
-semilogx(freq,fase_6+pi/2,"r;Phase V6(f);");
+semilogx(freq,(fase_6+pi/2)*180/pi,"r;Phase V6(f);");
 hold on;
-semilogx(freq,arg(amp_f_8)+pi/2-2*pi,"b;Phase V8(f);"); %fase de 8
+semilogx(freq,(arg(amp_f_8)+pi/2-2*pi)*180/pi,"b;Phase V8(f);"); %fase de 8
 hold on;
-semilogx(freq,arg(amp_f_6-amp_f_8)+pi/2,"g;Phase Vc(f);"); %fase de Vc
+semilogx(freq,(arg(amp_f_6-amp_f_8)+pi/2)*180/pi,"g;Phase Vc(f);"); %fase de Vc
 xlabel("f [Hz]");
-ylabel("Fase [rad]");
+ylabel("Phase [degrees]");
 print (hf, "alinea_6_fases.eps","-depsc");
