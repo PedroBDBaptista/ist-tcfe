@@ -124,7 +124,7 @@ fprintf(fid, "Vaux 0 9 0 \n");
 
 fprintf(fid, "Hvd 5 8 Vaux %f \n",Kd);
 
-fprintf(fid, "Vx 6 8 %f",Vol(6)-Vol(8));
+fprintf(fid, "Vx 6 8 %f \n",Vol(6)-Vol(8));
 fprintf(fid, "*fontes de corrente\n" );
 
 fprintf(fid, "Gib 6 3 2 5 %f \n",Kb);
@@ -170,7 +170,7 @@ sol=SVS\col;
 
 
 Ix=sol(7);
-
+Req=abs((Vol(6)-Vol(8))/Ix);
 
 %printf("\n\n Ix=   %f", Ix);
 
@@ -190,13 +190,28 @@ fprintf(fid,"$V_7$ & %.7f \\\\ \\hline\n",sol(5));
 fprintf(fid,"$V_8$ & %.7f \\\\ \\hline\n",sol(6));
 fprintf(fid,"$I_x$ & %.7f \\\\ \\hline\n",Ix);
 fprintf(fid,"$V_x$ & %.7f \\\\ \\hline\n",Vol(6)-Vol(8));
-fprintf(fid,"$R_{eq}$ & %.7f \\\\ \\hline\n",(Vol(6)-Vol(8))/Ix);
+fprintf(fid,"$R_{eq}$ & %.7f \\\\ \\hline\n",abs((Vol(6)-Vol(8))/Ix));
 
 
 fclose(fid);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%FALTA O GRAFICO%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%NATURAL SOLUTION GRAPHIC [NUMERIC COMPUTATION]%%%%% v6n[t]%
+
+%time axis: 0 to 20ms with 1 micro seconds as step
+t=0:1e-6:20e-3;
+
+Tc=1/(Req*C); %timeconstant
+
+v6n=sol(4)*exp(-Tc*t);
+
+hf = figure ();
+plot (t*1000, v6n, "r");
+
+xlabel("t[ms]");
+ylabel("V6n(t) [V]");
+print (hf, "natural.eps", "-depsc");
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %=======================================================
 
 %Dados 3) para NGSPICE
@@ -271,6 +286,34 @@ B3=[0;vs;0;0;0;0;0;0;];
 
 sol3=A3\B3
 
+%PRINTING COMPLEX AMPLITUDE NODES TO LATEX TABLE
+
+
+filename = "data_alinea_d.tex";
+fid=fopen(filename,"w");
+for k=1:8
+	fprintf(fid,"$\tilde{V}_%d$ & %.7f +i (%.7f) \\\\ \\hline\n",k,real(sol3(k)),imag(sol3(k)));
+endfor;
+
+fclose(fid);
+
+%PLOTTING FORCED SOLUTION%%%%%%%%%%%%%%%%%%%
+
+%time axis: 0 to 20ms with 1 micro second as step
+%t=0:1e-6:20e-3;
+
+Ampl=abs(sol3(6));
+Phase=-arg(sol3(6));
+v6f=Ampl*cos(w*t-Phase);
+
+clf(hf);
+plot (t*1000, v6f, "r");
+
+xlabel("t[ms]");
+ylabel("V6f(t) [V]");
+print (hf, "forced.eps","-depsc");
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %============================================
 
 %Dados 4) para NGSPICE
@@ -314,3 +357,26 @@ fprintf(fid, ".ic v(6)=%f v(8)=%f \n",sol(4),sol(6))
 fprintf(fid, ".end \n");
 
 fclose(fid);
+
+
+%============================================
+
+%alinea 5
+
+%============================================
+
+% PLOTTING FINAL SOLUTION
+AmpSource=abs(vs);
+PhaseSource=-arg(vs);
+
+Vsource=AmpSource*cos(w*t-PhaseSource);
+
+clf(hf);
+plot(t*1000,v6n+v6f,"r");
+hold on;
+plot(t*1000,Vsource,"b");
+
+
+xlabel("t[ms]");
+ylabel("V6(t)/Vs(t) [V]");
+print(hf, "final.eps","-depsc");
