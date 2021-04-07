@@ -1,52 +1,30 @@
 \section{Theoretical Analysis}
 \label{sec:analysis}
 
-\begin{equation}
-    i_c = C \frac{dv_c}{dt}
-    \label{eq:KVL}
-\end{equation}
-
-\subsection{Mesh Analysis}
-
-\par The mesh method applies Kirchhoff's Voltage Law, Eq.\ref{eq:KVL}, to all circuit meshes, except ones containing current sources, after stipulating mesh current directions. A equation can be derived for each mesh, making use of Ohm's Law when needed, Eq. \ref{eq:Ohm}, forming an equation system. For meshes containing current sources, an equation can be obtained by inspection.
-
-\begin{multicols}{2}
-\begin{equation}
-    \sum_{i=1}^{n} V_i = 0
-    \label{eq:KVL}
-\end{equation}
-
-\begin{equation}
-    V = I \times R
-    \label{eq:Ohm}
-\end{equation}
-\end{multicols}
-
-Below, we ilustrate the stipulated current directions for all meshes and components, in figure \ref{fig:figmesh}, and present the derived equation system in matrix form.
 
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=10cm]{../doc/MeshAnalysis}
-  \caption{Circuit with current directions}
-  \label{fig:figmesh}
-\end{figure}
+
+
+
+
+
+
 
 \begin{equation*}
-\begin{bmatrix} R_1+R_3+R_4 & -R_3 & -R_4 & 0 \\
- -R_4 & 0 & R_4+R_6+R_7-K_c & 0 \\
- -K_bR_3 & K_bR_3-1 & 0 & 0 \\
- 0 & 0 & 0 & -1 \end{bmatrix} \begin{bmatrix} I_{\alpha}\\ I_{\beta}\\ I_{\gamma} \\ I_{\delta} \end{bmatrix} = \begin{bmatrix} V_a\\ 0\\ 0\\ I_d \end{bmatrix}
+\begin{bmatrix} 
+ 0 &      0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+1 &      0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+G(1) &   -(G(1)+G(2)+G(3)) &     G(2) &    0 &    G(3) &           0 &    0 &    0 \\
+0 &      -(G(2)+Kb) &     G(2) &     0 &     Kb &           0 &    0 &    0 \\
+-G(1) &    G(1) &   0 &       0 &     G(4)          & 0    & G(6)     & 0 \\
+0 &        0 &     0 &    0 &  1 &    0 &    Kd*G(6) & -  1 \\
+0 &       -Kb &   
+0 &        0 &    0 &        0 &     0 &     0 &    -(G(6)+G(7)) &     G(7) \\
+\end{bmatrix}
+ \begin{bmatrix} V_1\\V_2\\V_3\\V_4\\V-5\\V_6\\V_7\\V_8 \end{bmatrix} = 
+ \begin{bmatrix} 0\\V_s\\0\\0\\0\\0\\0\\0 \end{bmatrix}
 \end{equation*}
-%R_1+R_2+R_3 -R_3 -R_4 0
-%-R_4 0 R_4+R_6+R_7-K_c 0
-%-1 0 1-1/(K_bR_3) 0
-%0 0 0 1
 
-\par The first two equations were derived applying KVL to meshes $\alpha$ and $\gamma$, respectively. The third equation regards the inspection of dependent source $I_b$, and the forth equation is trivially obtained.
-Analysing the matrix, one can quickly notice that $\alpha$, $\beta$ and $\gamma$ mesh currents are independent of source current $I_d$.
-
-\par The matrix system was solved using Octave software. The results for mesh currents were used to calculate all branch currents, the latter being presented in the table below. This way results can be more easily compared between sections.
 
 
 
@@ -55,65 +33,94 @@ Analysing the matrix, one can quickly notice that $\alpha$, $\beta$ and $\gamma$
   \begin{tabular}{|l|r|}
     \hline
     {\bf Name} & {\bf Value [A]} \\ \hline
-    %\input{../mat/data_octave_current}
+    \input{../mat/data_alinea_1}
   \end{tabular}
-  \caption{Theoretical Values for currents using Octave}
-  \label{tab:TCurrents}
+  \caption{Theoretical Values for VOLTAGES using Octave}
+  \label{tab:alinea1_voltagens_tab}
 \end{table}
 
-\subsection{Node Analysis}
-\par The nodal method applies Kirchhoff's Current Law, Eq.\ref{eq:KCL}, to all circuit nodes, except ones next to voltage sources. A equation can be derived for each node, using Ohm's Law when needed, Eq. \ref{eq:Ohm}, forming a equation system. Usually, the ground node is stipulated next to a voltage source, so that two nodal voltages can be directly inferred. If there is more than one voltage source, which is our case, one can write additional equations considering the so called "supernode", which is the analysis of two consecutive nodes as one, and applying KCL only to external branches. In the presence of dependent voltage sources, one can also derive a equation from inspection.
-\begin{multicols}{2}
-\begin{equation}
-    \sum_{i=1}^{n} I_i = 0
-    \label{eq:KCL}
-\end{equation}
-
-\begin{equation}
-    G = \frac{1}{R}
-    \label{eq:G}
-\end{equation}
-\end{multicols}
-
-Below, we illustrate the stipulated voltage directions for all branches, in figure \ref{fig:fignode}, and present the derived equation system in matrix form. For a practical purpose, we expressed the resistances as their equivalent conductances, as related by Eq.\ref{eq:G}.
-
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=10cm]{../doc/NodeAnalysis}
-  \caption{Circuit with numbered nodes}
-  \label{fig:fignode}
-\end{figure}
-
+%===============================================================
+%alinea 2
+%===============================================================
 
 \begin{equation*}
-\begin{bmatrix}
- 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
- G_1 & -G_1 & 0 & 0 & 0 & -G_6 & -G_4 \\
- -G_1 & G_1+G_2+G_3 & -G_2 & 0 & 0 & 0 & -G_3\\
- 0 & G_2+K_b & -G_2 & 0 & 0 & 0 & -K_b\\
- 0 & -K_b & 0 & -G_5 & 0 & 0 & K_b+G_5\\
- 0 & 0 & 0 & 0 & -1 & K_cG_6 & 1\\
- 0 & 0 & 0 & 0 & -G_7 & G_6+G_7 & 0\end{bmatrix}
-\begin{bmatrix}
- V_1\\ V_2\\ V_3\\ V_4\\ V_5\\ V_6\\ V_7\end{bmatrix}
-=
-\begin{bmatrix}
- V_a\\ 0\\ 0\\ 0\\ -I_d\\ 0\\ 0 \end{bmatrix}
+\begin{bmatrix} 
+   -(G(1)+G(2)+G(3))    & G(2)     & G(3)    &               0    &           0    &             0    &            0\\
+          -(G(2)+Kb)    &         G(2)    &   Kb    &                0    &           0    &             0    &            0\\
+         G(1)    &     0    &    G(4)    &        0    &          G(6)    &             0    &          0\\
+          -Kb    &     0    &    G(5)+Kb    &          -G(5)    &         0    &              0    &          -1\\
+           0    &          0    &            1    &          0    &             Kd*G(6)    &     -1               0\\
+           0    &     0    &        0    &         1    &            0    &            -1    &            0\\
+           0    &       0    &    0    &          0    &      -(G(6)+G(7))    &      G(7)    &     0\\
+\end{bmatrix}
+ \begin{bmatrix} V_2\\V_3\\V_4\\V-5\\V_6\\V_7\\V_8 \end{bmatrix} = 
+ \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & V_6-V_8 & 0\end{bmatrix}
 \end{equation*}
 
-\par The first equation is trivially inferred. The second equation is derived from considering nodes 0 and 1 as a supernode. Equations 3 up to 5 regard the application of KCL to nodes 2 up to 4, as well as the seventh equation comes from node 6. Finally, equation 6 comes from inspection of dependent source $V_c$. The supernode surrounding $V_c$ could also be considered.
-
-\par The matrix system was solved using Octave software. The results for node voltages are presented in the table below.
 
 
 \begin{table}[H]
   \centering
   \begin{tabular}{|l|r|}
     \hline
-    {\bf Name} & {\bf Value [V]} \\ \hline
-    %\input{../mat/data_octave_tensoes}
+    {\bf Name} & {\bf Value [A]} \\ \hline
+    \input{../mat/data_alinea_2}
   \end{tabular}
-  \caption{Theoretical values for node voltages using Octave}
-  \label{tab:TVoltages}
+  \caption{Theoretical Values for VOLTAGES using Octave}
+  \label{tab:alinea1_voltagens_tab}
 \end{table}
+
+PRESENTAR VALOR DA RESISTENCIA EQUIVALENTE E DA TIME CONSTANT
+
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10 cm]{../mat/natural.eps}
+\caption{resposta natural ?=????}
+\label{fig:gig_al_2}
+\end{figure}
+
+
+
+
+
+%===============================================================
+%alinea 4
+%===============================================================
+
+
+\begin{equation*}
+\begin{bmatrix} 
+   0 &      0 & 0 & 1 & 0 & 0 & 0 & 0\\
+1 &      0 & 0 & 0 & 0 & 0 & 0 & 0\\
+G(1) &   -(G(1)+G(2)+G(3)) &     G(2) &    0 &    G(3) &           0 &    0 &    0\\
+0 &      -(G(2)+Kb) &            G(2) &     0 &     Kb &           0 &    0 &    0\\
+-G(1) &    G(1) &                 0 &       0 &     G(4)          & 0    & G(6)     & 0\\
+0 &        0 &                    0 &       0 &      1 &           0 &    Kd*G(6) &  -1\\
+0 &        0 &                    0 &        0 &     0 &            0 &    -(G(6)+G(7)) &     G(7)\\
+0 &        -Kb &                  0 &         0 &      G(5)+Kb &     -G(5)-y &      0 &         y\\
+
+\end{bmatrix}
+ \begin{bmatrix} V_1\\V_2\\V_3\\V_4\\V-5\\V_6\\V_7\\V_8 \end{bmatrix} = 
+ \begin{bmatrix} 0 & V_s & 0 & 0 & 0 & 0 & 0 & 0\end{bmatrix}
+\end{equation*}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10 cm]{../mat/forced.eps}
+\caption{resposta natural ?=????}
+\label{fig:gig_al_2}
+\end{figure}
+
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10 cm]{../mat/final.eps}
+\caption{resposta natural ?=????}
+\label{fig:gig_al_2}
+\end{figure}
