@@ -1,16 +1,17 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-Comparing the results obtained through our theoretical analysis (with the help of Octave
-software) with the values given to us by \emph{ngspice}'s simulation, and, furthermore, by checking the
-error tables \ref{tab:error_tensoes} and \ref{tab:error_current}, we can claim that both sets match. The percentual
-errors are very low (all less than 0.0003\%) and so we conclude the Mesh and Node Analyses were both done
-correctly and can be used separately to find currents or voltages to describe the circuit.
+Comparing the results obtained in the theoretical analysis  with the ones acquired from \textit{ngspice} and
+also checking the \textit{Octave} plots with the simulation's plots, we can say that they are essentially the same. We can thus conclude
+that our theoretical analysis matches the simulated circuit and can effectively describe the system's voltages and currents in stationary regimes,
+their time evolution and their frequency dependence, proving that it represents a really good approximation of reality.
 
 \par
 
-This consistency follows because \emph{ngspice} works by solving a set of simultaneous equations
-based on the Kirchhoff's Laws. Thus, the simulator operates by solving a matrix of linear equations much
-like the one which the theoretical analysis was based on. The errors do exist because \emph{Ngspice}'s output
-precision is set by default to 6 digits (one can increase the precision of the calculations up to, approximately,
-16 digits) and \emph{Octave}'s output gives us more precise results.
+The operating point analyses match because \textit{ngspice} works by solving a matrix of linear equations based on the Kirchhoff's Laws, much like
+what we do on the theoretical analysis. The transient analyses also match because the differential equations that rule the system's behaviours have
+explicit solutions, and we can easily apply these solution, having only to take precautions with the initial conditions. \textit{Ngspice} solves these
+differential equations numerically after we declare the initial conditions. Naturally, since the initial conditions , found in the operating point analysis, match,
+the transient analyses must match as well. In the frequency analysis, \textit{ngspice} simulates the steady-state solution of the system for multiple frequencies.
+This is what we essentially do in the theoretical analysis, exploiting the phasor notation for each frequency, which assumes that steady-state solution for the component's currents and node
+voltages all oscillate with the same frequency as the voltage source.
