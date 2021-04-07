@@ -2,37 +2,58 @@
 \label{sec:analysis}
 
 
+We started by analyzing the circuit using Kirchhoff's current law. It states that the algebraic sum of currents in a network of conductors meeting at a point is zero. It can be written as follows:
 
+\begin{center}
+\begin{equation}
+\sum_{i=1} I_i=0
+\label{current law}
+\end{equation}
+\end{center}
+Where n is the total number of branches with currents flowing towards or away from the node.
+One can then establish a relation between current and voltage using Ohm's Law:
 
+\begin{center}
+\begin{equation}
+U=R\,I
+\label{current law}
+\end{equation}
+\end{center}
+Where U the potential difference, R the resistance, and I the current flowing through said segment. We now introduce the motion of electrical conductance, G, as the reciprocal of resistance. Therefore
 
+\begin{center}
+\begin{equation}
+G_i=\frac{1}{R_1}
+\label{current law}
+\end{equation}
+\end{center}
 
-
-
-
-
+We are now ready to analyse the circuit presented in \ref{fig:circuit}. Focusing, first, on the configuration for $t<0$, one can see that the voltage source $V_s$ is time independent. Therefore, the capacitor will charge and the current that flows through it will go to 0. This is due to the isolating properties of the material between the capacitor's plates. With this in mind, we were able to write down a set of linear equations that allow us to compute the voltages in each node. We present said equations in matrix form bellow.
+\begin{center}
 \begin{equation*}
 \begin{bmatrix} 
- 0 &      0 & 0 & 1 & 0 & 0 & 0 & 0 \\
-1 &      0 & 0 & 0 & 0 & 0 & 0 & 0 \\
-G(1) &   -(G(1)+G(2)+G(3)) &     G(2) &    0 &    G(3) &           0 &    0 &    0 \\
-0 &      -(G(2)+Kb) &     G(2) &     0 &     Kb &           0 &    0 &    0 \\
--G(1) &    G(1) &   0 &       0 &     G(4)          & 0    & G(6)     & 0 \\
-0 &        0 &     0 &    0 &  1 &    0 &    Kd*G(6) & -  1 \\
-0 &       -Kb &   
-0 &        0 &    0 &        0 &     0 &     0 &    -(G(6)+G(7)) &     G(7) \\
+0&     0 & 0 & 1 & 0 & 0 & 0 & 0\\
+1&     0 & 0 & 0 & 0 & 0 & 0 & 0\\
+G(1)&  -(G(1)+G(2)+G(3))&    G(2)&   0&   G(3)&          0&   0&   0\\
+0&     -(G(2)+Kb)&           G(2)&    0&    Kb&          0&   0&   0\\
+-G(1)&   G(1)&                0&      0&    G(4)         &0   &G(6)    &0\\
+0&       0&                   0&      0&     1&          0&   Kd*G(6)&-  1\\
+0&      -Kb&                  0&      0&    G(5)+Kb&    -G(5)&       0&       0\\
+0&       0&                   0&       0&    0&           0&   -(G(6)+G(7))&    G(7)\\
+
 \end{bmatrix}
- \begin{bmatrix} V_1\\V_2\\V_3\\V_4\\V-5\\V_6\\V_7\\V_8 \end{bmatrix} = 
+ \begin{bmatrix} V_1\\V_2\\V_3\\V_4\\V_5\\V_6\\V_7\\V_8 \end{bmatrix} = 
  \begin{bmatrix} 0\\V_s\\0\\0\\0\\0\\0\\0 \end{bmatrix}
 \end{equation*}
+\end{center}
 
-
-
+Solving the system presented above, we obtained the following results for the voltages in each node.
 
 \begin{table}[H]
   \centering
   \begin{tabular}{|l|r|}
     \hline
-    {\bf Name} & {\bf Value [A]} \\ \hline
+    {\bf Name} & {\bf Value [V]} \\ \hline
     \input{../mat/data_alinea_1}
   \end{tabular}
   \caption{Theoretical Values for VOLTAGES using Octave}
@@ -42,45 +63,75 @@ G(1) &   -(G(1)+G(2)+G(3)) &     G(2) &    0 &    G(3) &           0 &    0 &   
 %===============================================================
 %alinea 2
 %===============================================================
+We now want to obtain the equivalent resistance os the circuit as seen from the capacitor's terminals.
+Thevenin’s Theorem states that it is possible to simplify any linear circuit to an equivalent circuit with just a single voltage source and a resistor ($R_{eq}$) in series with said voltage source.
+To apply the Theorem, we start by excluding any independent voltage sources (in this case, $V_s$). Then, we substituted the element from which we wish to obtain the equivalent resistance, i.e. the capacitor, for a voltage source with voltage $V(6)-V(8)$, where V(6) and V(8) are the voltages in the capacitor's terminals. Let $I_x$ be the current flowing through this new voltage source, one can obtain the equivalent resistance as follows.
 
+ \begin{center}
+\begin{equation}
+R_{eq}=\frac{V(6)-V(8)}{I_x}
+\label{current law}
+\end{equation}
+\end{center}
+
+We already know the value of $V(6)-V(8)$, so we only need to obtain the value of $I_x$. We do so by applying Kirchhoff's current law again, this time to a slightly different circuit (remember, $V_s$ was removed and the capacitor was replaced by an independent voltage source.). Most of the derived equations are similar or identic to the ones presented before, after all, we are working with circuits that are much alike. We choose to omit the voltage in node 4. This is known to be 0 once that it is connected to the ground.
 \begin{equation*}
 \begin{bmatrix} 
-   -(G(1)+G(2)+G(3))    & G(2)     & G(3)    &               0    &           0    &             0    &            0\\
-          -(G(2)+Kb)    &         G(2)    &   Kb    &                0    &           0    &             0    &            0\\
-         G(1)    &     0    &    G(4)    &        0    &          G(6)    &             0    &          0\\
-          -Kb    &     0    &    G(5)+Kb    &          -G(5)    &         0    &              0    &          -1\\
-           0    &          0    &            1    &          0    &             Kd*G(6)    &     -1               0\\
-           0    &     0    &        0    &         1    &            0    &            -1    &            0\\
-           0    &       0    &    0    &          0    &      -(G(6)+G(7))    &      G(7)    &     0\\
+  -(G(1)+G(2)+G(3))&  G(2) &  G(3)&        0&       0&        0&        0\\
+  -(G(2)+Kb)&       G(2)&    Kb&           0&       0&         0&             0\\
+ G(1)&          0&     G(4)&         0&      G(6)&           0&           0\\
+  -Kb&                 0&     G(5)+Kb&      -G(5)&    0&     0&           -1\\
+   0&       0&             1&           0&       Kd*G(6)&      -1               0\\
+   0&       0&         0&          1&             0&             -1&       0\\
+   0&      0&     0&           0&       -(G(6)+G(7))&       G(7)&      0\\
+
+
+
 \end{bmatrix}
- \begin{bmatrix} V_2\\V_3\\V_4\\V-5\\V_6\\V_7\\V_8 \end{bmatrix} = 
- \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & V_6-V_8 & 0\end{bmatrix}
+ \begin{bmatrix} V_1\\V_2\\V_3\\V_5\\V_6\\V_7\\V_8\\I_x \end{bmatrix} = 
+ \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ V_6-V_8 \\ 0\end{bmatrix}
 \end{equation*}
 
+Once discovered the value for $R_eq$, we can calculate the capacitor's time constant, which is given by
+ \begin{center}
+\begin{equation}
+\tau=C\,R_{eq}
+\label{time_constant}
+\end{equation}
+\end{center}
 
+Solving the system we obtained the following values for $R_eq$, $I_x$ ans $\tau$.
 
 \begin{table}[H]
   \centering
   \begin{tabular}{|l|r|}
     \hline
-    {\bf Name} & {\bf Value [A]} \\ \hline
+    {\bf Name} & {\bf Value} \\ \hline
+    \input{../mat/res_eq}
+  \end{tabular}
+  \caption{Equivalent Resistance}
+  \label{tab:R_eq}
+\end{table}
+
+the voltages for the remaining nodes are as follows 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline
+    {\bf Name} & {\bf Value V[V] and I[A]} \\ \hline
     \input{../mat/data_alinea_2}
   \end{tabular}
   \caption{Theoretical Values for VOLTAGES using Octave}
-  \label{tab:alinea1_voltagens_tab}
+  \label{tab:alinea2_voltagens_tab}
 \end{table}
 
-PRESENTAR VALOR DA RESISTENCIA EQUIVALENTE E DA TIME CONSTANT
+This is procedure is extremely useful because it allows us to tranform the original circuit to a much simpler one. In fact, in order to study the behaviour of the capacitor as is charges and discharches (notice that until now we have considered the capacitor as being fully charged). It is the simplification of the problem that allow us to calculate the capacitor's time constant and from there obtain differential equations that we can actually solve. 
+
+With this in mind, we are now going to study how the voltages in the capacitors terminals vary over time.
 
 
 
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=10 cm]{../mat/natural.eps}
-\caption{resposta natural ?=????}
-\label{fig:gig_al_2}
-\end{figure}
 
 
 
@@ -104,23 +155,58 @@ G(1) &   -(G(1)+G(2)+G(3)) &     G(2) &    0 &    G(3) &           0 &    0 &   
 
 \end{bmatrix}
  \begin{bmatrix} V_1\\V_2\\V_3\\V_4\\V-5\\V_6\\V_7\\V_8 \end{bmatrix} = 
- \begin{bmatrix} 0 & V_s & 0 & 0 & 0 & 0 & 0 & 0\end{bmatrix}
+ \begin{bmatrix} 0 \\ V_s \\ 0 \\ 0 \\ 0 \\0 \\ 0 \\ 0\end{bmatrix}
 \end{equation*}
 
 
+
+
+
+
+AMPLITUDES COMPLEXAS COMIN YOUW WAY IN 3 3 1 TA AN!!!
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline
+    {\bf Name} & {\bf Value} \\ \hline
+    \input{../mat/data_alinea_d}
+  \end{tabular}
+  \caption{Complex Amplitudes in each node}
+  \label{tab:complex_amplitude}
+\end{table}
+
+
+
+
+
+
+vs(t) AND NO MORE LESS IMPORTANT V6(T) IN 3 2 1 
+
 \begin{figure}[H]
-\centering
-\includegraphics[width=10 cm]{../mat/forced.eps}
-\caption{resposta natural ?=????}
-\label{fig:gig_al_2}
+  \centering
+  \includegraphics[width=10cm]{final}
+  \caption{o q po aqui}
+  \label{fig:fignodos}
 \end{figure}
 
 
 
-
+ALINEA 6
+AMPLITUDE (FREQUENCIA)
 \begin{figure}[H]
-\centering
-\includegraphics[width=10 cm]{../mat/final.eps}
-\caption{resposta natural ?=????}
-\label{fig:gig_al_2}
+  \centering
+  \includegraphics[width=10cm]{alinea_6_amp}
+  \caption{o q po aqui}
+  \label{fig:fignodos}
 \end{figure}
+
+
+FASE FREQUENCIA
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{alinea_6_amp_2}
+  \caption{o q po aqui}
+  \label{fig:fignodos}
+\end{figure}
+
