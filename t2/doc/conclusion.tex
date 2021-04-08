@@ -2,7 +2,7 @@
 \label{sec:conclusion}
 
 Comparing the results obtained in the theoretical analysis  with the ones acquired from \textit{ngspice} and
-also checking the \textit{Octave} plots with the simulation's plots, we can say that they are essentially the same. We can thus conclude
+also checking the \textit{Octave} plots with the simulation's plots, we can say that they present significantly small errors, mainly derived from precision limitations. We can thus conclude
 that our theoretical analysis matches the simulated circuit and can effectively describe the system's voltages and currents in stationary regimes,
 their time evolution and their frequency dependence, proving that it represents a really good approximation of reality.
 
@@ -11,7 +11,7 @@ their time evolution and their frequency dependence, proving that it represents 
 The operating point analyses match because \textit{ngspice} works by solving a matrix of linear equations based on the Kirchhoff's Laws, much like
 what we do on the theoretical analysis. The transient analyses also match because the differential equations that rule the system's behaviours have
 explicit solutions, and we can easily apply these solution, having only to take precautions with the initial conditions. \textit{Ngspice} solves these
-differential equations numerically after we declare the initial conditions. Naturally, since the initial conditions , found in the operating point analysis, match,
+differential equations numerically after we declare the initial conditions. Naturally, since the initial conditions found in the operating point analysis match,
 the transient analyses must match as well. In the frequency analysis, \textit{ngspice} simulates the steady-state solution of the system for multiple frequencies.
 This is what we essentially do in the theoretical analysis, exploiting the phasor notation for each frequency, which assumes that steady-state solution for the component's currents and node
 voltages all oscillate with the same frequency as the voltage source.
