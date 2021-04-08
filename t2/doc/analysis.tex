@@ -23,7 +23,7 @@ Where U the potential difference, R the resistance, and I the current flowing th
 
 \begin{center}
 \begin{equation}
-G_i=\frac{1}{R_1}
+G=\frac{1}{R}
 \label{current law}
 \end{equation}
 \end{center}
@@ -104,7 +104,7 @@ We already know the value of $V(6)-V(8)$, so we only need to obtain the value of
  \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ V_6-V_8 \\ 0\end{bmatrix}
 \end{equation*}
 
-Once discovered the value for $R_eq$, we can calculate the capacitor's time constant, which is given by
+Once discovered the value for $R_{eq}$, we can calculate the capacitor's time constant, which is given by
  \begin{center}
 \begin{equation}
 \tau=C\,R_{eq}
@@ -112,7 +112,7 @@ Once discovered the value for $R_eq$, we can calculate the capacitor's time cons
 \end{equation}
 \end{center}
 
-Solving the system we obtained the following values for $R_eq$, $I_x$ ans $\tau$.
+Solving the system we obtained the following values for $R_{eq}$, $I_x$ ans $\tau$.
 
 \begin{table}[H]
   \centering
@@ -121,7 +121,7 @@ Solving the system we obtained the following values for $R_eq$, $I_x$ ans $\tau$
     {\bf Name} & {\bf Value} \\ \hline
     \input{../mat/res_eq}
   \end{tabular}
-  \caption{Equivalent Resistance}
+  \caption{Values obtained through Octave}
   \label{tab:R_eq}
 \end{table}
 
@@ -134,7 +134,7 @@ The voltages for the remaining nodes and the other component's currents are as f
     {\bf Name} & {\bf Value V[V] and I[A]} \\ \hline
     \input{../mat/data_alinea_2}
   \end{tabular}
-  \caption{Theoretical Values for VOLTAGES using Octave}
+  \caption{Theoretical Values for $t=0$ using Octave}
   \label{tab:alinea2_voltagens_tab}
 \end{table}
 
@@ -281,4 +281,4 @@ Plotting the same results for the phase shifts we get
      \label{fig:amp(f)1}
 \end{center}
 
-As predicted, $V_s$'s phase remains, by construction, 0, and $V_8$'s remains constant, as expected.
+As predicted, $V_s$'s phase remains, by construction 0, $V_8$'s remains constant and the capacitor's phase shifts to -90 degrees at high frequencies.
