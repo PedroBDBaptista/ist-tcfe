@@ -105,7 +105,7 @@ fprintf(fid,"$I(R2)$ & %.6g A \\\\ \\hline\n",(Vol(3)-Vol(2))/R(2));
 fprintf(fid,"$I(R3)$ & %.6g A \\\\ \\hline\n",(Vol(2)-Vol(5))/R(3));
 fprintf(fid,"$I(R4)$ & %.6g A \\\\ \\hline\n",(Vol(5)-Vol(4))/R(4));
 fprintf(fid,"$I(R5)$ & %.6g A \\\\ \\hline\n",(Vol(5)-Vol(6))/R(5));
-fprintf(fid,"$I(R6)$ & %.6g A \\\\ \\hline\n",(Vol(7)-Vol(4))/R(6));
+fprintf(fid,"$I(R6)$ & %.6g A \\\\ \\hline\n",(Vol(4)-Vol(7))/R(6));
 fprintf(fid,"$I(R7)$ & %.6g A \\\\ \\hline\n",(Vol(7)-Vol(8))/R(7));
 
 
@@ -207,7 +207,7 @@ fprintf(fid,"$I(R2)$ & %.6g A \\\\ \\hline\n",(sol(2)-sol(1))/R(2));
 fprintf(fid,"$I(R3)$ & %.6g A \\\\ \\hline\n",(sol(1)-sol(3))/R(3));
 fprintf(fid,"$I(R4)$ & %.6g A \\\\ \\hline\n",(sol(3)-0)/R(4));
 fprintf(fid,"$I(R5)$ & %.6g A \\\\ \\hline\n",(sol(3)-sol(4))/R(5));
-fprintf(fid,"$I(R6)$ & %.6g A \\\\ \\hline\n",(sol(5)-0)/R(6));
+fprintf(fid,"$I(R6)$ & %.6g A \\\\ \\hline\n",(0-sol(5))/R(6));
 fprintf(fid,"$I(R7)$ & %.6g A \\\\ \\hline\n",(sol(5)-sol(6))/R(7));
 fprintf(fid,"$I_x$ & %.7f \\\\ \\hline\n",Ix);
 
