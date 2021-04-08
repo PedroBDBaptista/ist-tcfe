@@ -28,7 +28,7 @@ G_i=\frac{1}{R_1}
 \end{equation}
 \end{center}
 
-\subsection{Steady-state at t<0}
+\subsection{Steady-state at $t<0$}
 
 We are now ready to analyse the circuit presented in \ref{fig:circuit}. Focusing, first, on the configuration for $t<0$, one can see that the voltage source $V_s$ is time independent. Therefore, the capacitor will charge and the current that flows through it will go to 0. This is due to the isolating properties of the material between the capacitor's plates. With this in mind, we were able to write down a set of linear equations that allow us to compute the voltages in each node. We present said equations in matrix form bellow.
 \begin{center}
@@ -65,7 +65,7 @@ Solving the system presented above, we obtained the following results for the vo
 %===============================================================
 %alinea 2
 %===============================================================
-\subsection{Circuit at t=0}
+\subsection{Circuit at $t=0$}
 
 We now want to obtain the equivalent resistance of the circuit as seen from the capacitor's terminals.
 Thevenin’s Theorem states that it is possible to simplify any linear circuit to an equivalent circuit with just a single voltage source and a resistor ($R_{eq}$) in series with said voltage source.
@@ -81,7 +81,7 @@ R_{eq}=\frac{V(6)-V(8)}{I_x}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{thevenin.eps}
+  \includegraphics[width=10cm]{thevenin.pdf}
   \caption{Circuit under analysis}
   \label{fig:thvenin}
 \end{figure}
@@ -125,7 +125,7 @@ Solving the system we obtained the following values for $R_eq$, $I_x$ ans $\tau$
   \label{tab:R_eq}
 \end{table}
 
-the voltages for the remaining nodes are as follows
+The voltages for the remaining nodes and the other component's currents are as follows:
 
 \begin{table}[H]
   \centering
@@ -138,7 +138,7 @@ the voltages for the remaining nodes are as follows
   \label{tab:alinea2_voltagens_tab}
 \end{table}
 
-This procedure is extremely useful because it allows us to transform the original circuit to a much simpler one. In fact, in order to study the behaviour of the capacitor as it charges and discharches (notice that until now we have considered the capacitor as being fully charged). It is the simplification of the problem that allow us to calculate the capacitor's time constant and from there obtain differential equations that we can actually solve.
+This procedure is extremely useful because it allows us to transform the original circuit to a much simpler one in order to study the behavior of the capacitor as it charges and discharges (notice that until now we have considered the capacitor as being fully charged). It is the simplification of the problem that allow us to calculate the capacitor's time constant and from there obtain differential equations that we can actually solve.
 Furthermore, it's important to state that this step is the analysis of the circuit at t=0, the instant in which the voltage source switches from being constant to being sinusoidal. Effectively, in this instant, $V_{s}=0$, and the only voltage that necessarily stays the same is the capacitor voltage, all the other ones may or may not change. That's also the reason why we've replaced the capacitor with a Voltage Source $V_{x}$. Not only that, but
 this procedure is necessary for us to know the initial conditions for the natural solution of the voltage in node 6.
 With this in mind, we are now going to study how the voltages in the capacitors terminals vary over time.
@@ -191,7 +191,7 @@ G(1) &   -(G(1)+G(2)+G(3)) &     G(2) &    0 &    G(3) &           0 &    0 &   
 \end{bmatrix}
  \begin{bmatrix} \tilde{V_1}\\ \tilde{V_2}\\ \tilde{V_3}\\ \tilde{V_4}\\ \tilde{V_5}\\ \tilde{V_6}\\ \tilde{V_7} \\ \tilde{V_8} \end{bmatrix} =
  \begin{bmatrix} 0 \\ \tilde{V_s} \\ 0 \\ 0 \\ 0 \\0 \\ 0 \\ 0\end{bmatrix}
- \label{eq:ampl_complexa}
+ \label{eq:amp_complexa}
 \end{equation*}
 where Y is the inverse of the capacitor's impedance ("resistance" equivalent in complex form).
 We got the following results:
@@ -238,7 +238,6 @@ with different amplitude and phase.
 
 \subsection{Frequency Analysis}
 
-\section{alinea 6}
 We want, now, to study how the frequency of the voltage independent source, $V_s$, may affect the voltages and phases in every other node.
 We start by considering that the phase in $V_s$ is 0. We can always do that since the phase are always relative to each other. One can imagine a time translation so that this holds true every time.
 Once obtained the imaginary amplitudes for the voltages in each node, it becomes trivial to find the real amplitude and phase shift.
