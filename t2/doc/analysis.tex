@@ -78,6 +78,14 @@ R_{eq}=\frac{V(6)-V(8)}{I_x}
 \end{equation}
 \end{center}
 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{thevenin.eps}
+  \caption{Circuit under analysis}
+  \label{fig:thvenin}
+\end{figure}
+
 We already know the value of $V(6)-V(8)$, so we only need to obtain the value of $I_x$. We do so by applying Kirchhoff's current law again, this time to a slightly different circuit (remember, $V_s$ was removed and the capacitor was replaced by an independent voltage source.). Most of the derived equations are similar or identic to the ones presented before, after all, we are working with circuits that are much alike. We choose to omit the voltage in node 4. This is known to be 0 once that it is connected to the ground.
 \begin{equation*}
 \begin{bmatrix}
@@ -183,6 +191,7 @@ G(1) &   -(G(1)+G(2)+G(3)) &     G(2) &    0 &    G(3) &           0 &    0 &   
 \end{bmatrix}
  \begin{bmatrix} \tilde{V_1}\\ \tilde{V_2}\\ \tilde{V_3}\\ \tilde{V_4}\\ \tilde{V_5}\\ \tilde{V_6}\\ \tilde{V_7} \\ \tilde{V_8} \end{bmatrix} =
  \begin{bmatrix} 0 \\ \tilde{V_s} \\ 0 \\ 0 \\ 0 \\0 \\ 0 \\ 0\end{bmatrix}
+ \label{eq:ampl_complexa}
 \end{equation*}
 where Y is the inverse of the capacitor's impedance ("resistance" equivalent in complex form).
 We got the following results:
@@ -247,7 +256,7 @@ Let $\mathcal{A}$ be the complex amplitude, $A$ the real amplitude, and $\phi$ t
     \end{equation}
 \end{center}
 
-If we focus on the matrix \ref{eq:} we can see that if we remove the $6^{th}$ column and the last line, we can remove the $6^{th}$ unknown variable. Notice that if this is done we are left with a matrix that is frequency independent. This means that all of the other variables must by frequency independent.
+If we focus on the matrix \ref{eq:amp_complexa} we can see that if we remove the $6^{th}$ column and the last line, we can remove the $6^{th}$ unknown variable. Notice that if this is done we are left with a matrix that is frequency independent. This means that all of the other variables must by frequency independent.
 
 We have computed the complex amplitudes for a very large finite set frequencies, ranging from 0.1 Hz to 1 MHz. We now present the obtained values for the phase shift of $V_6$, $V_8$, $V_c$ and $V_s$. Notice that $V_s$ is imposed to have null phase and amplitude of 1.
 
@@ -269,7 +278,7 @@ As expected, we can see that $V_8$ is frequency independent. Also as theoretical
 Plotting the same results for the phase shifts we get
 \begin{center}
     \includegraphics[scale=0.5]{alinea_6_fases}
-    \captionof{figure}{Amplitude as a function of frequency}
+    \captionof{figure}{Phase as a function of frequency}
      \label{fig:amp(f)1}
 \end{center}
 
