@@ -400,14 +400,28 @@ fclose(fid);
 AmpSource=abs(vs);
 PhaseSource=-arg(vs);
 
+
 Vsource=AmpSource*cos(w*t-PhaseSource);
+
+for i=1:50
+	v6_antes(i)=Vol(6);
+	vs_antes(i)=Vs;
+	x(i)=-5e-3+i*1e-4;
+endfor;
+
+x=[x,t];
+v6_antes=[v6_antes,v6n+v6f];
+vs_antes=[vs_antes,Vsource];
+
 
 
 clf(hf);
-plot(t*1000,v6n+v6f,"r;V6(t);");
+plot(x*1000,v6_antes,"r;V6(t);");
+%hold on;
+%plot(t*1000,v6n+v6f,"r;V6(t);");
 hold on;
-plot(t*1000,Vsource,"b;Vsource(t);");
-hold on;
+plot(x*1000,vs_antes,"b;Vsource(t);");
+
 
 
 xlabel("t[ms]");
