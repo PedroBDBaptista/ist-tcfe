@@ -1,0 +1,347 @@
+
+Circuit: *
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+No. of Data Rows : 1
+********************************************
+Operating point
+********************************************
+vcc = 1.000000e+01
+@q1[ic] = 1.404513e-02
+@rf[i] = 7.022567e-05
+op_TAB
+@cb[i] = 0.000000e+00
+@ce[i] = 0.000000e+00
+@q1[ib] = 7.022567e-05
+@q1[ic] = 1.404513e-02
+@q1[ie] = -1.41154e-02
+@q1[is] = 5.765392e-12
+@rc[i] = 1.411536e-02
+@re[i] = 1.411536e-02
+@rf[i] = 7.022567e-05
+@rs[i] = 0.000000e+00
+v(1) = 0.000000e+00
+v(2) = 0.000000e+00
+base = 2.254108e+00
+coll = 5.765392e+00
+emit = 1.411536e+00
+vcc = 1.000000e+01
+vcc#branch = -1.41154e-02
+vin#branch = 0.000000e+00
+op_END
+********************************************
+Transient analysis
+********************************************
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vcc                                         10
+1                                            0
+2                                            0
+base                                   2.25411
+coll                                   5.76539
+emit                                   1.41154
+vin#branch                                   0
+vcc#branch                          -0.0141154
+
+
+No. of Data Rows : 1360
+
+The file "trans.ps" may be printed on a postscript printer.
+trans_FIG
+********************************************
+Frequency analysis
+********************************************
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+No. of Data Rows : 71
+
+The file "acm.ps" may be printed on a postscript printer.
+acm_FIG
+
+The file "acp.ps" may be printed on a postscript printer.
+acp_FIG
+********************************************
+Input impedance
+********************************************
+
+The file "zim.ps" may be printed on a postscript printer.
+zim_FIG
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+No. of Data Rows : 1
+	Node                                  Voltage
+	----                                  -------
+	----	-------
+	emit                             1.411536e+00
+	coll                             5.765392e+00
+	base                             2.254108e+00
+	V(2)                             0.000000e+00
+	V(1)                             0.000000e+00
+	vcc                              1.000000e+01
+
+	Source	Current
+	------	-------
+
+	@ce[i]                           0.000000e+00
+	@re[i]                           1.411536e-02
+	@rc[i]                           1.411536e-02
+	@q1[is]                          5.765392e-12
+	@q1[ib]                          7.022567e-05
+	@q1[ie]                          -1.41154e-02
+	@q1[ic]                          1.404513e-02
+	@rf[i]                           7.022567e-05
+	@cb[i]                           0.000000e+00
+	@rs[i]                           0.000000e+00
+	vcc#branch                       -1.41154e-02
+	vin#branch                       0.000000e+00
+
+ BJT models (Bipolar Junction Transistor)
+      model               p2model
+
+       type                   npn
+       tnom                    27
+         is                 1e-16
+         bf                   200
+         nf                     1
+        vaf                     0
+        ikf                     0
+        ise                     0
+         ne                   1.5
+         br                     1
+         nr                     1
+        var                     0
+        ikr                     0
+        isc                     0
+         nc                     2
+         rb                     0
+        irb                     0
+        rbm                     0
+         re                     0
+         rc                     0
+        cje               1.2e-11
+        vje                  0.75
+        mje                  0.33
+         tf                     0
+        xtf                     0
+        vtf                     0
+        itf                     0
+        ptf                     0
+        cjc                 2e-12
+        vjc                  0.75
+        mjc                  0.33
+       xcjc                     1
+         tr                     0
+        cjs                     0
+        vjs                  0.75
+        mjs                     0
+        xtb                     0
+         eg                  1.11
+        xti                     3
+         fc                   0.5
+         kf                     0
+         af                     0
+        iss                     0
+         ns                     1
+       tlev                     0
+      tlevc                     0
+       tbf1                     0
+       tbf2                     0
+       tbr1                     0
+       tbr2                     0
+      tikf1                     0
+      tikf2                     0
+      tikr1                     0
+      tikr2                     0
+      tirb1                     0
+      tirb2                     0
+       tnc1                     0
+       tnc2                     0
+       tne1                     0
+       tne2                     0
+       tnf1                     0
+       tnf2                     0
+       tnr1                     0
+       tnr2                     0
+       trb1                     0
+       trb2                     0
+       trc1                     0
+       trc2                     0
+       tre1                     0
+       tre2                     0
+       trm1                     0
+       trm2                     0
+      tvaf1                     0
+      tvaf2                     0
+      tvar1                     0
+      tvar2                     0
+        ctc                     0
+        cte                     0
+        cts                     0
+       tvjc                     0
+       tvje                     0
+       tvjs                     0
+      titf1                     0
+      titf2                     0
+       ttf1                     0
+       ttf2                     0
+       ttr1                     0
+       ttr2                     0
+      tmje1                     0
+      tmje2                     0
+      tmjc1                     0
+      tmjc2                     0
+      tmjs1                     0
+      tmjs2                     0
+       tns1                     0
+       tns2                     0
+        nkf                   0.5
+       tis1                     0
+       tis2                     0
+      tise1                     0
+      tise2                     0
+      tisc1                     0
+      tisc2                     0
+    vbe_max                 1e+99
+    vbc_max                 1e+99
+    vce_max                 1e+99
+
+ Capacitor models (Fixed capacitor)
+      model                     C
+
+        cap                     0
+         cj                     0
+       cjsw                     0
+       defw                 1e-05
+       defl                     0
+     narrow                     0
+      short                     0
+        del                     0
+        tc1                     0
+        tc2                     0
+         di                     0
+      thick                     0
+     bv_max                 1e+99
+
+ Resistor models (Simple linear resistor)
+      model                     R
+
+        rsh                     0
+     narrow                     0
+      short                     0
+        tc1                     0
+        tc2                     0
+        tce                     0
+       defw                 1e-05
+          l                 1e-05
+         kf                     0
+         af                     0
+          r                     0
+     bv_max                 1e+99
+         lf                     1
+         wf                     1
+         ef                     1
+
+ BJT: Bipolar Junction Transistor
+     device                    q1
+      model               p2model
+         ic             0.0140451
+         ib           7.02257e-05
+         ie            -0.0141154
+        vbe              0.842572
+        vbc              -3.51128
+         gm              0.543019
+        gpi            0.00271509
+        gmu                 1e-12
+         gx                     0
+         go           4.59062e-23
+        cpi           2.12907e-11
+        cmu           1.12733e-12
+        cbx                     0
+       csub                     0
+
+ Capacitor: Fixed capacitor
+     device                    ce                    cb
+      model                     C                     C
+capacitance                 1e-05                 1e-06
+      dtemp                     0                     0
+     bv_max                 1e+99                 1e+99
+          i                     0                     0
+          p                     0                    -0
+
+ Resistor: Simple linear resistor
+     device                    re                    rc                    rf
+      model                     R                     R                     R
+ resistance                   100                   300                 50000
+         ac                   100                   300                 50000
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i             0.0141154             0.0141154           7.02257e-05
+          p             0.0199243              0.059773           0.000246582
+
+ Resistor: Simple linear resistor
+     device                    rs
+      model                     R
+ resistance                  1000
+         ac                  1000
+      dtemp                     0
+     bv_max                 1e+99
+      noisy                     1
+          i                     0
+          p                     0
+
+ Vsource: Independent voltage source
+     device                   vin                   vcc
+         dc                     0                    10
+      acmag                     1                     0
+      pulse                     0         -
+                              0.1          
+                           100000          
+        sin                     0         -
+                              0.1          
+                           100000          
+        exp                     0         -
+                              0.1          
+                           100000          
+        pwl                     0         -
+                              0.1          
+                           100000          
+       sffm                     0         -
+                              0.1          
+                           100000          
+         am                     0         -
+                              0.1          
+                           100000          
+    trnoise                     0         -
+                              0.1          
+                           100000          
+   trrandom                     0         -
+                              0.1          
+                           100000          
+          i                     0            -0.0141154
+          p                    -0              0.141154
+
+
+Total analysis time (seconds) = 0.023
+
+Total elapsed time (seconds) = 0.068 
+
+Total DRAM available = 1987.582 MB.
+DRAM currently available =  134.609 MB.
+Total ngspice program size =   22.379 MB.
+Resident set size =   10.371 MB.
+Shared ngspice pages =    8.102 MB.
+Text (code) pages =    5.789 MB.
+Stack = 0 bytes.
+Library pages =    2.645 MB.
+
