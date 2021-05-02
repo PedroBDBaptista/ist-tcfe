@@ -95,10 +95,11 @@ Dr22 25 0 Default
 
 
 .op
-.measure tran yavg AVG v(4) from=5.3 to=5.6
-.measure tran ypp PP v(4) from=5.3 to=5.6
-.measure tran ymax MAX v(4) from=5.3 to=5.6
-.measure tran ymin MIN v(4) from=5.3 to=5.6
+.measure tran 3avg AVG v(3) from=5.4 to=5.6
+.measure tran yavg AVG v(4) from=5.4 to=5.6
+.measure tran ypp PP v(4) from=5.4 to=5.6
+.measure tran ymax MAX v(4) from=5.4 to=5.6
+.measure tran ymin MIN v(4) from=5.4 to=5.6
 
 .end
 
@@ -121,8 +122,8 @@ echo "********************************************"
 echo  "Transient analysis"
 echo "********************************************"
 
-*tran step t_final t_inicial 
-tran 1e-5 5.6 5.3
+*tran step t_final t_inicial
+tran 1e-5 5.6 5.4
 
 
 hardcopy envelope.ps v(3)
@@ -131,4 +132,3 @@ hardcopy regulator.ps v(4)
 echo trans_FIG
 
 .endc
-
