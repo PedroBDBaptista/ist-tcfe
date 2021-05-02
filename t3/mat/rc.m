@@ -7,9 +7,10 @@ freq=2*pi*50.;
 period=1./50.
 A=230./10.;
 
+
 %envelope
-R1=5e3;
-C1=1;
+R1=300e3;
+C1=300e-6;
 
 
 
@@ -17,15 +18,10 @@ C1=1;
 toff=(1/freq)*atan(R1*C1*freq)
 
 
-% T on
-f=@(x) sin(freq*x)-sin(freq*toff)*exp(-(x-toff)/(R1*C1));
-x0=toff;
-ton=fzero(f,x0)
-
-condition=1;
-
+j=1;
 
 for i=1:tmax
+
 	t(i)=i*dt;
 	v2(i)=A*sin(freq*t(i));
 
@@ -35,25 +31,29 @@ for i=1:tmax
 		v3(i)=0.;
 	endif;
 
-	if(t(i)>toff && t(i)<ton)
+	if(t(i)>toff &&    A * sin(freq*toff) * exp(-(t(i)-toff)/(R1*C1)) > v3(i))
 		vo(i)=A * sin(freq*toff) * exp(-(t(i)-toff)/(R1*C1));
-		condition=0;
 	else
 		vo(i)=0.;
 	endif;
 
-	if(condition==0)
+	if(A * sin(freq*toff) * exp(-(t(i)-toff)/(R1*C1)) < v3(i)    &&   t(i)>toff+period)
 		toff=toff+period;
-		ton=ton+period;
-		condition=1;
 	endif;
+
+	%voltagem envelope
+	venvelope(i)=v3(i);
+	if(vo(i)>v3(i))
+		venvelope(i)=vo(i);
+	endif;
+
 
 endfor;
 
 
 
 
-
+%GRAFICOS
 
 hf = figure ();
 plot (t, v2, "g");
@@ -61,6 +61,8 @@ hold on;
 plot (t, v3, "r");
 hold on;
 plot (t, vo, "b");
+hold on;
+plot (t, venvelope, "-k");
 
 
 xlabel ("t[s]");

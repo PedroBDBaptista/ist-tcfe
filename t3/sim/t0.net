@@ -3,11 +3,6 @@
 * BJT amp with feedback
 *
 
-* forces current values to be saved
-.options savecurrents
-
-
-
 
 * input voltage source
 Vin 1 0 0.0 ac 1.0 sin(0 230 50)
@@ -30,11 +25,68 @@ Ev 2 0 1 0 0.1
 De1 2 3 Default
 
 *RESISTOR
-Re1 3 0 5k
+Re1 3 0 300k
 
 *CONDENSADOR
-Ce1 3 0 10u
+Ce1 3 0 300u
 
+
+
+
+
+*VOLTAGE REGULATOR
+
+*resistor
+Rr2 4 3 715k
+
+
+
+*diodos
+Dr1 4 5 Default
+
+Dr2 5 6 Default
+
+Dr3 6 7 Default
+
+Dr4 7 8 Default
+
+Dr5 8 9 Default
+
+Dr6 9 10 Default
+
+Dr7 10 11 Default
+
+Dr8 11 12 Default
+
+Dr9 12 13 Default
+
+Dr10 13 14 Default
+
+Dr11 14 15 Default
+
+Dr12 15 16 Default
+
+Dr13 16 17 Default
+
+Dr14 17 18 Default
+
+Dr15 18 19 Default
+
+Dr16 19 20 Default
+
+Dr17 20 21 Default
+
+Dr18 21 22 Default
+
+Dr19 22 23 Default
+
+Dr20 23 24 Default
+
+Dr21 24 25 Default
+
+Dr22 25 0 Default
+
+*Dr23 26 0 Default
 
 
 
@@ -43,6 +95,10 @@ Ce1 3 0 10u
 
 
 .op
+.measure tran yavg AVG v(4) from=5.3 to=5.6
+.measure tran ypp PP v(4) from=5.3 to=5.6
+.measure tran ymax MAX v(4) from=5.3 to=5.6
+.measure tran ymin MIN v(4) from=5.3 to=5.6
 
 .end
 
@@ -64,9 +120,14 @@ op
 echo "********************************************"
 echo  "Transient analysis"
 echo "********************************************"
+
+*tran step t_final t_inicial 
 tran 1e-5 5.6 5.3
 
-hardcopy trans.ps v(3)
+
+hardcopy envelope.ps v(3)
+hardcopy regulator.ps v(4)
+
 echo trans_FIG
 
 .endc
