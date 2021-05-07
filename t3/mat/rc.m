@@ -1,6 +1,6 @@
 close all
 clear all
-
+%comentario
 dt=1e-5
 tmax=2e4+2000;
 freq=2*pi*50.;
