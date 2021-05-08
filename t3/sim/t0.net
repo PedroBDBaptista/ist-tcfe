@@ -127,8 +127,9 @@ tran 1e-5 5.6 5.4
 
 
 hardcopy envelope.ps v(3)
+echo envelope_FIG
 hardcopy regulator.ps v(4)
-
-echo trans_FIG
+echo regulator_FIG
+*echo trans_FIG
 
 .endc
