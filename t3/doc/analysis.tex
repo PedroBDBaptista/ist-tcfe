@@ -61,14 +61,14 @@ Using Ohm's law
 
 Now that we have $t_{off}$ we can write the output voltage as follows:
 \begin{equation}
-v_o(t)=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R*C}}
+v_o(t)=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R\,C}}
 \end{equation}
 
 
 Now we compute $t_{ON}$
 \begin{equation}
-	v_s(t_{ON})=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R*C}}\\
-	A sin(\omega t_{ON})=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R*C}}
+	v_s(t_{ON})=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R\,C}}\\
+	A sin(\omega t_{ON})=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R\,C}}
 \label{eq:ton}
 \end{equation}
 
@@ -80,7 +80,7 @@ Therefore, the output voltage, $v_o$, can be written as:
 	v_o(t) = \left\{
 \begin{array}{ll}
 	v_s & D_{ON} \\
-	A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R*C}} & D_{OFF}\\
+	A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R\,C}} & D_{OFF}\\
 \end{array}
 \right.
 \end{equation}
