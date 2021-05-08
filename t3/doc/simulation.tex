@@ -12,7 +12,7 @@ This discrepancy probably results from the difference in the diode model used in
 
 The following figures show the output voltage, for a time-lenght of 10 periods at the exit terminal of the ED and VR circuits.  The analogous figures produced in the previous section are also presented side by side, so that they are more easily compared.
 
-[Plot output ED, 10T, side by side]
+%[Plot output ED, 10T, side by side]
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
@@ -31,7 +31,7 @@ The following figures show the output voltage, for a time-lenght of 10 periods a
 \label{fig:EnvelopeComparacao}
 \end{figure}
 
-[Plot output VR, 10T, side by side]
+%[Plot output VR, 10T, side by side]
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
@@ -50,12 +50,10 @@ The following figures show the output voltage, for a time-lenght of 10 periods a
 \label{fig:RegulatorComparacao}
 \end{figure}
 
-[considerations about these figures]
-(One can see the differences already detected in the first two measurments...)
+As one can see, the results look the same, but in both cases Octave's plots showcase slightly higher voltage values. The main reason for this is because in Octave we used both the ideal and theoretical diode models, whereas \textit{Ngspice} works with a different and
+more accurate model that better describes the diode's real physical behaviour. Also, even though the graphs showcase the output signal at different times, one should not worry with this detail since the functions are all periodic.
 
 Finally, we present the total deviation from the desired voltage, which comprises the DC deviation as well as the AC component. For such figure, we simply compute ($v_0$ - 12).
-
-
 [Plot $v_0$-12]
 
 Further considerations will be written in the conclusion.
