@@ -62,7 +62,7 @@ Applying Kirchhoff's Current Law (KCL) and Ohm's law
 
 Now we compute $t_{ON}$. To do so we match the voltage source to the voltage of the capacitor. We obtain the following non-linear equation for $t_{ON}$
 \begin{equation}
-	A sin(\omega t_{ON}) =A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R\,C}}\\
+	A sin(\omega t_{ON}) =A  \sin(\omega t_{off})  e^{-\frac{t-t_{off}}{R\,C}}\\
 \label{eq:ton}
 \end{equation}
 
@@ -74,7 +74,7 @@ Therefore, the output voltage, $v_o$, can be written as:
 	v_o(t) = \left\{
 \begin{array}{ll}
 	v_s & D_{ON} \\
-	A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R\,C}} & D_{OFF}\\
+	A  \sin(\omega t_{off})  e^{-\frac{t-t_{off}}{R\,C}} & D_{OFF}\\
 \end{array}
 \right.
 \end{equation}
@@ -94,7 +94,7 @@ However, this picture doesn't allow us to have a clear view of the ripple, so we
   \caption{Output Voltage of the Envelope Detector using \emph{Octave}}
   \label{fig:venvelope2}
 \end{figure}
-In order to get a graph similar to the one presented in the next section, he have shown the 10 consecutive periods after the first one.
+In order to get a plot similar to the one presented in the next section, he have shown the 10 consecutive periods after the first one.
 
 
 
@@ -104,7 +104,7 @@ In order to get a graph similar to the one presented in the next section, he hav
 
 \subsection{Voltage Regulator}
 
-Proceeding to the VR, figure \ref{fig:voltage regulator} shows the designed circuit. This is composed of 22 diodes and 1 resistor ($R_2=715 \, k\Omega$).
+Proceeding to the VR, figure \ref{fig:voltage regulator} shows the designed circuit. This is composed of 22 diodes in series represented by the equivalent diode $D_{eq}$ and 1 resistor ($R_2=715 \, k\Omega$).
 \begin{figure}[h!]
   \centering
   \includegraphics[width=9cm]{voltage_reg.pdf}
