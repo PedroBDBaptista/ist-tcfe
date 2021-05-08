@@ -47,21 +47,23 @@ Applying Kirchhoff's Current Law (KCL) we get:
 Using Ohm's law
 
 \begin{equation}
-  \frac{v_S}{R}=-C\frac{dv_c}{dt}\\
-  \frac{A}{R}sin(\omega t_{off})= - C A \omega cos(\omega t_{off}) \\
-  t_{off}=\frac{arctan(RC\omega)}{\omega}
+\begin{split}
+  \frac{v_S}{R} &=-C\frac{dv_c}{dt}\\
+  \frac{A}{R}\sin(\omega t_{off}) &= - C \,A \omega \cos(\omega t_{off}) \\
+  t_{off} &=\frac{\arctan(RC\omega)}{\omega}\\
+\end{split}
 \end{equation}
 
 Now that we have $t_{off}$ we can write the output voltage as follows:
 \begin{equation}
-v_o(t)=A  sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R*C}}
+v_o(t)=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R*C}}
 \end{equation}
 
 
 Now we compute $t_{ON}$
 \begin{equation}
-	v_s(t_{ON})=A  sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R*C}}\\
-	A sin(\omega t_{ON})=A  sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R*C}}
+	v_s(t_{ON})=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R*C}}\\
+	A sin(\omega t_{ON})=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R*C}}
 \label{eq:ton}
 \end{equation}
 
@@ -73,7 +75,7 @@ Therefore, the output voltage, $v_o$, can be written as:
 	v_o(t) = \left\{
 \begin{array}{ll}
 	v_s & D_{ON} \\
-	A  sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R*C}} & D_{OFF}\\
+	A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R*C}} & D_{OFF}\\
 \end{array}
 \right.
 \end{equation}
