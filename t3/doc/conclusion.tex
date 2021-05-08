@@ -1,31 +1,11 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-[argue output DC level deviation, voltage ripple, cost, accuracy/discrepancy, merit]
+Comparing the results obtained in the theoretical analysis  with the ones acquired from \textit{ngspice} and also checking the \textit{Octave} plots with the simulation's plots, we can say that they're graphically very similiar. However, quantitatively they present measurable discrepancies.
 
+The voltage output's ripple (from \textit{Ngspice}) is 5 orders of magnitude smaller than the DC level, and the deviation from the desired DC level (exactly $12$V) is also 5 orders of magnitude smaller than both the DC level and the desired one.
+\textit{Octave}'s deviation, however, is 2 orders of magnitude higher than \textit{Ngspice}'s. This shows that \textit{Ngspice}'s models are substantially different from the ones used in \textit{Octave}, namely the diode models. Due to Ngspice's complexity and precision, we are made to believe
+ that its results are the ones closer to reality. This is why our merit was based on the results obtained from this \textit{software}.\par
 
-
-Comparing the results obtained in the theoretical analysis  with the ones acquired from \textit{ngspice} and also checking the \textit{Octave} plots with the simulation's plots, we can say that they present (...)
-
-The DC level deviation is [XX]$V$ in the simulation, [XX] orders of magnitude smaller than the DC level, which is (considerably good).
-The same can be said of the voltage ripple (...)
-
-[accuracy/discrepanc considerations]
-
-The total cost of the circuit is [XX] monetary units. The established cost of components obviously favours the use of diodes, which was our choise, allowing a relatively low total cost.  
-
-With all the measurements and figures presented, we calculated the merit figure of our designed circuit as [XX].
-
-%significantly small errors, mainly derived from precision limitations. We can thus conclude
-% that our theoretical analysis matches the simulated circuit and can effectively describe the system's voltages and currents in stationary regimes,
-% their time evolution and their frequency dependence, proving that it represents a really good approximation of reality.
-
-% \par
-
-% The operating point analyses match because \textit{ngspice} works by solving a matrix of linear equations based on the Kirchhoff's Laws, much like
-% what we do on the theoretical analysis. The transient analyses also match because the differential equations that rule the system's behaviours have
-% explicit solutions, and we can easily apply these solution, having only to take precautions with the initial conditions. \textit{Ngspice} solves these
-% differential equations numerically after we declare the initial conditions. Naturally, since the initial conditions found in the operating point analysis match,
-% the transient analyses must match as well. In the frequency analysis, \textit{ngspice} simulates the steady-state solution of the system for multiple frequencies.
-% This is what we essentially do in the theoretical analysis, exploiting the phasor notation for each frequency, which assumes that steady-state solution for the component's currents and node
-% voltages all oscillate with the same frequency as the voltage source.
+The total cost of the circuit is $1317,3$ monetary units. The established cost of components obviously favours the use of diodes, which was our choice, allowing a relatively low total cost.
+With all the measurements and figures presented, we calculated the merit figure of our designed circuit as $1,1347$.

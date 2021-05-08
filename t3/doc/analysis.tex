@@ -112,7 +112,7 @@ Proceeding to the VR, figure \ref{fig:voltage regulator} shows the designed circ
   \label{fig:voltage regulator}
 \end{figure}
 
-The diode model used in the analysis of this circuit is the real diode model. Knowing that $n$ diodes in series is equivalent to a diode with parameter $\eta'=n*\eta$ and that we chose to
+The diode model used in the analysis of this circuit is the theoretical diode model. Knowing that $n$ diodes in series is equivalent to a diode with parameter $\eta'=n*\eta$ and that we chose to
 interpret the circuit at temperature $T=27ºC$ (to agree with NGSpice's simulation conditions), which changes the Thermal Voltage's value $V_T=\frac{k_BT}{q}$, then the current that passes through the 22 diodes is given by:
 
 \begin{equation}
@@ -121,7 +121,7 @@ i=I_s(e^{\frac{V_o}{22 \eta V_T}}-1)
 where $I_s=1.0\times 10^{-14}$A is the saturation current, $V_o$ is the voltage at the diode serie's terminals and the emittion coefficient is $\eta=1$ (according to NGSpice's default conditions).
 Using KVL we get $V_o+Ri-V_s=0$, where $V_s$ is the output voltage from the envelope circuit. Thus, using the diode's real model, it follows:
 \begin{equation}
-  V+RI_s(e{\frac{V}{22 \eta V_T}}-1)-V_s=0 \Leftrightarrow f(V)=0
+  V+RI_s(e^{\frac{V}{22 \eta V_T}}-1)-V_s=0 \Leftrightarrow f(V)=0
   \label{VoltageRegulatorEquation}
 \end{equation}
 The expected output at the VR exit terminals is calculated through the non-linear equation (\ref{VoltageRegulatorEquation}), solving it using Newthon's method.
