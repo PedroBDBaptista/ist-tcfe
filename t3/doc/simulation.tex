@@ -1,87 +1,199 @@
 \section{Simulation Analysis}
 \label{sec:simulation}
 
-\subsection{Operating Point Analysis}
+\par We now proceed to perform a computational simulation of the converter, using the \textit{Ngspice} software. The circuit represented in figures [XX], [XX] and [XX] was implemented.
 
-Table~\ref{tab:op} shows the simulated operating point results for the circuit
-under analysis. Compared to the theoretical analysis results, one notices the
-following differences: describe and explain the differences.
+Firstly, we measure the output voltage level, which is presented bellow. \textit{Ngspice}'s average function is used for such computation, (using at least 1000 points). (If if output value varies with step used/ N of points used)
 
-\begin{table}[h]
-  \centering
-  \begin{tabular}{|l|r|}
-    \hline    
-    {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{../sim/op_tab}
-  \end{tabular}
-  \caption{Operating point. A variable preceded by @ is of type {\em current}
-    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
-    Volt.}
-  \label{tab:op}
-\end{table}
+[Measure DC level using NGspice functions]
 
-\lipsum[1-1]
+The measurement of the ripple of the signal is presented bellow, using \textit{min} and \textit{max} functions of \textit{Ngspice}.
 
+[Measure Ripple using NGspice functions]
 
-\subsection{Transient Analysis}
+This result differs from the one obtained in the theoretical analyses by [XX]\% (or [XX] orders of magnitude). This probably results from the difference in the diode model used in \textit{Ngspice} computations, which is considerably more complex and precise than the one used in the previous section. (maybe try to get the NGS diode equation)
 
-Figure~\ref{fig:trans} shows the simulated transient analysis results for the
-circuit under analysis. Compared to the theoretical analysis results, one
-notices the following differences: describe and explain the differences.
+The following figures show the output voltage, for the (first) [XX] periods at the exit terminal of the ED and VR circuits.  The analogous figures produced in the previous section are also presented side by side, so that they are more easily compared. 
 
-\begin{figure}[h] \centering
-\includegraphics[width=0.6\linewidth]{trans.eps}
-\caption{Transient output voltage}
-\label{fig:trans}
-\end{figure}
+[Plot output ED, 10T, side by side]
 
-\lipsum[1-1]
+[Plot output VR, 10T, side by side]
+
+[considerations about these figures]
+(One can see the differences already detected in the first two measurments...)
+
+Finnaly, we present the total deviation from the desired voltage, which comprises the DC deviation as well as the AC component. For such figure, we simply compute ($v_0$ - 12). 
 
 
+[Plot $v_0$-12]
 
-\subsection{Frequency Analysis}
+Further considerations will be written in the conclusion.
 
-\subsubsection{Magnitude Response}
+% We start by inputing the given circuit into the simulation software, \emph{ngspice}, by numbering the existing nodes and carefully specifying each components connections as shown in figure \ref{fig:NGS_RC}.
+% One must add that in order to define $V_d$ one needs to have access to the current going through $R_6$, so we added a voltage source $V_{aux}$, with voltage $0V$, connected to nodes 0 and 4, in series with $R_6$ to take its current, since this is the same for components in series.
 
-Figure~\ref{fig:acm} shows the magnitude of the frequency response for the
-circuit under analysis. Compared to the theoretical analysis results, one
-notices the following differences: describe and explain the differences.
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=10cm]{../doc/NGSpice_RC}
+%   \caption{Considered circuit to input in \emph{ngspice}}
+%   \label{fig:NGS_RC}
+% \end{figure}
 
-\begin{figure}[h] \centering
-\includegraphics[width=0.6\linewidth]{acm.eps}
-\caption{Magnitude response}
-\label{fig:acm}
-\end{figure}
+% After inputing all components into \emph{ngspice}, we then ran the simulation program for time $t<0$, in which voltage source $v_s$ has a constant output $V_s$, as indicated in Eqs. \ref{eq:v_s} and \ref{eq:u}. Because $v_s$ is the only independent source in the circuit, the solution reaches a steady-state regime after capacitor $C$ is charged, thus the results are all constant values.
 
-\lipsum[1-1]
 
-\subsubsection{Phase Response}
+% Table \ref{tab:ngspice_1} shows the simulated results for the circuit
+% under analysis, namely the currents in all branches and the voltages in all nodes.
+% \begin{multicols}{2}
 
-Figure~\ref{fig:acp} shows the magnitude of the frequency response for the
-circuit under analysis. Compared to the theoretical analysis results, one
-notices the following differences: describe and explain the differences.
+% \begin{table}[H]
+%   \centering
+%   \begin{tabular}{|l|r|}
+%     \hline
+%     {\bf Name} & {\bf Value [A or V]} \\ \hline
+%     \input{../sim/op_tab1}
+%   \end{tabular}
+%   \caption{Operating point analysis for $t<0$. A variable preceded by @ is of type {\em current}
+%     and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+%     Volt.}
+%   \label{tab:ngspice_1}
+% \end{table}
 
-\begin{figure}[h] \centering
-\includegraphics[width=0.6\linewidth]{acp.eps}
-\caption{Phase response}
-\label{fig:acp}
-\end{figure}
+% \begin{table}[H]
+%   \centering
+%   \begin{tabular}{|l|r|}
+%     \hline
+%     {\bf Name} & {\bf Value [A or V]} \\ \hline
+%     \input{../mat/data_alinea_1}
+%   \end{tabular}
+%   \caption{Theoretical Values using Octave}
+%   \label{tab:alinea1_voltagens_tab_2}
+% \end{table}
 
-\lipsum[1-1]
+% \end{multicols}
 
-\subsubsection{Input Impedance}
+% \par We can see that the node voltages are essentially the same as the ones we got from \textit{Octave}. One can immediately notice that current values for the voltage sources are approximately symmetrical to the ones presented in the theoretical analysis. This is because we have considered the current in the voltage sources going from the negative terminal to the positive one. On the other hand, \emph{ngspice} considers the current the other way around, i.e., entering the positive terminal. 
 
-Figure~\ref{fig:zim} shows the magnitude of the frequency response for the
-circuit under analysis. Compared to the theoretical analysis results, one
-notices the following differences: describe and explain the differences.
+% \par Analysing the differences in values obtain in both methods, one can identify generally errors are of $10^{-6} V$ for voltages and $10^{-9} A$ for currents.
 
-\begin{figure}[h] \centering
-\includegraphics[width=0.6\linewidth]{zim.eps}
-\caption{Input impedance}
-\label{fig:zim}
-\end{figure}
+% \par We then proceed to simulate the circuit at $t=0$, where the voltage source switches from being constant to being sinusoidal. At this instant, source $v_s$ has a null output, as one can infer from Eqs. \ref{eq:v_s} and \ref{eq:u}. As the capacitor $C$ was charged, the capacitor will mantain the voltage at its terminals as it starts its discharge. This way, at $t=0$, one can substitute the capacitor C with a constant voltage source $V_x = V(6)-V(8)$, being $V(i)$ the voltage at node $i$ calculated previously for time $t<0$. Since this is another script, we ideally should've taken the 2 node voltages from the previous script to the second, but since the octave's results were essentially the same, we just used the latter while declaring the components. We then ran the operating point analysis. Table \ref{tab:ngspice_2} shows currents in all branches and voltages in all nodes, at time $t=0$.
+% \pagebreak
+% \begin{multicols}{2}
+% \begin{table}[H]
+%   \centering
+%   \begin{tabular}{|l|r|}
+%     \hline
+%     {\bf Name} & {\bf Value [A or V]} \\ \hline
+%     \input{../sim/op_tab2}
+%   \end{tabular}
+%   \caption{Operating point analysis for $t=0$. A variable preceded by @ is of type {\em current}
+%     and expressed in Ampere; other variables are of type {\it voltage} and expressed in
+%     Volt.}
+%   \label{tab:ngspice_2}
+% \end{table}
 
-\lipsum[1-1]
+% \begin{table}[H]
+%   \centering
+%   \begin{tabular}{|l|r|}
+%     \hline
+%     {\bf Name} & {\bf Value V[V] and I[A]} \\ \hline
+%     \input{../mat/data_alinea_2}
+%   \end{tabular}
+%   \caption{Theoretical Values for voltages using Octave}
+%   \label{tab:alinea2_voltagens_tab_2}
+% \end{table}
+% \end{multicols}
+
+% \par Analysing the differences in values obtain in both methods, the error for $I_x$ is of order $10^{-8} A$ and for $V_6$ is of order $10^{-7} V$. These derive from precision limitations. The theoretical values obtained for most currents are of order $10^{-20}$, this is again due to Octave numerical precision and should be interpreted as zero.  
+
+% \par This proceeding is necessary in order to obtain the voltages at nodes 6 and 8 at $t=0$, so that these can be used as border conditions for times $t>0$. 
+
+% \subsection{Transient Analysis}
+
+% \par We begin by studying the natural response of the circuit, keeping the source $v_s$ null. The following image represents the evolution of voltage $v(6)$ for the time interval [0,20$ms$].
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width= 0.45\textwidth]{../sim/natural.pdf}
+%   \caption{Transient analysis with $v_s =0$ for t$\in$[$0$,$20ms$].}
+%   \label{fig:sim_1}
+% \end{figure}
+
+% %\vspace{20pts}
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=0.45\textwidth]{natural.eps}
+%   \caption{Natural Solution for $V_{6}$}
+%   \label{fig:OctaveNaturalSolution_2}
+% \end{figure}
+
+
+% The voltage at the capacitor terminals drops with an exponencial form, as theoretically expected.
+
+% \par Now considering that the source $v_s$ has a sinusoidal output, as reffered in Eqs. \ref{eq:v_s} and \ref{eq:u}, we reproduce the same analysis, also presenting the voltage at node 1.
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width= 0.45\textwidth]{../sim/trans.pdf}
+%   \caption{Transient analysis with $v_s = sin(2\pi 1000 t)$ for t$\in$[$0$,$20ms$].}
+%   \label{fig:sim_2}
+% \end{figure}
+
+% %\vspace{40pts}
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width= 0.45\textwidth]{final.eps}
+%   \caption{$V_6(t)$ and $V_s(t)$}
+%   \label{fig:OctaveFinalSolution}
+% \end{figure}
+
+
+
+% \par We can see that voltage at node 6 drops as a superposition of the natural and the forced solutions. Beyond time $t=14ms$, the forced response is practically the only in play. The results agree with the theoretical analysis.
+% \pagebreak
+% \subsection{Frequency Analysis}
+
+% \par Next, a frequency analysis was performed, checking the magnitude and phase responses in the range of 0.1$Hz$ to 1$MHz$. The plots are shown bellow.
+
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width= 0.45\textwidth]{../sim/acm.pdf}
+%   \caption{Frequency analysis. Magnitude in dB. Freq. range in logarithmic scale.}
+%   \label{fig:sim_3}
+% \end{figure}
+
+% %\vspace{40pts}
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width= 0.45\textwidth]{alinea_6_amp_2}
+%   \caption{Amplitude as a function of frequency}
+%   \label{fig:fignodos_2}
+% \end{figure}
+
+
+% \par Analysing the figure above, the magnitude of $v(1)$, equal to $v_s$ is constant because the magnitude of the imposed voltage is not dependent on the frequency. On the other hand, the impedance of the capacitor follows $Z_c = 1/j\omega C$, thus, according to phasors Ohm's law, the voltage at its terminals tends to zero. 
+
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width= 0.45\textwidth]{../sim/acp.pdf}
+%   \caption{Frequency analysis. Phase in degrees. Freq. range in logarithmic scale.}
+%   \label{fig:sim_3}
+% \end{figure}
+% %\vspace{40pts}
+
+% \begin{center}
+%     \includegraphics[width= 0.45\textwidth]{alinea_6_fases}
+%     \captionof{figure}{Phase as a function of frequency}
+%      \label{fig:amp(f)1_2}
+% \end{center}
+
+% \par The results agree with the theoretical analysis, in which the results were already discussed.
+
 
 
 

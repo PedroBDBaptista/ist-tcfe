@@ -1,5 +1,5 @@
 # ---------------------------------------------------------
-# type the "make" command to create report.pdf 
+# type the "make" command to create report.pdf
 # ---------------------------------------------------------
 
 #doc name
@@ -13,7 +13,6 @@ all: $(FILE).pdf
 
 $(FILE).pdf: $(wildcard *.tex) $(LODFIGS)
 	cp -f ../mat/*.eps .
-	cp -f ../sim/*.eps .
 	pdflatex  $(FILE).tex
 	pdflatex  $(FILE).tex
 	pdflatex  $(FILE).tex
@@ -28,5 +27,3 @@ clean:
 	@rm -rf *.log *.lot *.nlo *.nls *.out *.toc *~ *.*% ./*.pdf ./*.eps
 
 .PHONY: all clean
-
-
