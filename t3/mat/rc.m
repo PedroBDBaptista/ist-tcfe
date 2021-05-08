@@ -129,7 +129,7 @@ hf = figure();
 plot(tgraf,v_outgraf,"b");
 axis([tgraf(1),tgraf(tmaxgraf)]);
 xlabel("t[s]");
-ylabel("v_out(t) [V]");
+ylabel("v_{out}(t) [V]");
 print(hf,"vout.eps","-depsc");
 
 printf("media do vout:      %f\n",mean(v_outgraf));
