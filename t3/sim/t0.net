@@ -130,6 +130,8 @@ hardcopy envelope.ps v(3)
 echo envelope_FIG
 hardcopy regulator.ps v(4)
 echo regulator_FIG
+hardcopy deviation.ps (v(4)-12)
+echo deviation_FIG
 *echo trans_FIG
 
 .endc

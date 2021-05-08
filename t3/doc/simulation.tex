@@ -53,7 +53,23 @@ The following figures show the output voltage, for a time-lenght of 10 periods a
 As one can see, the results look the same, but in both cases Octave's plots showcase slightly higher voltage values. The main reason for this is because in Octave we used both the ideal and theoretical diode models, whereas \textit{Ngspice} works with a different and
 more accurate model that better describes the diode's real physical behaviour. Also, even though the graphs showcase the output signal at different times, one should not worry with this detail since the functions are all periodic.
 
-Finally, we present the total deviation from the desired voltage, which comprises the DC deviation as well as the AC component. For such figure, we simply compute ($v_0$ - 12).
-[Plot $v_0$-12]
+Finally, we present the total deviation from the desired voltage, which comprises the DC deviation as well as the AC component. For such figure, we simply compute ($V_o$ - 12). The plot is shown below as well as Octave's equivalent plot:
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{../sim/deviation.pdf}
+  \caption{Deviation from \textit{Ngspice}. Units are in $\mu$ V}
+  \label{fig:DeviationNGSPICE}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{vout_12.eps}
+  \caption{Deviation using \textit{Octave}}
+  \label{fig:DeviationOCTAVE}
+\end{subfigure}
+\caption{Side-by-side comparison of \textit{Ngspice}'s and \textit{Octave}'s $V_o$-12 plot}
+\label{fig:RegulatorComparacao}
+\end{figure}
 
 Further considerations will be written in the conclusion.
