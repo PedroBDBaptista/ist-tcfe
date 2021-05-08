@@ -1,10 +1,13 @@
 close all
 clear all
 %comentario
-dt=1e-5
-tmax=2e4+2000;
+
+dt=5e-4;
+period=1./50.;
+tmax=11*period/dt;
+tmaxgraf=10*period/dt;
+translacao_tempo=period/dt;
 freq=2*pi*50.;
-period=1./50.
 A=230./10.;
 
 
@@ -31,6 +34,8 @@ for i=1:tmax
 	else
 		v3(i)=0.;
 	endif;
+
+
 
 	if(t(i)>toff &&    A * sin(freq*toff) * exp(-(t(i)-toff)/(R1*C1)) > v3(i))
 		vo(i)=A * sin(freq*toff) * exp(-(t(i)-toff)/(R1*C1));
@@ -87,35 +92,45 @@ endfor;
 
 %making new vectores
 
-for j=1:2e4
-	tgraf(j)=t(j+2000);
-	v2graf(j)=v2(j+2000);
-	v3graf(j)=v3(j+2000);
-	vograf(j)=vo(j+2000);
-	venvelopegraf(j)=venvelope(j+2000);
-	v_outgraf(j)=v_out(j+2000);
+for j=1:tmaxgraf
+	tgraf(j)=t(j+translacao_tempo);
+	v2graf(j)=v2(j+translacao_tempo);
+	v3graf(j)=v3(j+translacao_tempo);
+	vograf(j)=vo(j+translacao_tempo);
+	venvelopegraf(j)=venvelope(j+translacao_tempo);
+	v_outgraf(j)=v_out(j+translacao_tempo);
 endfor
 
 hf = figure ();
-plot (tgraf, v2graf, "g");
+plot(tgraf, v2graf, "g;Voltage source;");
 hold on;
-plot (tgraf, v3graf, "r");
+plot(tgraf, v3graf, "r;Rectifier only;");
 hold on;
-plot (tgraf, vograf, "b");
-hold on;
-plot (tgraf, venvelopegraf, "-k");
+%plot(tgraf, vograf, "b");
+%hold on;
+plot(tgraf, venvelopegraf, "-k;Envelope Detector;");
 
-axis([tgraf(1),tgraf(2e4)]);
-xlabel ("t[s]");
-ylabel ("v2(t) [V]");
-print (hf, "v2.eps", "-depsc");
+axis([tgraf(1),tgraf(tmaxgraf)]);
+xlabel("t[s]");
+ylabel("Voltage [V]");
+print(hf, "v2.eps", "-depsc");
+
+clf(hf);
+
+plot(tgraf, venvelopegraf, "-k");
+axis([tgraf(1),tgraf(tmaxgraf)]);
+xlabel("t[s]");
+ylabel("Voltage [V]");
+print(hf, "venvelope.eps", "-depsc");
+
 
 clf(hf);
 hf = figure();
 plot(tgraf,v_outgraf,"b");
-axis([tgraf(1),tgraf(2e4)]);
+axis([tgraf(1),tgraf(tmaxgraf)]);
 xlabel("t[s]");
 ylabel("v_out(t) [V]");
 print(hf,"vout.eps","-depsc");
 
-mean(venvelopegraf)
+printf("media do vout:      %f\n",mean(v_outgraf));
+printf("ripplr do vout:      %f\n",max(v_outgraf)-min(v_outgraf));
