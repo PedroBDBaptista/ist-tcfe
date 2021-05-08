@@ -8,15 +8,25 @@ v_s=230 \, \sin(2 \pi \, 50 \, t)
 \end{equation*}
 We chose a spire ratio of ten to one (10:1) which reduces the voltage amplitude do 23 V. This is a good value to work from once that it is in the same order of magnitude as the desired voltage (12 V), but still greater than it, which allows us to work with the different parameters of the system, such as resistance, capacitance, and number of diodes, in a way that suits our goals.
 
+One can divide the studied circuit into two main components: the Envelope Detector Circuit and the Voltage Regulator one. Below we present a more complete picture (figure \ref{fig:circuito}) of the considered system.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{geral_2.pdf}
+\caption{AC DC Converter Circuit}
+\label{fig:circuito}
+\end{figure}
+
+
 \subsection{Envelope Detector}
 
-Next, we proceed to the ED (Envelope Detector) circuit. The chosen circuit is described in figure \ref{fig:envelopecircuito} and is composed of one diode and one resistors (...)[explain rational behind circuit, reference merit]
+Next, we proceed to the ED (Envelope Detector) circuit. The chosen circuit is described in figure \ref{fig:envelopecircuito} and is composed of one diode ($D_0$) and one resistor ($R_1=300\,k\Omega$), and one capacitor ($C=300 \, \mu F$).
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\linewidth]{envelopecircuito.pdf}
+\includegraphics[width=0.5\linewidth]{envelopecircuito.pdf}
 \caption{Envelope Detector Circuit}
-\label{fig:envelope}
+\label{fig:envelopecircuito}
 \end{figure}
 
 
@@ -36,39 +46,23 @@ Where, $i_C$ is given by:
   i_C=C \frac{d v_O}{dt}
 \end{equation}
 
-Let $t_{off}$ be the time instant at which the diode goes of and $t_{on}$ the time instant at which it goes on. With this configuration one can write for $t=t_{off}$:
+Let $t_{off}$ be the time instant at which the diode goes of and $t_{on}$ the time instant at which it goes on. With this configuration one can say that for $t=t_{off}$ that $i_D=0$.
 
-\begin{equation}
-  i_D=0
-\end{equation}
 
-Applying Kirchhoff's Current Law (KCL) we get:
-
-\begin{equation}
-  i_D=i_R+i_C\\
-  i_R=-i_C
-\end{equation}
-
-Using Ohm's law
+Applying Kirchhoff's Current Law (KCL) and Ohm's law
 
 \begin{equation}
 \begin{split}
   \frac{v_S}{R} &=-C\frac{dv_c}{dt}\\
-  \frac{A}{R}\sin(\omega t_{off}) &= - C \,A \omega \cos(\omega t_{off}) \\
   t_{off} &=\frac{\arctan(RC\omega)}{\omega}\\
 \end{split}
 \end{equation}
 
-Now that we have $t_{off}$ we can write the output voltage as follows:
-\begin{equation}
-v_o(t)=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R\,C}}
-\end{equation}
 
 
-Now we compute $t_{ON}$
+Now we compute $t_{ON}$. To do so we match the voltage source to the voltage of the capacitor. We obtain the following non-linear equation for $t_{ON}$
 \begin{equation}
-	v_s(t_{ON})=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}/{R\,C}}\\
-	A sin(\omega t_{ON})=A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R\,C}}
+	A sin(\omega t_{ON}) =A  \sin(\omega t_{off})  e^{\frac{-t-t_{off}}{R\,C}}\\
 \label{eq:ton}
 \end{equation}
 
@@ -84,31 +78,40 @@ Therefore, the output voltage, $v_o$, can be written as:
 \end{array}
 \right.
 \end{equation}
+
 We simulated the circuit as presented using octave and we now show the obtained results:
-First we present in the same plot the voltage source, the voltage of the rectifier and the envelope.
-\begin{figure}[H]
+First we present in the same plot the voltage source, the voltage of the rectifier and the envelope (figure \ref{fig:venvelope1}).
+\begin{figure}[h!]
   \centering
-  \includegraphics[width=10cm]{v2.eps}
+  \includegraphics[width=9cm]{v2.eps}
   \caption{Output Voltage of the Envelope Detector using \emph{Octave}}
-  \label{fig:venvelope}
+  \label{fig:venvelope1}
 \end{figure}
-However, this picture doesn't allow us to have a clear view of the ripple, so we noow present only the output voltage.
+However, this picture doesn't allow us to have a clear view of the ripple, so we noow present only the output voltage (figure \ref{fig:venvelope1}).
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{venvelope.eps}
+  \includegraphics[width=9cm]{venvelope.eps}
   \caption{Output Voltage of the Envelope Detector using \emph{Octave}}
-  \label{fig:venvelope}
+  \label{fig:venvelope2}
 \end{figure}
 In order to get a graph similar to the one presented in the next section, he have shown the 10 consecutive periods after the first one.
 
+
+
+
+
+
+
 \subsection{Voltage Regulator}
-[Figure of VR]
-[Plot output]
 
-[Analysis of Voltage Regulator]
-Proceeding to the VR, figure [XX] shows the designed circuit. This is composed of 22 diodes and 1 resistor.
+Proceeding to the VR, figure \ref{fig:voltage regulator} shows the designed circuit. This is composed of 22 diodes and 1 resistor ($R_2=715 \, k\Omega$).
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=9cm]{voltage_reg.pdf}
+  \caption{Voltage Regulator Circuit}
+  \label{fig:voltage regulator}
+\end{figure}
 
-[Figure of VR]
 The diode model used in the analysis of this circuit is the real diode model. Knowing that $n$ diodes in series is equivalent to a diode with parameter $\eta'=n*\eta$ and that we chose to
 interpret the circuit at temperature $T=27ºC$ (to agree with NGSpice's simulation conditions), which changes the Thermal Voltage's value $V_T=\frac{k_BT}{q}$, then the current that passes through the 22 diodes is given by:
 
@@ -124,12 +127,21 @@ Using KVL we get $V_o+Ri-V_s=0$, where $V_s$ is the output voltage from the enve
 The expected output at the VR exit terminals is calculated through the non-linear equation (\ref{VoltageRegulatorEquation}), solving it using Newthon's method.
 The output was computed using \textit{Octave} software. In figure (\ref{fig:VoltageRegulatorOutput}) 10 periods of the output signal are represented:
 
- \begin{figure}[H]
+ \begin{figure}[h!]
    \centering
-   \includegraphics[width=10cm]{vout.eps}
+   \includegraphics[width=9cm]{vout.eps}
    \caption{AC/DC converter's theoretical output voltage}
    \label{fig:VoltageRegulatorOutput}
  \end{figure}
+
+Now we present the plot of the voltage output minus 12V (the desired voltage). This is, clearly, similar to the one presented before, but it gives us a better prespective of how far it is from the ideal value of 12V.
+ \begin{figure}[h!]
+   \centering
+   \includegraphics[width=9cm]{vout_12.eps}
+   \caption{AC/DC converter's theoretical output voltage minus 12V}
+   \label{fig:VoltageRegulatorOutput}
+ \end{figure}
+
 
 
 Thus, the theoretical DC output is $12.04$ V, which presents a $0.04V$ deviation ($0.33$\%)from the desired $12$V. The theoretical voltage ripple is $0.00025$V, which is 5 orders of magnitude lower than the DC component of the output.

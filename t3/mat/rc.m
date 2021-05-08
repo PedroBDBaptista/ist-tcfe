@@ -99,6 +99,7 @@ for j=1:tmaxgraf
 	vograf(j)=vo(j+translacao_tempo);
 	venvelopegraf(j)=venvelope(j+translacao_tempo);
 	v_outgraf(j)=v_out(j+translacao_tempo);
+	v_out_graf_12(j)=v_outgraf(j)-12;
 endfor
 
 hf = figure ();
@@ -131,6 +132,14 @@ axis([tgraf(1),tgraf(tmaxgraf)]);
 xlabel("t[s]");
 ylabel("v_{out}(t) [V]");
 print(hf,"vout.eps","-depsc");
+
+clf(hf);
+hf = figure();
+plot(tgraf,v_out_graf_12,"b");
+axis([tgraf(1),tgraf(tmaxgraf)]);
+xlabel("t[s]");
+ylabel("v_{out}(t)-12 [V]");
+print(hf,"vout_12.eps","-depsc");
 
 printf("media do vout:      %f\n",mean(v_outgraf));
 printf("ripplr do vout:      %f\n",max(v_outgraf)-min(v_outgraf));
