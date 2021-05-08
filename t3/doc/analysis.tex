@@ -1,7 +1,12 @@
 \section{Theoretical Analysis}
 \label{sec:theoretical}
 
-First, we start to analyze the transformer. This component is not the main object of study of this assignment, so we'll consider an ideal transformer, without losses, and only look at the spire ratio and subsequent voltage ratio at its terminals. As such we must determine the desired amplitude of the signal at the entry terminals of the ED, so that we can get 12$V$ at the VR exit. [Describe the rational and the spire number chosen]  %using Kirchhoff's current law. It states that the algebraic sum of currents in a network of conductors meeting at a point is zero. It can be written as follows:
+First, we start to analyze the transformer. This component is not the main object of study of this assignment, so we'll consider an ideal transformer, without losses, and only look at the spire ratio and subsequent voltage ratio at its terminals. As such we must determine the desired amplitude of the signal at the entry terminals of the ED, so that we can get 12$V$ at the VR exit.
+Considering that the voltage of our source is given by:
+\begin{equation*}
+v_s=230 \, \sin(2 \pi \, 50 \, t)
+\end{equation*}
+We chose a spire ratio of ten to one (10:1) which reduces the voltage amplitude do 23 V. This is a good value to work from once that it is in the same order of magnitude as the desired voltage (12 V), but still greater than it, which allows us to work with the different parameters of the system, such as resistance, capacitance, and number of diodes, in a way that suits our goals.
 
 \subsection{Envelope Detector}
 
