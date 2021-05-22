@@ -1,0 +1,77 @@
+\section{Simulation Analysis}
+\label{sec:simulation}
+
+\par We now proceed to perform a computational simulation of the converter, using the \textit{Ngspice} software. The circuit represented in figure [\ref{fig:circuito}] was implemented.
+
+Firstly, we measure the output voltage level.\textit{Ngspice}'s average function is used for such computation, using at least 1000 points. According to Ngspice, the DC component of the output voltage
+is $V_{oDC}=11.99963$V. (If if output value varies with step used/ N of points used)\par
+The measurement of the ripple of the signal was made using \textit{min} and \textit{max} functions of \textit{Ngspice}, which gives us $ripple_{Vo}=2.990047 \times 10^{-4}$V
+
+The theoretical results for $V_{oDC}$ and $ripple_{Vo}$ differ from the ones obtained in this section  by 0.30\% and 17.7\%, respectively (here we considered the \textit{Ngspice}'s results as exact since this \textit{software} simulates real circuits with great precision).
+This discrepancy probably results from the difference in the diode model used in \textit{Ngspice} computations, which is considerably more complex and precise than the one used in the previous section.
+
+The following figures show the output voltage, for a time-lenght of 10 periods at the exit terminal of the ED and VR circuits.  The analogous figures produced in the previous section are also presented side by side, so that they are more easily compared.
+
+\vspace{-2cm}
+%[Plot output ED, 10T, side by side]
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{../sim/envelope.pdf}
+  \caption{Envelope's output from \textit{Ngspice}}
+  \label{fig:EnvelopeNGSPICE}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{venvelope.eps}
+  \caption{Envelope's output using \textit{Octave}}
+  \label{fig:EnvelopeOCTAVE}
+\end{subfigure}
+\caption{Side-by-side comparison of \textit{Ngspice}'s and \textit{Octave}'s Envelope output}
+\label{fig:EnvelopeComparacao}
+\end{figure}
+\vspace{-0.5cm}
+%[Plot output VR, 10T, side by side]
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{../sim/regulator.pdf}
+  \caption{Voltage Regulator's output from \textit{Ngspice}}
+  \label{fig:RegulatorNGSPICE}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{vout.eps}
+  \caption{Voltage Regulator's output using \textit{Octave}}
+  \label{fig:RegulatorOCTAVE}
+\end{subfigure}
+\caption{Side-by-side comparison of \textit{Ngspice}'s and \textit{Octave}'s Voltage Regulator output}
+\label{fig:RegulatorComparacao}
+\end{figure}
+
+As one can see, the results look the same, but in both cases Octave's plots showcase slightly higher voltage values. The main reason for this is because in Octave we used both the ideal and theoretical diode models, whereas \textit{Ngspice} works with a different and
+more accurate model that better describes the diode's real physical behaviour. Also, even though the graphs showcase the output signal at different times, one should not worry with this detail since the functions are all periodic.
+
+Finally, we present the total deviation from the desired voltage, which comprises the DC deviation as well as the AC component. For such figure, we simply compute ($V_o$ - 12). The plot is shown below as well as Octave's equivalent plot:
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{../sim/deviation.pdf}
+  \caption{Deviation from \textit{Ngspice}. Units are in $\mu$V}
+  \label{fig:DeviationNGSPICE}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.9\linewidth]{vout_12.eps}
+  \caption{Deviation using \textit{Octave}}
+  \label{fig:DeviationOCTAVE}
+\end{subfigure}
+\caption{Side-by-side comparison of \textit{Ngspice}'s and \textit{Octave}'s $V_o$-12 plot}
+\label{fig:RegulatorComparacao}
+\end{figure}
+
+Ngspice's average deviation is $3.7 \times 10^{-4}$.
+Further considerations will be written in the conclusion.
