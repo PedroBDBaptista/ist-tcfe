@@ -31,7 +31,7 @@ Cb emit 0 2740u
  Q2 0 base2 emit2 BC557A
  Vfc coll base2 0.0
 *Rout emit2 vcc 450
-Rout emit2 vcc 1
+Rout emit2 vcc 5
 
 * output coupling capacitor
 Co emit2 out 3m
@@ -48,8 +48,8 @@ RL out 0 8
 .measure ac gain_max MAX vdb(coll) from=1 to=100MEG
 .measure ac out_max MAX vdb(out) from=1 to=100MEG
 
-.param gain_Limit_Volt = 2.134401e+01 -3.0
-.param out_Limit_Volt = 1.560026e+01 - 3.0
+.param gain_Limit_Volt = 2.826105e+01 -3.0
+.param out_Limit_Volt = 2.614240e+01 - 3.0
 
 .measure ac gain_LowerLimit when vdb(coll)=gain_Limit_Volt
 .measure ac out_LowerLimit when vdb(out)=out_Limit_Volt
@@ -78,6 +78,7 @@ echo vo1_db_FIG
 hardcopy vo2_db.ps db(v(out))
 echo vo2_db_FIG
 hardcopy vo2_vo1_db.ps v(out)/v(coll)
+echo vo2_vo1_db_FIG
 
 
 *------------------Impedance Analysis-----------------------
