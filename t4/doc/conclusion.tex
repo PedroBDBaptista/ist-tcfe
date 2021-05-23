@@ -6,13 +6,10 @@ Comparing the results from the simulation with the ones gotten from the theoreti
 One thing we noticed is that the relations derived from the theoretical analysis don't always hold. For example, the expression for the final output impedance states that the lower the resistance RE2, the lower the impedance, yet many times lowering this value on \textit{ngspice} would not lead
 to a decrease in this impedance. On the contrary, the impedance grew larger. This and other discrepancies show that the model we used to describe the system in the theoretical analysis doesn't exactly describe what happens in reality and is rather incomplete. This assumption is justified by comparing
 the simple transistor models used in the theoretical analysis with the simulator's transistor models, which are much more complex, having a large number of parameters to take into account and also introducing parasitic capacitors and inductors that better help describe the transistor's behaviour.
+This explains the large errors we got. We also noticed that small errors in the Operating Point Analysis propagated to larger errors in the incremental analysis.
+\par
+The Amplifier we built is not ideal, even though the gain is acceptable, because the impedances are not really compatible, namely the input impedance with resistor $R_s$ and, most importantly, the output impedance with the load resistor $R_L$. We tried to decrease this last impedance, lowering
+$R_{E2}$ to a value of $1\Omega$. This showed to be great for $Zo$, but it would also lower the output stage's input impedance, which would make the whole output stage incompatible with the gain stage. ZO1 would become larger than ZI2 ($Z01>>ZI2$) which is the opposite of what we want. This would take a toll on the
+amplifier's gain, since the gain stage's output signal would get damped in the output stage's terminals. \par
 
-
-Comparing the results obtained in the theoretical analysis  with the ones acquired from \textit{ngspice} and also checking the \textit{Octave} plots with the simulation's plots, we can say that they're graphically very similiar. However, quantitatively they present measurable discrepancies.
-
-The voltage output's ripple (from \textit{Ngspice}) is 5 orders of magnitude smaller than the DC level, and the deviation from the desired DC level (exactly $12$V) is also 5 orders of magnitude smaller than both the DC level and the desired one.
-\textit{Octave}'s deviation, however, is 2 orders of magnitude higher than \textit{Ngspice}'s. This shows that \textit{Ngspice}'s models are substantially different from the ones used in \textit{Octave}, namely the diode models. Due to Ngspice's complexity and precision, we are made to believe
- that its results are the ones closer to reality. This is why our merit was based on the results obtained from this \textit{software}.\par
-
-The total cost of the circuit is $1317,3$ monetary units. The established cost of components obviously favours the use of diodes, which was our choice, allowing a relatively low total cost.
-With all the measurements and figures presented, we calculated the merit figure of our designed circuit as $1,1347$.
+Nevertheless, the total cost of the circuit we built is 6857.4 monetary units, obtaining a merit of 624.5.
