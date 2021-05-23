@@ -117,8 +117,8 @@ We now proceed to list some of the theoretical results and comparing them to the
         \begin{tabular}{c|c|c}
           \textbf{Quantity} & \textbf{Theoretical}  & \textbf{Simulation}  \\
           \hline
-            $Gain_{gain_stage}$ (dB) &	48.392  & ---- \\
-            $Gain_{output_stage}$  &	0.99195  & ----\\
+            $Gain_{gain-stage}$ (dB) &	48.392  & ---- \\
+            $Gain_{output-stage}$  &	0.99195  & ----\\
             $Gain_{total}$ (dB)   &	42.585 & 26.142 \\
             ZI1($\Omega$)  &	484.43 & ----\\
             Z01($\Omega$)  &	886.28 & ----\\
@@ -135,17 +135,17 @@ First we should take into account that the theoretical analysis was done assumin
 the capacitor works as a short-circuit.
 This means that the $Gain$ values are the bandwidth gain values (we did not perform a frequency analysis in the theoretical analysis,
 we just assumed we were working on the bandwidth frequencies).
-$Gain_{gain_stage}$ is high and $Gain_{output_stage} \approx 1$ corroborating the correct performance of an Amplifier. The total gain, $Gain_{total}$, is still high
-but does not match the \textit{ngspice}'s gain, presenting an error of $E(\%)=62.9\% $. The decrease from $Gain_{gain_stage}$ to $Gain_{total}$ comes from (not only!) the impedances,
+$Gain_{gain_stage}$ is high and $Gain_{output-stage} \approx 1$ corroborating the correct performance of an Amplifier. The total gain, $Gain_{total}$, is still high
+but does not match the \textit{ngspice}'s gain, presenting an error of $E(\%)=62.9\% $. The decrease from $Gain_{gain-stage}$ to $Gain_{total}$ comes from (not only!) the impedances,
 which we will comment below:\par
 
 The gain stage's input impedance, $ZI1$, is $484.43\Omega$, which is not a great input impedance when compared to $R_s=100\Omega$. This means that the signal from $V_s$ is
 attenuated in the gain stage's terminals. Ideally, we would want $ZI1>>R_s$. The output stage's output impedance, $Z02=0.015109 \Omega$, is very low compared to the Load resistance $R_L=8\Omega$.
 Even though this is not the final output impedance, it showcases one ot the output stage's characteristcs : low output impedance, which is crucial for the signal to not be attenuated in the load resistance.
 Now $Z01$ and $ZI2$ are not ideal. We would prefer $ZI2$ to be way larger than $Z01$ so that the signal between the gain stage's terminals would not be damped when transitioning to the output stage's terminals.
-Effectively, this is what happens, meaning it's one of the reasons $Gain_{total}$ decreases when compared to $Gain_{gain_stage}$.\par
+Effectively, this is what happens, meaning it's one of the reasons $Gain_{total}$ decreases when compared to $Gain_{gain-stage}$.\par
 Zi=ZI1 and comparing it to \textit{ngspice}'s input impedance we get an error of $E(\%)=20.1\%$. The final output impedance is $Zo=1.9972\Omega$ which is not ideal when comparing it to the load resistance. Ideally,
 we would want $Zo<<R_L$. Comparing it to \textit{ngspice}'s output impedance, we get an error of $E(\%)=51.6\%$.
 \par
-We would like to discuss the role of $R_c$ in the $Gain_{gain_stage}$ of the circuit. The greater its value, the greater the gain will be yet when one increases $R_c$ above a certain level, the transistor no longer works in
+We would like to discuss the role of $R_c$ in the $Gain_{gain-stage}$ of the circuit. The greater its value, the greater the gain will be yet when one increases $R_c$ above a certain level, the transistor no longer works in
 the forward active region.
