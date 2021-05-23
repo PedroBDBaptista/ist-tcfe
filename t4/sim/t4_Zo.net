@@ -34,10 +34,10 @@ Cb emit 0 2740u
 * output stage
 Q2 0 base2 emit2 BC557A
 Vfc coll base2 0.0
-Rout emit2 vcc 450
+Rout emit2 vcc 1
 
 * output coupling capacitor
-Co emit2 out 1m
+Co emit2 out 3m
 
 * load (Vfc2 to measure current and do ohm's law to get output impedance)
 Vfc2 out 0 0 ac 1.0 sin(0 1.0 1k)
