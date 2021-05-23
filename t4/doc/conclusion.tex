@@ -1,6 +1,13 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
+Comparing the results from the simulation with the ones gotten from the theoretical analysis, we can conclude that they show several discrepancies.
+
+One thing we noticed is that the relations derived from the theoretical analysis don't always hold. For example, the expression for the final output impedance states that the lower the resistance RE2, the lower the impedance, yet many times lowering this value on \textit{ngspice} would not lead
+to a decrease in this impedance. On the contrary, the impedance grew larger. This and other discrepancies show that the model we used to describe the system in the theoretical analysis doesn't exactly describe what happens in reality and is rather incomplete. This assumption is justified by comparing
+the simple transistor models used in the theoretical analysis with the simulator's transistor models, which are much more complex, having a large number of parameters to take into account and also introducing parasitic capacitors and inductors that better help describe the transistor's behaviour.
+
+
 Comparing the results obtained in the theoretical analysis  with the ones acquired from \textit{ngspice} and also checking the \textit{Octave} plots with the simulation's plots, we can say that they're graphically very similiar. However, quantitatively they present measurable discrepancies.
 
 The voltage output's ripple (from \textit{Ngspice}) is 5 orders of magnitude smaller than the DC level, and the deviation from the desired DC level (exactly $12$V) is also 5 orders of magnitude smaller than both the DC level and the desired one.
