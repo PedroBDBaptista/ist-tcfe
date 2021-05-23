@@ -7,10 +7,10 @@
 \centering
   \includegraphics[width=.5\linewidth]{gainstage.pdf}
   \caption{Gain stage circuit}
-  \label{fig:gain_Stage}
+  \label{fig:gain_stage}
 \end{figure}
 
-\par This circuit is composed of the following components: four resistors ($R_{B1}=80k\Omega$, $R_{B2}=20k\Omega$, $R_{C}=1k\Omega$ and $R_{E}=100\Omega$), a coupling capacitor ($C_s = 1 mF$), a bypass capacitor ($C_b=1mF$) a NPN transistor ($Q_1$, model BC547A) and a constant voltage source ($V_{cc}=12V$). Identified with red, the bias circuit ensures the adequate voltage at $Q_1$'s base terminal.
+\par This circuit is composed of the following components: four resistors ($R_{B1}=80k\Omega$, $R_{B2}=20k\Omega$, $R_{C}=1k\Omega$ and $R_{E1}=100\Omega$), a coupling capacitor ($C_s = 1 mF$), a bypass capacitor ($C_b=2.74mF$) a NPN transistor ($Q_1$, model BC547A) and a constant voltage source ($V_{cc}=12V$). Identified with red, the bias circuit ensures the adequate voltage at $Q_1$'s base terminal.
 
 \begin{figure}[H]
 \centering
@@ -19,7 +19,7 @@
   \label{fig:output_stage}
 \end{figure}
 
-\par The second stage, shown in figure \ref{}, consists of a PNP transistor ($Q_2$, model BC557A), a resistor ($R_{E2}=450\Omega$) and a coupling capacitor ($C_2=4mF$). It's purpose is to minimize the output impedance, so that the load ($R_L=8\Omega$) can be safely conected.
+\par The second stage, shown in figure \ref{fig:output_stage}, consists of a PNP transistor ($Q_2$, model BC557A), a resistor ($R_{E2}=5\Omega$) and a coupling capacitor ($C_2=3mF$). It's purpose is to minimize the output impedance, so that the load ($R_L=8\Omega$) can be safely conected and the signal isn't significantly damped.
 
 \begin{figure}[H]
 \centering
@@ -28,35 +28,16 @@
   \label{fig:complete_circuit}
 \end{figure}
 
-\par The values of the components were optimized to satisfy the operation of $Q_1$ in the foward-active region (FAR), the minimization of the lower cutoff frequency, the maximization of the band width, as the adequate input and output impedances. [falar mais sobre isto]
+\par The values of the components were optimized to satisfy the operation of $Q_1$ and $Q_2$ in the foward-active region (FAR), the minimization of the lower cutoff frequency, the maximization of the band width, as the adequate input and output impedances.
 
-\par We now show the gain of the entire circuit $v_o / v_s$ as a function of frequency, from 10$Hz$ to 100$MHz$, according to the \textit{Ngspice} simulation. This is obtained through the voltage at node \textit{coll}, using the fact that the \textit{ac} analysis of the software automaticly turns to a incremental version of the circuit, allowing the use of the source voltage amplitude as $v_s = 1V$.
+\par We now show the gain of the entire circuit $v_o / v_s$ as a function of frequency, from 10$Hz$ to 100$MHz$, according to the \textit{Ngspice} simulation. This is obtained through the voltage at node \textit{out}, using the fact that the \textit{ac} analysis of the software automatically uses an incremental version of the circuit, allowing the use of the source voltage amplitude as $v_s = 1V$, withot further implications.
 
 \vspace{-2cm}
 \begin{figure}[H]
 \centering
   \includegraphics[width=.8\linewidth]{../sim/vo2_db.pdf}
-  \caption{Frequency response of the Gain Stage gain, from \textit{Ngspice} simulation}
+  \caption{Gain's frequency response of the amplifier circuit}
   \label{fig:gain_stage_gain(freq)}
 \end{figure}
 
-\par For these conditions, the band gain is $v_o/v_s = 26.142 dB$. The lower and upper cutoff frequencies are, respectively and aproximately, $15.532 Hz$ and $2.5446 MHz$. Thus, the bandwidth is also $2.5445 MHz$. The input impedance is $Z_i=606.40\Omega$. The output impedance is $Z_o=4.1295 \Omega$. These values have been taken from the \textit{log} files in the \textit{t4/sim} folder.
-
-
-% Firstly, we measure the output voltage level.\textit{Ngspice}'s average function is used for such computation, using at least 1000 points. According to Ngspice, the DC component of the output voltage
-% is $V_{oDC}=11.99963$V. (If if output value varies with step used/ N of points used)\par
-% The measurement of the ripple of the signal was made using \textit{min} and \textit{max} functions of \textit{Ngspice}, which gives us $ripple_{Vo}=2.990047 \times 10^{-4}$V
-
-% The theoretical results for $V_{oDC}$ and $ripple_{Vo}$ differ from the ones obtained in this section  by 0.30\% and 17.7\%, respectively (here we considered the \textit{Ngspice}'s results as exact since this \textit{software} simulates real circuits with great precision).
-% This discrepancy probably results from the difference in the diode model used in \textit{Ngspice} computations, which is considerably more complex and precise than the one used in the previous section.
-
-% The following figures show the output voltage, for a time-lenght of 10 periods at the exit terminal of the ED and VR circuits.  The analogous figures produced in the previous section are also presented side by side, so that they are more easily compared.
-
-
-% As one can see, the results look the same, but in both cases Octave's plots showcase slightly higher voltage values. The main reason for this is because in Octave we used both the ideal and theoretical diode models, whereas \textit{Ngspice} works with a different and
-% more accurate model that better describes the diode's real physical behaviour. Also, even though the graphs showcase the output signal at different times, one should not worry with this detail since the functions are all periodic.
-
-% Finally, we present the total deviation from the desired voltage, which comprises the DC deviation as well as the AC component. For such figure, we simply compute ($V_o$ - 12). The plot is shown below as well as Octave's equivalent plot:
-
-% Ngspice's average deviation is $3.7 \times 10^{-4}$.
-% Further considerations will be written in the conclusion.
+\par For these conditions, the band gain is $v_o/v_s = 26.142 dB$. The lower and upper cutoff frequencies are, respectively and aproximately, $15.532 Hz$ and $2.5446 MHz$. Thus, the bandwidth is $2.5445 MHz$. The input impedance is $Z_i=606.40\Omega$. The output impedance is $Z_o=4.1295 \Omega$. These values have been taken from the \textit{log} files in the \textit{t4/sim} folder. The figure of merit obtained with these parameters is $M=624,5$. These results are further discussed in the next section.
