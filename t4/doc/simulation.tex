@@ -1,7 +1,17 @@
 \section{Simulation Analysis}
 \label{sec:simulation}
 
-\par We now proceed to perform a computational simulation of the converter, using the \textit{Ngspice} software. The circuit represented in figure [\ref{fig:circuito}] was implemented.
+\par We now proceed to perform a computational simulation of the amplifier, using the \textit{Ngspice} software. The implemented gain stage circuit is represented in figure [\ref{fig:gain_stage}].
+
+\vspace{-2cm}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=.8\linewidth]{gainstage.pdf}
+  \caption{Gain stage circuit}
+  \label{fig:gain_stage}
+\end{figure}%
+
+\par The circuit is composed of the following components: four resistors (R_a coupling capacitor ($C_s = 1 mF$), 
 
 Firstly, we measure the output voltage level.\textit{Ngspice}'s average function is used for such computation, using at least 1000 points. According to Ngspice, the DC component of the output voltage
 is $V_{oDC}=11.99963$V. (If if output value varies with step used/ N of points used)\par
