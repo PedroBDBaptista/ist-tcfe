@@ -1,20 +1,24 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\par The objective of this laboratory assignment is to design and study a AC-DC converter. We will choose and implement the architecture of the converter in a way that maximizes the figure of merit, according to equation \ref{eq:merit}.
+\par In this lab report we shall study the Audio Amplifier Circuit. The purpose of such a circuit is to increase the voltage of the input signal. We call Voltage Gain to the quotient between the output voltage and the input. The behavior of such a system is frequency-dependent, thus, we are interested in finding out from and to which values for frequency the circuit behaves properly. To the pair of frequencies referred we call LowerCutoffFrequency and UpperCutoffFrequency, the difference between those is called the bandwidth. Our goal is to study how the different parameters of the circuit affect the mentioned quantities. The merit of our work is given by equation \ref{eq:merit}.
+
+
 
 \begin{equation}
-    M = \frac{1}{cost \times (ripple(v_0) + average (v_0 - 12) + 10^{-6})}
+    M = \frac{voltageGain \times bandWidth}{cost \times lowerCutoffFreq}
     \label{eq:merit}
 \end{equation}
 
-The circuit to be analysed is broadly described in figure \ref{fig:circuit}. It receives a AC input signal (230$V$/50$Hz$) and it's composed of a transformer with 10 to 1 spire ratio and galvanic isolation, followed by a Envelope Detector (ED) circuit and a Voltage Regulator (VR) circuit. The ideal output of the circuit is a 12$V$ DC signal. 
+
+
+A simplified scheme of the circuit to be studied is presented in figure\ref{fig:circuit}. 
 
 \begin{figure}[H]   
 \centering
 \includegraphics[width=10 cm]{geral.pdf}
-\caption{AC-DC converter circuit scheme}
+\caption{Scheme of the audio amplifier}
 \label{fig:circuit}
 \end{figure}
 
-\par The ED and VR circuits are the ones whose architecture is up to our choosing. A more extensive description of these circuits will be presented in Section~\ref{sec:theoretical}, as well as a theoretical analysis of the implemented circuit, with the help of \textit{Octave} software. In Section~\ref{sec:simulation}, the circuit is analysed by simulation, using the software \textit{ngspice}, and the results are compared to the theoretical results obtained in Section~\ref{sec:theoretical}. The conclusions of this study are outlined in Section~\ref{sec:conclusion}.
+In section \ref{sec:theoretical} we will study both parts of the circuit to a deeper level. Our goal is to describe theoretically the behavior of the circuit (section \ref{sec:theoretical}), that will be done using \empm{Octave}, and to describe it using a simulation software such as \emph{Ngspice}, section \ref{sec:simulation}. We will then compare both of them and see where they agree and disagree, presenting possible differences for such divergencies.
