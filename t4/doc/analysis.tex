@@ -5,18 +5,10 @@
 
 \subsection{Gain Stage}
 \par The main purpose of this part of the circuit is, as the name suggests, to increase the voltage of the output signal, producing, therefore, a high Voltage Gain.\\
-We now present a more detailed of the architecture of the gain stage.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.5\linewidth]{gainstage.pdf}
-\caption{Gain Stage Circuit}
-\label{fig:gain_stage_circuit}
-\end{figure}
+The figure of the circuit is presented in figure \ref{fig:gain_stage}
 
 
-
-We start by giving a simple explanation as to the existance of some of the presented components. For example, $C_s$ is a coupling capacitor whose job is to eliminate the DC component from the voltage source $v_s$. The bias circuit (represented in red in figure \ref{fig:gain_stage_circuit}) aims to guarantee that the voltage at the source is such that allows the transistor to conduct normally, making sure it is in the forward active region.
+We start by giving a simple explanation as to the existance of some of the presented components. For example, $C_s$ is a coupling capacitor whose job is to eliminate the DC component from the voltage source $v_s$. The bias circuit (represented in red in figure \ref{fig:gain_stage}) aims to guarantee that the voltage at the source is such that allows the transistor to conduct normally, making sure it is in the forward active region.
 Resistor $R_E$ is used to stabilize the temperature effects on the circuit, however, it lowers the gain. For that reason, capacitor $C_E$ is placed in parallel to it. With this configuration we can see that for low frequencies (DC) the capacitor works as an open circuit, for medium/high frequencies the capacitor works as a short circuit, bypassing $R_E$, thus increasing the gain again.\\
 
 We are now interested in doing an operating point analysis of the circuit. To do so, we start by computing the Thevenin's equivalent of the bias circuit. At an operating point analysis, all capacitors behave as open circuits. We now present the circuit obtained with the Thevenin's equivalent.
@@ -71,16 +63,10 @@ Z_o=R_C||r_o
 \subsection{Output Stage}
 The impedances obtained from the Gain stage are not compatible neither with the input's resistance $R_s$ nor with the resistance from the speaker $R_{speaker}=8\Omega$. In order to maintain the integrity of the signal, one must aim for a large value for $Z_I$ to not degrade the input signal and a low value for $Z_o$ to not degrade the output signal.\\
 
-We start by introducing the circuit with which we are going to work. The figure below shows the drawn circuit.
+The considered circuit can be observed in figure \ref{fig:output_stage}.
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.5\linewidth]{output_stage.pdf}
-\caption{Output Stage Circuit}
-\label{fig:output_stage_figure}
-\end{figure}
 
-Much like in the previous section, we are interested in doing an operation point analysis. In such, the capacitor will behave as an open circuit and the figure \ref{fig:output stage figure} can be simplified to:
+Much like in the previous section, we are interested in doing an operation point analysis. In such, the capacitor will behave as an open circuit and the figure \ref{fig:output_stage} can be simplified to:
 
 \begin{figure}[h!]
 \centering
