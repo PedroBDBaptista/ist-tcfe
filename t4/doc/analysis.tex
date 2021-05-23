@@ -1,147 +1,118 @@
 \section{Theoretical Analysis}
 \label{sec:theoretical}
 
-First, we start to analyze the transformer. This component is not the main object of study of this assignment, so we'll consider an ideal transformer, without losses, and only look at the spire ratio and subsequent voltage ratio at its terminals. As such we must determine the desired amplitude of the signal at the entry terminals of the ED, so that we can get 12$V$ at the VR exit.
-Considering that the voltage of our source is given by:
-\begin{equation*}
-v_s=230 \, \sin(2 \pi \, 50 \, t)
-\end{equation*}
-We chose a spire ratio of ten to one (10:1) which reduces the voltage amplitude do 23 V. This is a good value to work from once that it is in the same order of magnitude as the desired voltage (12 V), but still greater than it, which allows us to work with the different parameters of the system, such as resistance, capacitance, and number of diodes, in a way that suits our goals.
-
-One can divide the studied circuit into two main components: the Envelope Detector Circuit and the Voltage Regulator one. Below we present a more complete picture (figure \ref{fig:circuito}) of the considered system.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.6\linewidth]{geral_2.pdf}
-\caption{AC DC Converter Circuit}
-\label{fig:circuito}
-\end{figure}
 
 
-\subsection{Envelope Detector}
-
-Next, we proceed to the ED (Envelope Detector) circuit. The chosen circuit is described in figure \ref{fig:envelopecircuito} and is composed of one diode ($D_0$) and one resistor ($R_1=300\,k\Omega$), and one capacitor ($C=300 \, \mu F$).
+\subsection{Gain Stage}
+\par The main purpose of this part of the circuit is, as the name suggests, to increase the voltage of the output signal, producing, therefore, a high Voltage Gain.\\
+We now present a more detailed of the architecture of the gain stage.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.5\linewidth]{envelopecircuito.pdf}
-\caption{Envelope Detector Circuit}
-\label{fig:envelopecircuito}
+\includegraphics[width=0.5\linewidth]{gainstage.pdf}
+\caption{Gain Stage Circuit}
+\label{fig:gain stage circuit}
 \end{figure}
 
 
-The used diode model is the ideal model. This follows the equation below.
 
-\begin{equation}
-	v_O(t) = \left\{
-	\begin{array}{ll}
-		v_s & D_{ON} \\
-	 -R i_C & D_{OFF}\\
-  \end{array}
-\right.
-\end{equation}
+We start by giving a simple explanation as to the exitance of some of the presented components. For example, $C_s$ is a coupling capacitor whose job is to eliminate the DC component from de voltage source $v_s$. The bias circuit (represented in red in figure \ref{fig:gain stage circuit}) aims to guarantee that the voltage at the source is such that allows the transistor to conduct normally, making sure it is in the forward active region.
+Resistor $R_E$ is used to stabilize the temperature effects on the circuit, however, it lowers the gain. For that reason, capacitor $C_E$ is placed in parallel to it. With this configuration we can see that for low frequencies (DC) the capacitor works as an open circuit, for medium/high frequencies the capacitor works as a short circuit, bypassing $R_E$.\\
 
-Where, $i_C$ is given by:
-\begin{equation}
-  i_C=C \frac{d v_O}{dt}
-\end{equation}
-
-Let $t_{off}$ be the time instant at which the diode goes of and $t_{on}$ the time instant at which it goes on. With this configuration one can say that for $t=t_{off}$ that $i_D=0$.
+We are now interested in doing an operating point analysis of the circuit. To do so, we start by computing the Thevenin's equivalent of the bias circuit. At an operating point analysis, all capacitors behave as open circuits. We now present the circuit obtained with the Thevenin's equivalent.
 
 
-Applying Kirchhoff's Current Law (KCL) and Ohm's law
-
-\begin{equation}
-\begin{split}
-  \frac{v_S}{R} &=-C\frac{dv_c}{dt}\\
-  t_{off} &=\frac{\arctan(RC\omega)}{\omega}\\
-\end{split}
-\end{equation}
-
-
-
-Now we compute $t_{ON}$. To do so we match the voltage source to the voltage of the capacitor. We obtain the following non-linear equation for $t_{ON}$
-\begin{equation}
-	A sin(\omega t_{ON}) =A  \sin(\omega t_{off})  e^{-\frac{t-t_{off}}{R\,C}}\\
-\label{eq:ton}
-\end{equation}
-
-One can obtain $t_{ON}$ by solving the equation presented at equation \ref{eq:ton}. This was made numerically.
-
-Therefore, the output voltage, $v_o$, can be written as:
-
-\begin{equation}
-	v_o(t) = \left\{
-\begin{array}{ll}
-	v_s & D_{ON} \\
-	A  \sin(\omega t_{off})  e^{-\frac{t-t_{off}}{R\,C}} & D_{OFF}\\
-\end{array}
-\right.
-\end{equation}
-
-We simulated the circuit as presented using octave and we now show the obtained results:
-First we present in the same plot the voltage source, the voltage of the rectifier and the envelope (figure \ref{fig:venvelope1}).
 \begin{figure}[h!]
-  \centering
-  \includegraphics[width=9cm]{v2.eps}
-  \caption{Output Voltage of the Envelope Detector using \emph{Octave}}
-  \label{fig:venvelope1}
+\centering
+\includegraphics[width=0.5\linewidth]{gainstage_equiv.pdf}
+\caption{Gain Stage Circuit}
+\label{fig:gain stage circuit}
 \end{figure}
-However, this picture doesn't allow us to have a clear view of the ripple, so we noow present only the output voltage (figure \ref{fig:venvelope1}).
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=9cm]{venvelope.eps}
-  \caption{Output Voltage of the Envelope Detector using \emph{Octave}}
-  \label{fig:venvelope2}
-\end{figure}
-In order to get a plot similar to the one presented in the next section, he have shown the 10 consecutive periods after the first one.
 
 
+In this stage, is particularly important that we calculate the voltage $V_{CE}$ and make sure that it is greater than $V_{BEON}$ confirming that the transistor is working in the forward active region (FAR).\\
 
+22222 The values for other important quantities will be presented alongside the ones obtained in the simulation in order to ease its analysis.\\
 
+We shall now focus on finding a way to calculate de expected voltage gain of the circuit. We do so by considering an incremental circuit for medium frequencies. Remembering that for medium frequencies the capacitor $C_E$ behaves like a short circuit which is equivalent to consider $R_E=0$.
 
-
-
-\subsection{Voltage Regulator}
-
-Proceeding to the VR, figure \ref{fig:voltage regulator} shows the designed circuit. This is composed of 22 diodes in series represented by the equivalent diode $D_{eq}$ and 1 resistor ($R_2=715 \, k\Omega$).
 \begin{figure}[h!]
-  \centering
-  \includegraphics[width=9cm]{voltage_reg.pdf}
-  \caption{Voltage Regulator Circuit}
-  \label{fig:voltage regulator}
+\centering
+\includegraphics[width=0.5\linewidth]{gainstage_increm.pdf}
+\caption{Gain Stage Incremetal Circuit}
+\label{fig:gain stage incremetal circuit}
 \end{figure}
 
-The diode model used in the analysis of this circuit is the theoretical diode model. Knowing that $n$ diodes in series is equivalent to a diode with parameter $\eta'=n*\eta$ and that we chose to
-interpret the circuit at temperature $T=27ºC$ (to agree with NGSpice's simulation conditions), which changes the Thermal Voltage's value $V_T=\frac{k_BT}{q}$, then the current that passes through the 22 diodes is given by:
+Using mesh analysis one can derive the following expressions for the voltage gain of the circuit.
 
 \begin{equation}
-i=I_s(e^{\frac{V_o}{22 \eta V_T}}-1)
+v_o=-g_m(R_C||r_o)v_{\pi}
 \end{equation}
-where $I_s=1.0\times 10^{-14}$A is the saturation current, $V_o$ is the voltage at the diode serie's terminals and the emittion coefficient is $\eta=1$ (according to NGSpice's default conditions).
-Using KVL we get $V_o+Ri-V_s=0$, where $V_s$ is the output voltage from the envelope circuit. Thus, using the diode's real model, it follows:
+
 \begin{equation}
-  V+RI_s(e^{\frac{V}{22 \eta V_T}}-1)-V_s=0 \Leftrightarrow f(V)=0
-  \label{VoltageRegulatorEquation}
+v_{\pi}=\frac{r_{\pi}||R_{B1}||R_{B2}}{R_s+r_{\pi}||R_{B1}||R_{B2}}
 \end{equation}
-The expected output at the VR exit terminals is calculated through the non-linear equation (\ref{VoltageRegulatorEquation}), solving it using Newthon's method.
-The output was computed using \textit{Octave} software. In figure (\ref{fig:VoltageRegulatorOutput}) 10 periods of the output signal are represented:
 
- \begin{figure}[H]
-   \centering
-   \includegraphics[width=9cm]{vout.eps}
-   \caption{AC/DC converter's theoretical output voltage}
-   \label{fig:VoltageRegulatorOutput}
- \end{figure}
+\begin{equation}
+gain=\frac{v_o}{v_s}=-g_m(R_C||r_o)\frac{r_{\pi}||R_{B1}||R_{B2}}{R_s+r_{\pi}||R_{B1}||R_{B2}}
+\end{equation}
 
-Now we present the plot of the voltage output minus 12V (the desired voltage). This is, clearly, similar to the one presented before, but it gives us a better prespective of how far it is from the ideal value of 12V.
- \begin{figure}[H]
-   \centering
-   \includegraphics[width=9cm]{vout_12.eps}
-   \caption{AC/DC converter's theoretical output voltage minus 12V}
-   \label{fig:VoltageRegulatorOutput}
- \end{figure}
+One can also obtain expressions for the input and output impegances of the circuit gain. Those are as follows:
+
+
+\begin{equation}
+Z_I=R_{B1}||R_{B2}||r_{\pi}
+\end{equation}
+
+\begin{equation}
+Z_o=R_C||r_o
+\end{equation}
 
 
 
-Thus, the theoretical DC output is $12.04$ V, which presents a $0.04V$ deviation ($0.33$\%)from the desired $12$V. The theoretical voltage ripple is $0.00025$V, which is 5 orders of magnitude lower than the DC component of the output.
+analyse resultsssssss!!!!???????!!!!!!??????
+!!!!!!!!11
+!!!!!!!!!
+!!!!!!!1
+!!!!!!!!
+
+
+
+\subsection{Output Stage}
+The impedances obtained from the Gain stage are not compatible neither with the input's resistance $R_s$ nor with the resistance from the speaker $R_{speaker}=8\Omega$. In order to maintain the integrity of the signal, one must aim for a large value for $Z_I$ to not degrade the input signal and a low value for $Z_o$ to not degrade the output signal.\\
+
+We start by introducing the circuit with which we are going to work. Figure \ref{fig:output stage figure} shows the drawn circuit.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\linewidth{output_stage.pdf}
+\caption{Output Stage Circuit}
+\label{fig:output stage figure}
+\end{figure}
+
+Much like in the previous section, we are interested in doing an operation point analysis. In such, the capacitor will behave as an open circuit and the figure \ref{fig:output stage figure} can be simplified to:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.5\linewidth{output_stage_OP.pdf}
+\caption{Output Stage Circuit for OP Analysis}
+\label{fig:output stage figure OP}
+\end{figure}
+
+
+Computing the voltage gain vou this section of the circuit, we end up with:
+
+\begin{equation}
+gain=\frac{v_o}{v_i}=\frac{g_m}{g_m+g{\pi}+g_E+g_o} \approx 1
+\end{equation}
+
+The impedances are given by:
+
+\begin{equation}
+Z_I=\frac{g_m+g{\pi}+g_E+g_o}{g{\pi}(g{\pi}+g_E+g_o)} \approx 1
+\end{equation}
+
+
+\begin{equation}
+Z_o=\frac{1}{g_m+g{\pi}+g_E+g_o} \approx 1
+\end{equation}
