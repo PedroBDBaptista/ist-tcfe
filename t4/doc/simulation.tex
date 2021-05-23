@@ -23,14 +23,14 @@
 
 \begin{figure}[H]
 \centering
-  \includegraphics[width=.5\linewidth]{output_stage.pdf}
-  \caption{Output Stage circuit}
-  \label{fig:output_stage}
+  \includegraphics[width=.5\linewidth]{geral_completo.pdf}
+  \caption{Audio Amplifier circuit, detailed scheme}
+  \label{fig:complete_circuit}
 \end{figure}
 
 \par The values of the components were optimized to satisfy the operation of $Q_1$ in the foward-active region (FAR), the minimization of the lower cutoff frequency, the maximization of the band width, as the adequate input and output impedances. [falar mais sobre isto]
 
-\par We now show the gain of the entire circuit $v_0 / v_s$ as a function of frequency, from 10$Hz$ to 100$MHz$, according to the \textit{Ngspice} simulation. This is obtained through the voltage at node \textit{coll}, using the fact that the \textit{ac} analysis of the software automaticly turns to a incremental version of the circuit, allowing the use of the source voltage as $v_s = 1V$.
+\par We now show the gain of the entire circuit $v_o / v_s$ as a function of frequency, from 10$Hz$ to 100$MHz$, according to the \textit{Ngspice} simulation. This is obtained through the voltage at node \textit{coll}, using the fact that the \textit{ac} analysis of the software automaticly turns to a incremental version of the circuit, allowing the use of the source voltage amplitude as $v_s = 1V$.
 
 \vspace{-2cm}
 \begin{figure}[H]
@@ -40,6 +40,7 @@
   \label{fig:gain_stage_gain(freq)}
 \end{figure}
 
+\par For these conditions, the band gain is $v_o/v_s = 15.60 dB$. The lower and upper cutoff frequencies are, respectively and aproximately, $16.61 Hz$ and $2.935 MHz$. Thus, the bandwidth is also $2.935 MHz$. The input impedance is $Z_i=614.7\Omega$. The output impedance is $Z_o=0.961 Hz$. These values have been taken from the \textit{log} files in the \textit{t4/sim} folder.
 
 
 % Firstly, we measure the output voltage level.\textit{Ngspice}'s average function is used for such computation, using at least 1000 points. According to Ngspice, the DC component of the output voltage
