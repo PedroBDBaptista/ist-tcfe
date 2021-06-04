@@ -1,0 +1,44 @@
+\section{Simulation Analysis}
+\label{sec:simulation}
+
+\par We now proceed to perform a computational simulation of the amplifier, using the \textit{Ngspice} software. The implemented gain stage circuit is represented in figure [\ref{fig:gain_stage}]. We started from the given script, making incremental changes to improve the merit figure and ensure impedance compatability.  
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=.5\linewidth]{gainstage.pdf}
+  \caption{Gain stage circuit}
+  \label{fig:gain_stage}
+\end{figure}
+
+\par This circuit is composed of the following components: four resistors ($R_{B1}=80k\Omega$, $R_{B2}=20k\Omega$, $R_{C}=1k\Omega$ and $R_{E1}=100\Omega$), a coupling capacitor ($C_s = 1 mF$), a bypass capacitor ($C_b=2.74mF$) a NPN transistor ($Q_1$, model BC547A) and a constant voltage source ($V_{cc}=12V$). Identified with red, the bias circuit ensures the adequate voltage at $Q_1$'s base terminal.
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=.5\linewidth]{output_stage.pdf}
+  \caption{Output Stage circuit}
+  \label{fig:output_stage}
+\end{figure}
+
+\par The second stage, shown in figure \ref{fig:output_stage}, consists of a PNP transistor ($Q_2$, model BC557A), a resistor ($R_{E2}=5\Omega$) and a coupling capacitor ($C_2=3mF$). It's purpose is to minimize the output impedance, so that the load ($R_L=8\Omega$) can be safely conected and the signal isn't significantly damped.
+
+\begin{figure}[H]
+\centering
+  \includegraphics[width=.5\linewidth]{geral_completo.pdf}
+  \caption{Audio Amplifier circuit, detailed scheme}
+  \label{fig:complete_circuit}
+\end{figure}
+
+\par The values of the components were optimized to satisfy the operation of $Q_1$ and $Q_2$ in the foward-active region (FAR), the minimization of the lower cutoff frequency, the maximization of the band width, as the adequate input and output impedances.
+
+\par We now show the gain of the entire circuit $v_o / v_s$ as a function of frequency, from 10$Hz$ to 100$MHz$, according to the \textit{Ngspice} simulation. This is obtained through the voltage at node \textit{out}, using the fact that the \textit{ac} analysis of the software automatically uses an incremental version of the circuit, allowing the use of the source voltage amplitude as $v_s = 1V$, without further implications.
+
+\vspace{-2cm}
+\begin{figure}[H]
+\centering
+  \includegraphics[width=.8\linewidth]{../sim/vo2_db.pdf}
+  \caption{Gain's frequency response of the amplifier circuit, in dB}
+  \label{fig:gain_stage_gain(freq)}
+\end{figure}
+
+\par For these conditions, the voltage gain in the passband is $v_o/v_s = 26.142 dB$. The lower and upper cutoff frequencies are, respectively and aproximately, $15.532 Hz$ and $2.5446 MHz$. Thus, the bandwidth is $2.5445 MHz$. The input impedance is $Z_i=606.40\Omega$. The output impedance is $Z_o=4.1295 \Omega$. These values have been taken from the \textit{log} files in the \textit{t4/sim} folder. The figure of merit obtained with these parameters is $M=624.5$. These results are further discussed in the next section.
+
