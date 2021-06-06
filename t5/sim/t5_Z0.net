@@ -51,7 +51,7 @@
 
 Vcc vcc 0 5.0
 Vee vee 0 -5.0
-Vin in 0 0 ac 1.0 sin(0 10m 1k)
+Vin in 0 0 ac 0.0 sin(0 0 1k)
 
 X1 non_in inv_in vcc vee aux_out uA741
 
@@ -65,7 +65,7 @@ R2 aux_out out 1k
 C2 0 out 110n
 
 * load
-*RL out 0 8
+Vl out 0 0 ac 1.0 sin(0 1.0 1k)
 
 .op
 .measure ac out_max MAX vdb(out) from=1 to=100MEG
@@ -96,25 +96,19 @@ hardcopy vo1.ps vdb(out)
 
 * frequency analysis
 ac dec 10 1 100MEG
-plot vdb(out)
-plot v(out)
-plot vp(out)
-hardcopy vo1db.ps vdb(out)
+*plot vdb(out)
+*plot v(out)
+*plot vp(out)
+*hardcopy vo1db.ps vdb(out)
 *echo vo1f_FIG
-hardcopy vo1f.ps v(out)
-hardcopy vo1ph.ps vp(out)
+*hardcopy vo1f.ps v(out)
+*hardcopy vo1ph.ps vp(out)
 
 *input impedance in kohm
-plot abs(v(in)[30]/Vin#branch[30]/(-1000))
-print v(in)[30]/Vin#branch[30]/(-1000)
+plot abs(v(out)[30]/Vl#branch[30]/(-1000))
+print v(out)[30]/Vl#branch[30]/(-1000)
 
-*plot abs(C1#branch[30])
-print C1[i]
-
-*plot abs(R1#branch[30])
-print R1[i]
-
-*need a different setup to measure output impedance
+*v(out)[30]/vl#branch[30]/(-1000) = 6.800495e-01,-4.66901e-01
 
 .endc 
 
