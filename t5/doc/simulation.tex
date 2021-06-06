@@ -1,31 +1,31 @@
 \section{Simulation Analysis}
 \label{sec:simulation}
 
-\par We now proceed to perform a computational simulation of the bandpass filter, using the \textit{Ngspice} software. The implemented circuit is represented in figure [\ref{fig:complete_circuit}]. We started from the given script, modifying it in order to implement an active inverting OpAmp filter. The issue with this design was that the gain and the cutoff frequencies depended on the same resistance values, in such a way that the limitations imposed in available components dictaded significant deviations to the desired gain and central frequency. So we changed the implemeted design to an active noninverting band pass filter. This design offered more degrees of freedom, an essencial factor when considering our component limitations. Then we did incremental changes to improve the merit figure and ensure reasonable impedances.
+\par We now proceed to perform a computational simulation of the bandpass filter, using the \textit{Ngspice} software. The implemented circuit is represented in figure [\ref{fig:Non-inv_Passband}]. We started from the given script, modifying it in order to implement an active inverting OpAmp filter. The issue with this design was that the gain and the cutoff frequencies depended on the same resistance values, in such a way that the limitations imposed in available components dictaded significant deviations to the desired gain and central frequency. So we changed the implemeted design to an active non-inverting band pass filter. This design offered more degrees of freedom, an essencial factor when considering our component limitations. Then we did incremental changes to improve the merit figure and ensure reasonable impedances.
 
-% \begin{figure}[H]
-% \centering
-%   \includegraphics[width=.5\linewidth]{gainstage.pdf}
-%   \caption{Gain stage circuit}
-%   \label{fig:gain_stage}
-% \end{figure}
+ \begin{figure}[H]
+ \centering
+   \includegraphics[width=.5\linewidth]{geral_1.pdf}
+   \caption{Implemented Non-inverting Passband Filter}
+   \label{fig:Non-inv_Passband}
+ \end{figure}
 
 \par This circuit is composed of the following components: four resistors ($R_{1}=1k\Omega$, $R_{2}=1k\Omega$, $R_{3}=1k\Omega$ and $R_{4}=100k\Omega$), three capacitors ($C_1 = C_{21} = C_{22} = 220 nF$), two of them in series (with equivalent capacity $C_2 = 110nF$), an operational amplifier ($A_1$, model uA741), two constant voltage sources to feed the OpAmp ($V_{cc}=5V$, $V_{ee} = -5V$) and an input sinusoidal voltage source ($|V_{in}| = 10mV$).
 
-\par It is possible to divide the implemeted noninverting filter in three diferent stages, as presented in the figure. Firstly we just implemented the highpass filter e amplification stages. This allowed to discover that the OpAmp had an interinsic lowpass cutoff frequency, determined as $f_{OA} = 11 284 Hz$. Adding the third stage, was important to verify that it's lowpass cutoff frequency was lower than $f_{OA}$.
+\par It is possible to divide the implemeted non-inverting filter in three diferent stages, as presented in the figure. Firstly we just implemented the highpass filter e amplification stages. This allowed to discover that the OpAmp had an interinsic lowpass cutoff frequency, determined as $f_{OA} = 11 284 Hz$. Adding the third stage, was important to verify that it's lowpass cutoff frequency was lower than $f_{OA}$.
 
 
 \par The values of the components were optimized, within the imposed limitations, to satisfy the desired central frequency and gain, as well as an adequate input and output impedances.
 
-\par We now show the gain of the entire circuit $v_o / v_{in}$ as a function of frequency, from 10$Hz$ to 100$MHz$, according to the \textit{Ngspice} simulation. This is obtained through the voltage at node \textit{out}, using the fact that the \textit{ac} analysis of the software automatically uses an incremental version of the circuit, allowing the use of the source voltage amplitude as $v_{in} = 1V$, without further implications, namely the real $v_0$ not surpassing $V_{cc}.
+\par We now show the gain of the entire circuit $v_o / v_{in}$ as a function of frequency, from 10$Hz$ to 100$MHz$, according to the \textit{Ngspice} simulation. This is obtained through the voltage at node \textit{out}, using the fact that the \textit{ac} analysis of the software automatically uses an incremental version of the circuit, allowing the use of the source voltage amplitude as $v_{in} = 1V$, without further implications, namely the real $v_0$ not surpassing $V_{cc}$.
 
-% \vspace{-2cm}
-% \begin{figure}[H]
-% \centering
-%   \includegraphics[width=.8\linewidth]{../sim/vo2_db.pdf}
-%   \caption{Gain's frequency response of the amplifier circuit, in dB}
-%   \label{fig:gain_stage_gain(freq)}
-% \end{figure}
+ \vspace{-2cm}
+ \begin{figure}[H]
+ \centering
+   \includegraphics[width=.8\linewidth]{../sim/vo1db.pdf}
+   \caption{Gain's frequency response of the non-inverting passband filter, in dB}
+   \label{fig:gain(freq)}
+ \end{figure}
 
-\par For these conditions, the maximum voltage gain in the passband is $v_o/v_{in} = 36.532 dB$. The lower and upper cutoff frequencies are, respectively and aproximately, $406.81 Hz$ and $2481.3 Hz$. Therefor, the central frequency is $f_0 = 1004.69 Hz$. The input impedance at $f_0$ is $Z_i=999.99\Omega$. The output impedance is $Z_o=680.05 \Omega$. These values have been taken from the \textit{log} files in the \textit{t4/sim} folder. The figure of merit obtained with these parameters is $M = 7.60 \times 10^{-5}$. These results are further discussed in the next section.
+\par For these conditions, the maximum voltage gain in the passband is $v_o/v_{in} = 36.532 dB$. The lower and upper cutoff frequencies are, respectively and aproximately, $406.81 Hz$ and $2481.3 Hz$. Therefore, the central frequency is $f_0 = 1004.69 Hz$. The input impedance at $f_0$ is $Z_i = (999.99 - 723.53 i) \Omega$. The output impedance is $Z_o = (680.05 - 466.90 i) \Omega$. These values have been taken from the \textit{log} files in the \textit{t4/sim} folder. The figure of merit obtained with these parameters is $M = 2.57 \times 10^{-4}$. These results are further discussed in the next section.
 
