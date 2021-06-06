@@ -52,8 +52,11 @@ print(hf, "ganho.eps", "-depsc");
 %IMPEDANCIAS
 wf=2*pi*1000;
 
-Zi=abs(1/(j*wf*C1)+R1)
-Zout=abs(1/( 1/(R2+R3) + j*wf*C2 ))
+Zi=(1/(j*wf*C1)+R1)
+Zout=(1/( 1/(R2+R3) + j*wf*C2 ))
+
+Zi_abs=abs((1/(j*wf*C1)+R1))
+Zout_abs=abs((1/( 1/(R2+R3) + j*wf*C2 )))
 
 
 %IMPRESSAO VALORES
@@ -68,4 +71,4 @@ printf("central frequency %f\n",sqrt(f(HCF_indice)*f(LCF_indice)) );
 
 lower_TEO=1/(2*pi*C1*R1)
 upper_TEO=1/(2*pi*C2*R2)
-central=sqrt(lower*upper)
+central_TEO=sqrt(lower_TEO*upper_TEO)
