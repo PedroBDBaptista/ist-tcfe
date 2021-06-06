@@ -1,24 +1,20 @@
 \section{Introduction}
 \label{sec:introduction}
 
-\par In this lab report we shall study the Audio Amplifier Circuit. The purpose of such a circuit is to increase the voltage of the input signal. We call Voltage Gain to the quotient between the output voltage and the input. The behavior of such a system is frequency-dependent, thus, we are interested in finding out from and to which frequency values the circuit behaves properly. To the pair of frequencies referred we call Lower Cutoff Frequency and Upper Cutoff Frequency, the difference between those is called the bandwidth. Our goal is to study how the different parameters of the circuit affect the mentioned quantities. The merit of our work is given by equation \ref{eq:merit}.
+\par In this laboratory assignment we shall study and assemble a Operational Amplifier (OP-AMP). Our goal is to implement a band pass filter (BPF) whose central frequency is 1000 Hz, and aim for a gain of 40 dB.
+
+\par The merit of our work is given by equation \ref{eq:merit}.
 
 
 
 \begin{equation}
-    M = \frac{voltageGain \times bandWidth}{cost \times lowerCutoffFreq}
+    M = \frac{1}{cost ( voltagegaindeviation + centralfrequencydeviation + 10^{-6}}
     \label{eq:merit}
 \end{equation}
 
 
 
-A simplified scheme of the circuit to be studied is presented in figure \ref{fig:circuit}. 
+%Poe-se aqui o circuito??
 
- \begin{figure}[H]   
- \centering
- \includegraphics[width=10 cm]{geral.pdf}
- \caption{Scheme of the audio amplifier}
- \label{fig:circuit}
- \end{figure}
+The analysis of this circuit was made recurring to a simulation software, \emph{Ngspice}, this is presented in section \ref{sec:simulation}, and through a theoretical analysis, this is presented in section \ref{sec:theoretical}. We will then compare the results obtained and conclude about the use of either analysis.
 
-In section \ref{sec:theoretical} we will study both parts of the circuit to a deeper level. Our goal is to describe theoretically the behavior of the circuit (section \ref{sec:theoretical}), that will be done using \textit{Octave}, and to describe it using a simulation software such as \textit{Ngspice}, section \ref{sec:simulation}. We will then compare both of them and see where they agree and disagree, presenting possible differences for such divergencies.
