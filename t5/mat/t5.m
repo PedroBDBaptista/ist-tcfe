@@ -9,15 +9,36 @@ C1=220e-9
 C2=110e-9
 
 
-%w=2*pi*1000
 
-f=logspace(1,7,70);
-n=columns(f)
+f=logspace(1,7,10000);
+n=columns(f);
+
+
 for i=1:n
 	w(i)=2*pi*f(i);
 	gain(i)=(1/(j*w(i)*C2)) / ( 1/(j*w(i)*C2) + R2) *  (R1 / (R1+ 1/(j*w(i)*C1)) ) *(1+R4/R3);
 	ganho_modulo(i)=abs(gain(i));
 endfor;
+
+ganho_maximo=max(ganho_modulo);
+
+
+LCF_indice=1;
+HCF_indice=1;
+
+
+for i=1:n
+	if(LCF_indice==1 && ganho_modulo(i)>(ganho_maximo/sqrt(2)) )
+		LCF_indice=i;
+	endif;
+
+	if(LCF_indice!=1 && HCF_indice==1 && ganho_modulo(i)<ganho_maximo/sqrt(2))
+		HCF_indice=i;
+	endif;
+endfor;
+
+
+
 
 hf = figure ();
 semilogx(f, 20*log10(ganho_modulo), "-b");
@@ -26,10 +47,25 @@ xlabel("f[Hz]");
 ylabel("Gain");
 print(hf, "ganho.eps", "-depsc");
 
-indice=find(ganho_modulo==max(ganho_modulo))
-%wf=w(indice)
 
-wf=1000*2*pi
+
+%IMPEDANCIAS
+wf=2*pi*1000;
 
 Zi=abs(1/(j*wf*C1)+R1)
 Zout=abs(1/( 1/(R2+R3) + j*wf*C2 ))
+
+
+%IMPRESSAO VALORES
+
+%printf("\n\nLCF_indice %f\n",LCF_indice );
+%printf("HCF_indice %f\n",HCF_indice);
+
+
+printf("\n\nLCF %f\n",f(LCF_indice) );
+printf("HCF %f\n",f(HCF_indice) );
+printf("central frequency %f\n",sqrt(f(HCF_indice)*f(LCF_indice)) );
+
+lower_TEO=1/(2*pi*C1*R1)
+upper_TEO=1/(2*pi*C2*R2)
+central=sqrt(lower*upper)
