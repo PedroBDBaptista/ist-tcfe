@@ -1,34 +1,101 @@
 \section{Theoretical Analysis}
 \label{sec:theoretical}
 
+In this section we are going to theoretically analyze the circuit, deriving results with the help of the \textit{Octave} software and compare them with the simulation's results.
+The circuit to be analyzed is presented below:
 
+\begin{figure}[H]
+\centering
+  \includegraphics[width=.5\linewidth]{geral_2.pdf}
+  \caption{Active Non-inverting OP AMP Bandpass Filter}
+  \label{fig:geral2}
+\end{figure}
 
-\subsection{Gain Stage}
-\par The main purpose of this part of the circuit is, as the name suggests, to increase the voltage of the output signal, producing, therefore, a high Voltage Gain.\\
-The figure of the circuit is presented in figure \ref{fig:gain_stage}
+As you can see, the circuit is divided in 3 stages: the High Pass Filter Stage, the Amplifier Stage and the Low Pass Filter Stage, which serve the function of, respectively, block out low frequencies, amplify the voltage signal and block out high frequencies.
+Furthermore, the OP AMP is implemented in the circuit in a non-inverting configuration. This way, the circuit acts as an Active Non-inverting OP AMP Bandpass Filter.\par
+Now we proceed to compute the input and output impedances, as well as the gain of the circuit.
 
+\subsection{Input and Output Impedances}
 
-We start by giving a simple explanation as to the existance of some of the presented components. For example, $C_s$ is a coupling capacitor whose job is to eliminate the DC component from the voltage source $v_s$. The bias circuit (represented in red in figure \ref{fig:gain_stage}) aims to guarantee that the voltage at the source is such that allows the transistor to conduct normally, making sure it is in the forward active region.
-Resistor $R_E$ is used to stabilize the temperature effects on the circuit, however, it lowers the gain. For that reason, capacitor $C_E$ is placed in parallel to it. With this configuration we can see that for low frequencies (DC) the capacitor works as an open circuit, for medium/high frequencies the capacitor works as a short circuit, bypassing $R_E$, thus increasing the gain again.\\
-
-We are now interested in doing an operating point analysis of the circuit. To do so, we start by computing the Thevenin's equivalent of the bias circuit. At an operating point analysis, all capacitors behave as open circuits. We now present the circuit obtained with the Thevenin's equivalent.
-
-
-% \begin{figure}[H]
-% \centering
-% \includegraphics[width=0.5\linewidth]{gainstage_equiv.pdf}
-% \caption{Gain Stage Circuit Thevenin's equivalent}
-% \label{fig:gain_stage_circuit}
-% \end{figure}
-
-
-
+The input impedance is computed as:
+\begin{equation}
+Z_{I}=\left.\frac{V_{i}}{I_{i}}\right\vert_{Z_L=\infty}
+\end{equation}
+where $Z_{L}$ is the load impedance and $I_i$ is the current that passes through the voltage source $V_i$. Since no current enters an OP AMP (in the $+$ and $-$ terminals), this leaves us with a capacitor in series with a resistor.
+Thus, the input impedance is:
 
 \begin{equation}
-GAIN=\Bigg( \frac{ \frac{1}{j\omega C_2}}{\frac{1}{j\omega C_2}+R_2} \Bigg) \Bigg( \frac{R_1}{R_1+\frac{1}{j\omega C_1}}   \Bigg)  \Bigg( 1+\frac{R_4}{R_3}  \Bigg)
+Z_{I}=\frac{1}{jwC_1}+R_1
 \end{equation}
 
+The output impedance is computed as:
 
+\begin{equation}
+Z_{O}=\left.\frac{V_{o}}{I_{o}}\right\vert_{V_i=0}
+\end{equation}
+Again, since no current enters an OP AMP and $V_i=0$, we are left with a capacitor $C_2$, which is a series of 2 capacitors $C_{21}$ and $C_{22}$, in parallel with a series of resistors $R_2$, $R_3$ and $R_4||0$. This last term means $R_4$ in parallel with the OP AMP's output impedance, which is 0.
+This way, the output impedance is:
+
+\begin{equation}
+Z_{O}=\frac{1}{\frac{1}{R_2+R_3}+jwC_2}
+\end{equation}
+
+where
+
+\begin{equation}
+C_2=\frac{1}{jw(C_{21}+C_{22})}
+\end{equation}
+
+\subsection{Gain}
+
+To compute the gain, we can divide the problem in 3 sections. Starting with the High Pass Filter Stage and using a Voltage Divider, we get:
+
+\begin{equation}
+V_{+}=\frac{R_1}{R_1+1/(jwC_1)}V_i
+\label{Eq:V+}
+\end{equation}
+
+With this expression we can already see the effect of this stage. As the name suggests, for high frequencies $V_{+}$ $\to$ $V_i$ and for low frequencies $V_{+}$ $\to$ $0$.
+Thus, the High Pass Filter Stage blocks the signals with low frequencies.
+
+Now, going through the amplifier stage and by inspection we see that $V_a=V_{-}+R_4I_4$, where $I_4=I_3=(V_{-}-0)/R_3$. Thus, we get:
+
+\begin{equation}
+V_a=V_{-}+R_4\frac{V_{-}}{R_3}  \Leftrightarrow V_a = V_{-}\left(1+\frac{R_4}{R_3}\right)
+\label{Eq:Va}
+\end{equation}
+
+This equation reveals the amplifying properties of this stage. The greater $R_4$ is compared to $R_3$, the greater $V_a$ will be. This is why this stage is called the amplifier stage.\par
+
+Last but not least, we get to the Low Pass Filter Stage. Using a Voltage Divider:
+
+\begin{equation}
+  V_o=\frac{\frac{1}{jwC_2}}{\frac{1}{jwC_2}+R_2}V_a
+\label{Eq:Vo}
+\end{equation}
+
+This explains why this is called the Low Pass Filter Stage. For low frequencies $V_o$ $\to$ $V_a$, but for high frequencies $V_o$ $\to$ $0$.\par
+
+Now, using equations (\ref{Eq:V+}) , (\ref{Eq:Va}) and (\ref{Eq:Vo}) and remembering that $V_{+}=V_{-}$ thanks to negative feedback, the gain is given by:
+\begin{equation}
+\frac{V_o(w)}{V_i(o)}=\Bigg( \frac{ \frac{1}{j\omega C_2}}{\frac{1}{j\omega C_2}+R_2} \Bigg) \Bigg( \frac{R_1}{R_1+\frac{1}{j\omega C_1}}   \Bigg)  \Bigg( 1+\frac{R_4}{R_3}  \Bigg)
+\end{equation}
+
+With the help of \textit{Octave} we plotted the gain as a function of the frequency $f=w/(2\pi)$. The frequency response is then:
+
+\begin{figure}[H]
+ \centering
+   \includegraphics[width=.5\linewidth]{ganho.eps}
+   \caption{Octave's gain frequency response}
+   \label{fig:Octavegain(f)}
+\end{figure}
+
+\begin{figure}[H]
+ \centering
+   \includegraphics[width=.5\linewidth]{../sim/vo1db.pdf}
+   \caption{Ngspice's gain frequency response}
+   \label{fig:Ngspicegain(f)}
+\end{figure}
 
 \begin{center}
     \begin{table}[H]
@@ -36,10 +103,14 @@ GAIN=\Bigg( \frac{ \frac{1}{j\omega C_2}}{\frac{1}{j\omega C_2}+R_2} \Bigg) \Big
         \begin{tabular}{c|c|c}
           \textbf{Quantity} & \textbf{Theoretical}  & \textbf{Simulation}  \\
           \hline
-            Lower Cut Frequency (Hz) &  ---- &  15.532 \\
-            Upper Cut Frequency (MHz)&  ---- &  2.5446 \\
+
+            Lower Cut Frequency (Hz) &  406.78 &  406.81 \\
+            Upper Cut Frequency (Hz)&  2576.56 &  2481.3 \\
+            Central Frequency (Hz)& 1023.77 & \\ 1004.69 \\
+            Gain (dB) &  36.564  & 36.532 \\
+            Input Impedance ($\Omega$) & $1000.00-723.43i$ & 999.99-723.53i\\
+            Output Impedance ($\Omega$) & $687.11-949.79i$ & 680.05-466.9i\\
         \end{tabular}
         \caption{\textit{Octave}'s results vs. \textit{ngspice}'s results}
     \end{table}
 \end{center}
-
