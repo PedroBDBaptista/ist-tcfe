@@ -51,7 +51,7 @@
 
 Vcc vcc 0 5.0
 Vee vee 0 -5.0
-Vin in 0 0 ac 0.0 sin(0 0 1k)
+Vin in 0 0.0
 
 X1 non_in inv_in vcc vee aux_out uA741
 
@@ -68,47 +68,19 @@ C2 0 out 110n
 Vl out 0 0 ac 1.0 sin(0 1.0 1k)
 
 .op
-.measure ac out_max MAX vdb(out) from=1 to=100MEG
-
-.param out_Band_Limit = 3.935130e+01 -3.0
-
-.measure ac out_LowerLimit when vdb(out)=out_Band_Limit
-.measure ac out_UpperLimit when vdb(out)=out_Band_Limit CROSS=LAST
-
-*Resultados do circ inversor
-*out_max             =  5.600772e+00 at=  5.011872e+02
-*out_lowerlimit      =   9.75430e+01
-*out_upperlimit      =   2.30128e+03
-
-
 .end
 
 .control
 
 print all
 
-* time analysis
-tran 1e-5 1e-2
-plot vdb(out)
-hardcopy vo1.ps vdb(out)
-*echo vo1_FIG
-
 
 * frequency analysis
-ac dec 10 1 100MEG
-*plot vdb(out)
-*plot v(out)
-*plot vp(out)
-*hardcopy vo1db.ps vdb(out)
-*echo vo1f_FIG
-*hardcopy vo1f.ps v(out)
-*hardcopy vo1ph.ps vp(out)
+ac dec 10 10 100MEG
 
 *input impedance in kohm
-plot abs(v(out)[30]/Vl#branch[30]/(-1000))
-print v(out)[30]/Vl#branch[30]/(-1000)
-
-*v(out)[30]/vl#branch[30]/(-1000) = 6.800495e-01,-4.66901e-01
+plot abs(v(out)[20]/Vl#branch[20]/(-1000))
+print v(out)[20]/Vl#branch[20]/(-1000)
 
 .endc 
 
