@@ -68,9 +68,9 @@ C2 0 out 110n
 *RL out 0 8
 
 .op
-.measure ac out_max MAX vdb(out) from=1 to=100MEG
+.measure ac out_max MAX vdb(out) from=10 to=100MEG
 
-.param out_Band_Limit = 3.935130e+01 -3.0
+.param out_Band_Limit = 3.653233e+01 -3.0
 
 .measure ac out_LowerLimit when vdb(out)=out_Band_Limit
 .measure ac out_UpperLimit when vdb(out)=out_Band_Limit CROSS=LAST
@@ -87,34 +87,21 @@ C2 0 out 110n
 
 print all
 
-* time analysis
-tran 1e-5 1e-2
-plot vdb(out)
-hardcopy vo1.ps vdb(out)
-*echo vo1_FIG
-
-
 * frequency analysis
-ac dec 10 1 100MEG
+ac dec 10 10 100MEG
 plot vdb(out)
 plot v(out)
 plot vp(out)
 hardcopy vo1db.ps vdb(out)
-*echo vo1f_FIG
-hardcopy vo1f.ps v(out)
+echo vo1db_FIG
+hardcopy vo1g.ps v(out)
+echo vo1g_FIG
 hardcopy vo1ph.ps vp(out)
+echo vo1ph_FIG
 
 *input impedance in kohm
-plot abs(v(in)[30]/Vin#branch[30]/(-1000))
-print v(in)[30]/Vin#branch[30]/(-1000)
-
-*plot abs(C1#branch[30])
-print C1[i]
-
-*plot abs(R1#branch[30])
-print R1[i]
-
-*need a different setup to measure output impedance
+plot abs(v(in)[20]/Vin#branch[20]/(-1000))
+print v(in)[20]/Vin#branch[20]/(-1000)
 
 .endc 
 

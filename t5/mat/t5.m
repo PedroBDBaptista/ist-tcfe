@@ -53,7 +53,7 @@ print(hf, "ganho.eps", "-depsc");
 wf=2*pi*1000;
 
 Zi=(1/(j*wf*C1)+R1)
-Zout=(1/( 1/(R2+R3) + j*wf*C2 ))
+Zout=(1 / ( 1/(R2+R3) + j*wf*C2 ))
 
 Zi_abs=abs((1/(j*wf*C1)+R1))
 Zout_abs=abs((1/( 1/(R2+R3) + j*wf*C2 )))
@@ -72,3 +72,6 @@ printf("central frequency %f\n",sqrt(f(HCF_indice)*f(LCF_indice)) );
 lower_TEO=1/(2*pi*C1*R1)
 upper_TEO=1/(2*pi*C2*R2)
 central_TEO=sqrt(lower_TEO*upper_TEO)
+
+w_central=2*pi*sqrt(f(HCF_indice)*f(LCF_indice));
+gain_fin_db=20*log10(abs((1/(j*w_central*C2)) / ( 1/(j*w_central*C2) + R2) *  (R1 / (R1+ 1/(j*w_central*C1)) ) *(1+R4/R3)))
