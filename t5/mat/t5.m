@@ -20,10 +20,10 @@ for i=1:n
 endfor;
 
 hf = figure ();
-semilogx(f, 20*log10(ganho_modulo), "g;Voltage source;");
+semilogx(f, 20*log10(ganho_modulo), "-b");
 grid on;
-xlabel("t[s]");
-ylabel("Voltage [V]");
+xlabel("f[Hz]");
+ylabel("Gain");
 print(hf, "ganho.eps", "-depsc");
 
 indice=find(ganho_modulo==max(ganho_modulo))
