@@ -11,7 +11,7 @@ C2=110e-9
 
 %w=2*pi*1000
 
-f=logspace(1,7,10000);
+f=logspace(1,7,70);
 n=columns(f)
 for i=1:n
 	w(i)=2*pi*f(i);
