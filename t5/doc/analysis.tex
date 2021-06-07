@@ -81,6 +81,25 @@ Now, using equations (\ref{Eq:V+}) , (\ref{Eq:Va}) and (\ref{Eq:Vo}) and remembe
 \frac{V_o(\omega)}{V_i(\omega)}=\Bigg( \frac{ \frac{1}{j\omega C_2}}{\frac{1}{j\omega C_2}+R_2} \Bigg) \Bigg( \frac{R_1}{R_1+\frac{1}{j\omega C_1}}   \Bigg)  \Bigg( 1+\frac{R_4}{R_3}  \Bigg)
 \end{equation}
 
+
+\subsection{Low Cut-Off Frequency, High Cut-Off Frequency, and Central Frequency}
+In this section we explore the methods used to determine the Low Cut-Off Frequency (LCF), the High Cut-Off Frequency (HCF), and the Central Frequency.\\
+This is was made numerally. By definition the LCF and HCF are defined by the values of frequency from and to which, respectively, the gain at said frequency is greater or equal than the maximum gain divided by $\sqrt{2}$, which is equivalent to a gain 3dB lower than the maximum gain.
+
+
+\begin{equation}
+  \forall_{f\in[LCF, HCF]:}\,Gain(f)\geq \frac{Gain_{max}}{\sqrt{2}}
+\label{Eq:ganho_freq}
+\end{equation}
+
+The central frequency can be obtained by applying the geometric mean to the LCF and HCF:
+
+
+\begin{equation}
+  CF=\sqrt{HCF\, \times \, LCF}
+\label{Eq:freq_cental}
+\end{equation}
+
 \subsection{Theoretical results and comparison}
 
 With the help of \textit{Octave} we plotted the gain as a function of the frequency $f=w/(2\pi)$. The following figure shows the frequency response from the theoretical analysis compared with the one we got from the simulation:
@@ -102,7 +121,7 @@ With the help of \textit{Octave} we plotted the gain as a function of the freque
 \label{fig:Gaincomparison}
 \end{figure}
 
-We also present a table with key results alongside their simulation counterparts and their respective errors assuming ngspice's results as the exact results:
+We also present a table with key results alongside their simulation counterparts and their respective errors assuming ngspice's results as the exact results (where the gain and the impedances were calculated at the central frequency):
 
 \begin{center}
     \begin{table}[H]
@@ -116,8 +135,9 @@ We also present a table with key results alongside their simulation counterparts
             Central Frequency (Hz)& 1023.77 &  1004.69 & 1.91$\%$  \\
             Gain (dB) &  36.564  & 36.532 & 0.09$\%$ \\
             Input Impedance ($\Omega$) & 1000.00-723.43i & 999.99-723.53i & 0.001$\%$ and 0.01$\%$\\
-            Output Impedance ($\Omega$) & 676.73-467.72i & 680.05-466.90i & 1.03$\%$ and 103$\%$\\
+            Output Impedance ($\Omega$) & 676.73-467.72i & 680.05-466.90i & 1.03$\%$ and 0.18$\%$\\
         \end{tabular}
         \caption{\textit{Octave}'s results vs. \textit{ngspice}'s results}
     \end{table}
 \end{center}
+
