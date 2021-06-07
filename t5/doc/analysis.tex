@@ -81,21 +81,28 @@ Now, using equations (\ref{Eq:V+}) , (\ref{Eq:Va}) and (\ref{Eq:Vo}) and remembe
 \frac{V_o(w)}{V_i(o)}=\Bigg( \frac{ \frac{1}{j\omega C_2}}{\frac{1}{j\omega C_2}+R_2} \Bigg) \Bigg( \frac{R_1}{R_1+\frac{1}{j\omega C_1}}   \Bigg)  \Bigg( 1+\frac{R_4}{R_3}  \Bigg)
 \end{equation}
 
-With the help of \textit{Octave} we plotted the gain as a function of the frequency $f=w/(2\pi)$. The frequency response is then:
+\subsection{Theoretical results and comparison}
 
+With the help of \textit{Octave} we plotted the gain as a function of the frequency $f=w/(2\pi)$. The following figure shows the frequency response from the theoretical analysis compared with the one we got from the simulation:
 \begin{figure}[H]
- \centering
-   \includegraphics[width=.5\linewidth]{ganho.eps}
-   \caption{Octave's gain frequency response}
-   \label{fig:Octavegain(f)}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{ganho.eps}
+  \caption{\textit{Octave}'s gain frequency response}
+  \label{fig:Ngspicegain(f)}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{../sim/vo1db.pdf}
+  \caption{\textit{Ngspice}'s gain frequency response}
+  \label{fig:Ngspicegain(f)}
+\end{subfigure}
+\caption{Side-by-side comparison of \textit{Ngspice}'s and \textit{Octave}'s frequency response}
+\label{fig:Gaincomparison}
 \end{figure}
 
-\begin{figure}[H]
- \centering
-   \includegraphics[width=.5\linewidth]{../sim/vo1db.pdf}
-   \caption{Ngspice's gain frequency response}
-   \label{fig:Ngspicegain(f)}
-\end{figure}
+We also present a table with key results alongside their simulation counterparts:
 
 \begin{center}
     \begin{table}[H]
@@ -106,10 +113,10 @@ With the help of \textit{Octave} we plotted the gain as a function of the freque
 
             Lower Cut Frequency (Hz) &  406.78 &  406.81 \\
             Upper Cut Frequency (Hz)&  2576.56 &  2481.3 \\
-            Central Frequency (Hz)& 1023.77 & \\ 1004.69 \\
+            Central Frequency (Hz)& 1023.77 &  1004.69 \\
             Gain (dB) &  36.564  & 36.532 \\
             Input Impedance ($\Omega$) & $1000.00-723.43i$ & 999.99-723.53i\\
-            Output Impedance ($\Omega$) & $687.11-949.79i$ & 680.05-466.9i\\
+            Output Impedance ($\Omega$) & $687.11-949.79i$ & 680.05-466.90i\\
         \end{tabular}
         \caption{\textit{Octave}'s results vs. \textit{ngspice}'s results}
     \end{table}
