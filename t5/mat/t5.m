@@ -53,10 +53,10 @@ print(hf, "ganho.eps", "-depsc");
 wf=2*pi*1000;
 
 Zi=(1/(j*wf*C1)+R1)
-Zout=(1 / ( 1/(R2+R3) + j*wf*C2 ))
+Zout=(1 / ( 1/(R2) + j*wf*C2 ))
 
 Zi_abs=abs((1/(j*wf*C1)+R1))
-Zout_abs=abs((1/( 1/(R2+R3) + j*wf*C2 )))
+Zout_abs=abs((1/( 1/(R2) + j*wf*C2 )))
 
 
 %IMPRESSAO VALORES
