@@ -33,11 +33,11 @@ The output impedance is computed as:
 \begin{equation}
 Z_{O}=\left.\frac{V_{o}}{I_{o}}\right\vert_{V_i=0}
 \end{equation}
-Again, since no current enters an OP AMP and $V_i=0$, we are left with a capacitor $C_2$, which is a series of 2 capacitors $C_{21}$ and $C_{22}$, in parallel with a series of resistors $R_2$, $R_3$ and $R_4||0$. This last term means $R_4$ in parallel with the OP AMP's output impedance, which is 0.
+Again, since no current enters an OP AMP and $V_i=0$, then $V_{+}=V_{-}=0$  and we are left with a capacitor $C_2$, which is a series of 2 capacitors $C_{21}$ and $C_{22}$, in parallel with a series of resistors $R_2$, $Z_{OPAMP}=0. T
 This way, the output impedance is:
 
 \begin{equation}
-Z_{O}=\frac{1}{\frac{1}{R_2+R_3}+jwC_2}
+Z_{O}=\frac{1}{\frac{1}{R_2}+jwC_2}
 \end{equation}
 
 where
@@ -78,7 +78,7 @@ This explains why this is called the Low Pass Filter Stage. For low frequencies 
 
 Now, using equations (\ref{Eq:V+}) , (\ref{Eq:Va}) and (\ref{Eq:Vo}) and remembering that $V_{+}=V_{-}$ thanks to negative feedback, the gain is given by:
 \begin{equation}
-\frac{V_o(w)}{V_i(o)}=\Bigg( \frac{ \frac{1}{j\omega C_2}}{\frac{1}{j\omega C_2}+R_2} \Bigg) \Bigg( \frac{R_1}{R_1+\frac{1}{j\omega C_1}}   \Bigg)  \Bigg( 1+\frac{R_4}{R_3}  \Bigg)
+\frac{V_o(\omega)}{V_i(\omega)}=\Bigg( \frac{ \frac{1}{j\omega C_2}}{\frac{1}{j\omega C_2}+R_2} \Bigg) \Bigg( \frac{R_1}{R_1+\frac{1}{j\omega C_1}}   \Bigg)  \Bigg( 1+\frac{R_4}{R_3}  \Bigg)
 \end{equation}
 
 \subsection{Theoretical results and comparison}
@@ -102,21 +102,21 @@ With the help of \textit{Octave} we plotted the gain as a function of the freque
 \label{fig:Gaincomparison}
 \end{figure}
 
-We also present a table with key results alongside their simulation counterparts:
+We also present a table with key results alongside their simulation counterparts and their respective errors assuming ngspice's results as the exact results:
 
 \begin{center}
     \begin{table}[H]
         \centering
         \begin{tabular}{c|c|c}
-          \textbf{Quantity} & \textbf{Theoretical}  & \textbf{Simulation}  \\
+          \textbf{Quantity} & \textbf{Theoretical}  & \textbf{Simulation} & \textbf(Error(\%))\\
           \hline
 
-            Lower Cut Frequency (Hz) &  406.78 &  406.81 \\
-            Upper Cut Frequency (Hz)&  2576.56 &  2481.3 \\
-            Central Frequency (Hz)& 1023.77 &  1004.69 \\
-            Gain (dB) &  36.564  & 36.532 \\
-            Input Impedance ($\Omega$) & $1000.00-723.43i$ & 999.99-723.53i\\
-            Output Impedance ($\Omega$) & $687.11-949.79i$ & 680.05-466.90i\\
+            Lower Cut Frequency (Hz) &  406.78 &  406.81 & 0.007\% \\
+            Upper Cut Frequency (Hz)&  2576.56 &  2481.3 & 3.8\% \\
+            Central Frequency (Hz)& 1023.77 &  1004.69 & 1.91%  \\
+            Gain (dB) &  36.564  & 36.532 & 0.09\% \\
+            Input Impedance ($\Omega$) & $1000.00-723.43i$ & 999.99-723.53i & 0.001\% | 0.01\%\\
+            Output Impedance ($\Omega$) & $676.73-467.72i$ & 680.05-466.90i & 1.03\% | 103\%\\
         \end{tabular}
         \caption{\textit{Octave}'s results vs. \textit{ngspice}'s results}
     \end{table}
