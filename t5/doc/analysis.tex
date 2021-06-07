@@ -33,7 +33,7 @@ The output impedance is computed as:
 \begin{equation}
 Z_{O}=\left.\frac{V_{o}}{I_{o}}\right\vert_{V_i=0}
 \end{equation}
-Again, since no current enters an OP AMP and $V_i=0$, then $V_{+}=V_{-}=0$  and we are left with a capacitor $C_2$, which is a series of 2 capacitors $C_{21}$ and $C_{22}$, in parallel with a series of resistors $R_2$, $Z_{OPAMP}=0. T
+Again, since no current enters an OP AMP and $V_i=0$, then $V_{+}=V_{-}=0$  and we are left with a capacitor $C_2$, which is a series of 2 capacitors $C_{21}$ and $C_{22}$, in parallel with a series of resistors $R_2$, $Z_{OPAMP}=0$.
 This way, the output impedance is:
 
 \begin{equation}
@@ -107,16 +107,16 @@ We also present a table with key results alongside their simulation counterparts
 \begin{center}
     \begin{table}[H]
         \centering
-        \begin{tabular}{c|c|c}
-          \textbf{Quantity} & \textbf{Theoretical}  & \textbf{Simulation} & \textbf(Error(\%))\\
+        \begin{tabular}{c|c|c|c}
+          \textbf{Quantity} & \textbf{Theoretical}  & \textbf{Simulation} & \textbf{Error}\\
           \hline
 
-            Lower Cut Frequency (Hz) &  406.78 &  406.81 & 0.007\% \\
-            Upper Cut Frequency (Hz)&  2576.56 &  2481.3 & 3.8\% \\
-            Central Frequency (Hz)& 1023.77 &  1004.69 & 1.91%  \\
-            Gain (dB) &  36.564  & 36.532 & 0.09\% \\
-            Input Impedance ($\Omega$) & $1000.00-723.43i$ & 999.99-723.53i & 0.001\% | 0.01\%\\
-            Output Impedance ($\Omega$) & $676.73-467.72i$ & 680.05-466.90i & 1.03\% | 103\%\\
+            Lower Cut Frequency (Hz) &  406.78 &  406.81 & 0.007$\%$ \\
+            Upper Cut Frequency (Hz)&  2576.56 &  2481.3 & 3.8$\%$ \\
+            Central Frequency (Hz)& 1023.77 &  1004.69 & 1.91$\%$  \\
+            Gain (dB) &  36.564  & 36.532 & 0.09$\%$ \\
+            Input Impedance ($\Omega$) & 1000.00-723.43i & 999.99-723.53i & 0.001$\%$ and 0.01$\%$\\
+            Output Impedance ($\Omega$) & 676.73-467.72i & 680.05-466.90i & 1.03$\%$ and 103$\%$\\
         \end{tabular}
         \caption{\textit{Octave}'s results vs. \textit{ngspice}'s results}
     \end{table}
